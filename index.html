@@ -338,6 +338,45 @@ textarea.field.sql{font-family:var(--mono);font-size:11px;line-height:1.55;min-h
 .gate-note{background:var(--surface-2);border-radius:2px;padding:11px 13px;font-size:11.5px;
   color:var(--muted);line-height:1.5;margin-top:16px;}
 .gate-note.err{background:#fbecea;color:var(--alert);}
+
+.kpitop{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.kpipct{font-family:var(--serif);font-size:34px;font-weight:300;color:var(--muted);line-height:1;}
+.kpibar{display:flex;gap:2px;height:6px;margin-top:16px;}
+.kpibar i{display:block;height:100%;border-radius:1px;transition:background .18s;}
+.kpilist{display:grid;gap:8px;}
+.kpi{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ws);
+  border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;
+  gap:14px;align-items:start;}
+.kpi.is-done{background:var(--surface-2);border-left-color:var(--ok);}
+.kpi.is-done .kpiname{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px;}
+.kpi.is-done .kpidel{color:var(--faint);}
+.tick{width:22px;height:22px;border:1px solid var(--line);border-radius:3px;display:grid;
+  place-items:center;font-size:12px;color:#fff;background:var(--surface);margin-top:1px;flex:none;
+  transition:background .15s,border-color .15s;}
+.tick:hover{border-color:var(--accent);}
+.kpi.is-done .tick{background:var(--ok);border-color:var(--ok);}
+.kpiname{font-size:14px;font-weight:600;letter-spacing:-.01em;cursor:pointer;}
+.kpidel{margin:5px 0 0;font-size:12.5px;color:var(--ink-2);line-height:1.5;max-width:74ch;}
+.kpinote{margin:7px 0 0;font-size:11.5px;color:var(--muted);line-height:1.45;}
+.kpiright{text-align:right;display:flex;flex-direction:column;gap:5px;align-items:flex-end;}
+.kpih{font-family:var(--mono);font-size:13px;}
+.kpiright .ws{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ws);}
+@media (max-width:720px){
+  .kpi{grid-template-columns:auto 1fr;}
+  .kpiright{grid-column:2;flex-direction:row;justify-content:flex-start;gap:10px;}
+}
+
+.briefgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px;align-items:start;}
+.briefgrid .guard{grid-column:1 / -1;border-left:3px solid var(--warn);}
+ul.crit{list-style:none;margin:12px 0 0;padding:0;}
+ul.crit li{position:relative;padding:7px 0 7px 20px;font-size:12.5px;line-height:1.5;
+  border-bottom:1px solid var(--line-soft);color:var(--ink-2);}
+ul.crit li:last-child{border-bottom:none;}
+ul.crit li:before{content:"";position:absolute;left:2px;top:14px;width:5px;height:5px;
+  border-radius:50%;background:var(--accent);}
+ul.crit.review li:before{background:var(--warn);}
+.guard ul.crit li:before{background:var(--warn);}
+@media (max-width:720px){ .briefgrid{grid-template-columns:1fr;} }
 .empty{padding:26px 20px;text-align:center;color:var(--faint);font-size:12.5px;}
 .hint{font-size:11.5px;color:var(--muted);}
 .rowbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}
@@ -395,12 +434,14 @@ textarea.field.sql{font-family:var(--mono);font-size:11px;line-height:1.55;min-h
 const KEY = "baliston-planner-v1";
 
 const WS = [
-  {id:"content", name:"Content Creation",              target:5,   c:"#1F5E63"},
-  {id:"funnel",  name:"Content Funnel & Strategy",     target:3,   c:"#414781"},
-  {id:"video",   name:"Video & Script Bank",           target:2,   c:"#7A4560"},
-  {id:"kol",     name:"KOL & Creator Research",        target:2,   c:"#55693C"},
-  {id:"stories", name:"Stories & Reactive Content",    target:1.5, c:"#A2682F"},
-  {id:"design",  name:"Marketing Design Support",      target:1.5, c:"#3F566B"}
+  {id:"content", name:"Content Creation",              target:6,    c:"#1F5E63"},
+  {id:"seo",     name:"Search & Discoverability",      target:4,    c:"#6B3F8C"},
+  {id:"kol",     name:"KOL & Creator Research",        target:1.5,  c:"#55693C"},
+  {id:"stories", name:"Stories & Reactive Content",    target:0.75, c:"#A2682F"},
+  {id:"video",   name:"Video & Script Bank",           target:0.75, c:"#7A4560"},
+  {id:"buffer",  name:"Review & Revisions Buffer",     target:1,    c:"#767F83"},
+  {id:"funnel",  name:"Content Funnel & Strategy",     target:0,    c:"#414781"},
+  {id:"design",  name:"Marketing Design Support",      target:0,    c:"#3F566B"}
 ];
 const wsOf = id => WS.find(w=>w.id===id) || WS[0];
 
@@ -427,6 +468,96 @@ const FKIND = ["Existing","Creating","Idea","Gap"];
 const CAPTION = ["Not started","Drafted","Ready","Approved"];
 const KOL_STATUS = ["Researching","Ready to Contact","Contacted","Responded","Conversation","Collaboration","Not Relevant"];
 const SCRIPT_STATUS = ["Idea","Writing","Review","Approved","Ready to Film","Filmed","Edited","Published"];
+const KPI_TEMPLATE = [
+  {name:"3 Series Posts", ws:"content", hours:4,
+   deliverable:"Create 3 posts — 1 Myth/Fact, 1 Educational, 1 Parameter Explainer — including captions. Keep the topics varied and useful rather than making every post promotional."},
+  {name:"Meet Our Users", ws:"content", hours:2,
+   deliverable:"Complete 1 Meet Our Users carousel plus caption and prepare it for manager review."},
+  {name:"Instagram Stories", ws:"stories", hours:0.75,
+   deliverable:"Create 2 Story sets supporting the week, including at least one interactive Story — poll, quiz or question."},
+  {name:"Short-form Video Bank", ws:"video", hours:0.75,
+   deliverable:"Develop 3 face-to-camera video concepts with a strong hook and key talking points. These should be quick for the team to film."},
+  {name:"KOL Research + Outreach", ws:"kol", hours:1.5,
+   deliverable:"Find 3 strong new KOLs not already in the database. Prepare a personalised email and DM for the best 2, for the Marketing Manager to review and send."},
+  {name:"SEO/AEO Question Research", ws:"seo", hours:1.5,
+   deliverable:"Add 10–15 real practitioner questions to the Question Bank. Record the source, practitioner or audience type, relevant topic cluster, and whether Baliston already answers it on the website."},
+  {name:"Community Research", ws:"seo", hours:1,
+   deliverable:"Verify 2–3 priority practitioner communities and qualify 3 strong discussion threads. Record audience, topic, activity and relevance, participation rules, whether Baliston could genuinely add value, and the recommended action. Do not post yet."},
+  {name:"Editorial / Backlink Research", ws:"seo", hours:1,
+   deliverable:"Research and qualify 5 relevant publications, associations, directories or podcasts that could legitimately mention or link to Baliston Health. Record the audience, opportunity or angle, contact route, and whether contributed content is accepted. Do not send outreach yet."},
+  {name:"SEO / AEO / GEO Learning", ws:"seo", hours:0.5,
+   deliverable:"Build familiarity with SEO, AEO and GEO — especially search intent, answer-ready content, topic clusters and authority, and why the Question Bank and community research support discoverability. Add concise notes to the working strategy."},
+  {name:"Review / Revisions Buffer", ws:"buffer", hours:1,
+   deliverable:"Reserved time for manager feedback, corrections and small unexpected requests."}
+];
+
+const SUCCESS_CRITERIA = [
+  "3 social series posts completed and ready to publish or review.",
+  "1 Meet Our Users carousel completed.",
+  "2 Instagram Story sets and 3 ready-to-film face-to-camera concepts created.",
+  "3 new qualified KOLs identified, with personalised outreach prepared for the best 2.",
+  "10–15 real practitioner questions added to the SEO/AEO Question Bank.",
+  "2–3 priority communities verified and 3 useful discussion threads qualified.",
+  "5 editorial or backlink opportunities qualified, with no outreach sent yet.",
+  "SEO/AEO/GEO learning notes updated with practical implications for Baliston Health."
+];
+
+const GUARDRAILS = [
+  "This week is discovery and mapping. Do not write SEO articles, send editorial outreach, or post in communities.",
+  "Quality beats volume.",
+  "Community work is for question discovery, audience language, AI and search visibility opportunities and trust-building — not link dropping.",
+  "Editorial research is the actual backlink and authority track. Focus on legitimate clinical education, practitioner expertise, original data or research, or a relevant news angle."
+];
+
+const REVIEW_POINTS = [
+  "Meet Our Users carousel",
+  "Final social posts, as needed",
+  "Personalised KOL email and DM copy",
+  "Any editorial target, before outreach",
+  "Any proposed community participation, before posting"
+];
+
+const WEEK_PLAN = [
+  {day:"mon", ws:"content", name:"Meet Our Users carousel — Marie: slides + caption", hours:2, priority:"High", due:1,
+   format:"Carousel", platform:"Instagram", notes:"Interview notes are in the shared drive. Finish ready for manager review, not published."},
+  {day:"mon", ws:"content", name:"Series post 1 — Myth/Fact, incl. caption", hours:1.5, priority:"High", due:2,
+   format:"Static Post", platform:"Instagram", notes:"Useful, not promotional. Pull claim wording from the approved messaging doc."},
+  {day:"tue", ws:"content", name:"Series post 2 — Educational, incl. caption", hours:1.25, priority:"High", due:3,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"seo", name:"SEO/AEO question research — 10–15 practitioner questions", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Website", notes:"For each: source, practitioner or audience type, topic cluster, and whether Baliston already answers it on the site."},
+  {day:"wed", ws:"content", name:"Series post 3 — Parameter Explainer, incl. caption", hours:1.25, priority:"High", due:4,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"wed", ws:"seo", name:"Community research — verify 2–3 communities, qualify 3 threads", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Record audience, topic, activity and relevance, participation rules, whether we could genuinely add value, and the recommended action. Do not post."},
+  {day:"wed", ws:"stories", name:"Instagram Stories — 2 sets, one interactive", hours:0.75, priority:"Medium", due:4,
+   format:"Story", platform:"Instagram", notes:"Poll, quiz or question sticker on at least one."},
+  {day:"thu", ws:"kol", name:"KOL research + outreach copy for the best 2", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"3 genuinely new names, checked against the tracker first. Outreach copy goes to Emma to send — do not send."},
+  {day:"thu", ws:"seo", name:"Editorial / backlink research — qualify 5 opportunities", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Audience, opportunity or angle, contact route, and whether contributed content is accepted. No outreach this week."},
+  {day:"thu", ws:"video", name:"Short-form video bank — 3 face-to-camera concepts", hours:0.75, priority:"Medium", due:4,
+   format:"Reel / Short Video", platform:"Instagram", notes:"Hook plus key talking points. Quick for the team to film."},
+  {day:"fri", ws:"seo", name:"SEO / AEO / GEO learning — notes into the working strategy", hours:0.5, priority:"Low", due:4,
+   format:"Other", platform:"Other", notes:"Search intent, answer-ready content, topic clusters, authority. Concise and practical."},
+  {day:"fri", ws:"buffer", name:"Review and revisions buffer", hours:1, priority:"Medium", due:null,
+   format:"Other", platform:"Other", notes:"Held for manager feedback, corrections and small unexpected requests."}
+];
+function makeWeekPlan(weekStart){
+  return WEEK_PLAN.map(t=>({
+    id:uid(), weekId:weekStart, day:t.day, workstream:t.ws, name:t.name,
+    hours:t.hours, actual:0, status:"Not Started", priority:t.priority,
+    due: t.due==null ? "" : addDays(weekStart, t.due),
+    format:t.format, platform:t.platform, owner:"Narindra",
+    recurrence:"One-off", link:"", notes:t.notes
+  }));
+}
+
+function makeKpis(weekId){
+  return KPI_TEMPLATE.map(k=>({id:uid(), weekId, name:k.name, deliverable:k.deliverable,
+    hours:k.hours, workstream:k.ws, done:false, notes:""}));
+}
+
 const OWNERS = ["Narindra","Emma","Shared"];
 
 const uid = () => Math.random().toString(36).slice(2,9);
@@ -502,23 +633,7 @@ function seed(){
     recurrence:recurrence||"One-off", link:"", notes:notes||""
   });
 
-  const tasks = [
-    T("mon","content","Meet Our Users carousel — Marie's story",2,"In Progress","High",2,"Carousel","Instagram","Narindra","Recurring","Interview notes are in the shared drive. Six slides: hook, injury, what changed, data, quote, CTA.",1.5),
-    T("mon","stories","Instagram Stories — 3 sets, fitting day at the lab",1,"Not Started","Medium",0,"Story","Instagram","Narindra","Recurring","Shoot on the phone, no formal lighting needed."),
-    T("mon","design","Finalise email signature graphics",1,"Changes Needed","High",1,"PDF / Document","Email","Narindra","One-off","Practitioner version needs the new certification mark, not the old one.",0.5),
-    T("tue","content","Educational post — what your gait says about knee pain",1.5,"Not Started","High",3,"Static Post","Instagram","Narindra","Recurring","Pull the claim wording from the approved messaging doc."),
-    T("tue","funnel","Map the Awareness stage — audit what we already have",1.5,"In Progress","High",4,"Other","Website","Narindra","One-off","Milestone 1 of the funnel project. List every live asset and tag it by stage.",1),
-    T("wed","funnel","Competitor teardown — how Oura structures problem awareness",1,"Not Started","Medium",7,"Other","Other","Narindra","One-off","Looking at sequence and CTA pattern, not visual style."),
-    T("wed","funnel","Draft practitioner persona v1",0.5,"Not Started","Low",7,"PDF / Document","Other","Narindra","One-off",""),
-    T("wed","video","Write 3 short-form video scripts — foot health basics",1.5,"Not Started","High",4,"Reel / Short Video","Instagram","Narindra","Recurring","Each under 45 seconds, hook in the first 3."),
-    T("thu","content","Captions and alt text for this week's three posts",1,"Not Started","Medium",4,"Other","Instagram","Narindra","Recurring",""),
-    T("thu","content","Social graphic — Baliston Care AI stat card",0.5,"Waiting / Review","Medium",4,"Static Post","LinkedIn","Narindra","One-off","Two versions in the drive — needs a pick."),
-    T("thu","kol","Research 10 potential KOLs — physiotherapists, FR + NL",1.5,"In Progress","High",4,"Other","Other","Narindra","Recurring","Add each one straight into the KOL tracker.",0.5),
-    T("thu","design","Trade show one-pager — QR card tweak",0.5,"Blocked","Medium",4,"PDF / Document","Other","Narindra","One-off","Waiting on the confirmed stand number before the QR can be finalised."),
-    T("fri","kol","Add follower counts and specialties to the outreach database",0.5,"Not Started","Medium",4,"Other","Other","Narindra","Recurring",""),
-    T("fri","video","Hook bank — 10 openers for practitioner Reels",0.5,"Not Started","Low",4,"Other","Other","Narindra","Recurring",""),
-    T("fri","stories","Repurpose the gait-check Reel into a Story sequence",0.5,"Not Started","Low",4,"Story","Instagram","Narindra","Recurring","")
-  ];
+  const tasks = makeWeekPlan(thisMon);
 
   const prevTasks = [
     T("mon","content","Meet Our Users carousel — Thomas",2,"Completed","High",null,"Carousel","Instagram","Narindra","Recurring","",2),
@@ -611,28 +726,21 @@ function seed(){
     review:{ keyProgress:"", outstandingNote:"", nextPriorities:["","",""] }
   };
 
-  return { version:1, currentWeek:thisMon, weeks, pipeline, funnel, ideas, kols, scripts, tab:"week" };
+  const kpis = makeKpis(thisMon).concat(makeKpis(prevMon).map(k=>({...k, done:true})));
+  return { version:1, currentWeek:thisMon, weeks, kpis, pipeline, funnel, ideas, kols, scripts, tab:"week" };
 }
 
 /* ============================================================
-   State and sync — public link, no login
+   State and sync — public planner, no login
 
    How access works
    ----------------
-   There is no sign-in. Whoever opens the link can use the planner.
+   There is none. This planner is deliberately public: anyone who opens the
+   web address can read and edit everything, with no sign-in of any kind.
 
-   The link can carry a secret phrase in its fragment, like:
-       https://you.github.io/planner/#k=our-shared-phrase
-
-   That phrase is sent as a header on every database call, and the security
-   policy requires it. The phrase lives in the link, never in this file, so
-   publishing this code in a public repo does not expose the data. It is
-   remembered in the browser after the first visit, so the plain URL works
-   from then on.
-
-   Open the page with no #k= at all and the planner runs fully open: anyone
-   with the address can read and write. Choose deliberately — the setup
-   screen generates whichever policy matches how you opened it.
+   Because of that, don't put anything here you wouldn't be comfortable
+   seeing published — the KOL tracker's contact details are the part worth
+   thinking about.
 
    Live updates
    ------------
@@ -669,26 +777,13 @@ const lastSynced = new Map();
 const clientId = Math.random().toString(36).slice(2,10);
 
 /* ---- the shared phrase ------------------------------------------------- */
-function readSecretFromUrl(){
-  const h = location.hash || "";
-  const m = h.match(/[#&]k=([^&]+)/);
-  return m ? decodeURIComponent(m[1]) : "";
-}
-function secret(){
-  const fromUrl = readSecretFromUrl();
-  if(fromUrl){
-    try{ localStorage.setItem(SECRET_KEY, fromUrl); }catch(e){}
-    return fromUrl;
-  }
-  try{ return localStorage.getItem(SECRET_KEY) || PLANNER_SECRET_FALLBACK; }catch(e){ return PLANNER_SECRET_FALLBACK; }
-}
-function shareLink(){
-  const base = location.origin + location.pathname;
-  const s = secret();
-  return s ? base + "#k=" + encodeURIComponent(s) : base;
-}
+/* This planner is public. No sign-in, no phrase, no gate — anyone with the
+   web address can open it and edit it. That is the intended behaviour here. */
+function readSecretFromUrl(){ return ""; }
+function secret(){ return ""; }
+function shareLink(){ return location.origin + location.pathname; }
 function myName(){
-  try{ return localStorage.getItem(NAME_KEY) || ""; }catch(e){ return ""; }
+  try{ return localStorage.getItem(NAME_KEY) || "Guest"; }catch(e){ return "Guest"; }
 }
 function setMyName(n){ try{ localStorage.setItem(NAME_KEY, n); }catch(e){} }
 
@@ -725,10 +820,21 @@ function hydrateWeek(w){
     });
     if(stored) stored.forEach(t=>{ t.weekId = w.start; state.tasks.push(t); });
   }
+  const dk = Object.getOwnPropertyDescriptor(w,"kpis");
+  if(!dk || !dk.get){
+    const storedK = Array.isArray(w.kpis) ? w.kpis : null;
+    delete w.kpis;
+    Object.defineProperty(w, "kpis", {
+      get(){ return state.kpis.filter(x=>x.weekId===w.start); },
+      enumerable:false, configurable:true
+    });
+    if(storedK) storedK.forEach(x=>{ x.weekId = w.start; state.kpis.push(x); });
+  }
   return w;
 }
 function hydrate(st){
   st.tasks = st.tasks || [];
+  st.kpis = st.kpis || [];
   Object.keys(st.weeks||{}).forEach(k=>{
     const w = st.weeks[k]; w.start = w.start || k; w.id = w.start; hydrateWeek(w);
   });
@@ -738,7 +844,12 @@ function hydrate(st){
 
 /* ---- rows -------------------------------------------------------------- */
 const COLS = {content:"pipeline", idea:"ideas", funnel:"funnel", kol:"kols", script:"scripts"};
-function colByKind(kind){ return kind==="task" ? state.tasks : (state[COLS[kind]] || []); }
+function colByKind(kind){
+  if(kind==="task") return state.tasks;
+  if(kind==="kpi") return state.kpis;
+  return state[COLS[kind]] || [];
+}
+const WEEK_SCOPED = ["task","kpi"];
 
 function collectRows(){
   const rows = [];
@@ -751,6 +862,10 @@ function collectRows(){
   state.tasks.forEach(t=>{
     const {id, weekId, ...rest} = t;
     rows.push({id:"task:"+id, kind:"task", week_id:weekId, data:{...rest, _id:id}});
+  });
+  state.kpis.forEach(k=>{
+    const {id, weekId, ...rest} = k;
+    rows.push({id:"kpi:"+id, kind:"kpi", week_id:weekId, data:{...rest, _id:id}});
   });
   Object.keys(COLS).forEach(kind=>{
     (state[COLS[kind]]||[]).forEach(o=>{
@@ -773,7 +888,7 @@ function applyRow(r){
   }
   const col = colByKind(r.kind);
   const obj = {...d, id:d._id}; delete obj._id;
-  if(r.kind==="task") obj.weekId = r.week_id;
+  if(WEEK_SCOPED.includes(r.kind)) obj.weekId = r.week_id;
   const ix = col.findIndex(x=>x.id===obj.id);
   if(ix>-1) col[ix] = obj; else col.push(obj);
 }
@@ -838,7 +953,7 @@ function serialise(){
   return {version:2, currentWeek:state.currentWeek, weeks:Object.fromEntries(
       Object.entries(state.weeks).map(([k,w])=>[k,{start:w.start,capacity:w.capacity,
         archived:w.archived,priorities:w.priorities,review:w.review}])),
-    tasks:state.tasks, pipeline:state.pipeline, funnel:state.funnel,
+    tasks:state.tasks, kpis:state.kpis, pipeline:state.pipeline, funnel:state.funnel,
     ideas:state.ideas, kols:state.kols, scripts:state.scripts, tab:state.tab};
 }
 
@@ -848,7 +963,7 @@ async function loadCloud(){
   if(error) throw error;
   if(!data.length) return false;
   state.weeks = {}; state.tasks = [];
-  state.pipeline=[]; state.funnel=[]; state.ideas=[]; state.kols=[]; state.scripts=[];
+  state.kpis=[]; state.pipeline=[]; state.funnel=[]; state.ideas=[]; state.kols=[]; state.scripts=[];
   lastSynced.clear();
   data.filter(r=>r.kind==="week").forEach(applyRow);
   data.filter(r=>r.kind!=="week").forEach(applyRow);
@@ -928,12 +1043,8 @@ function renderPresence(){
 
 /* ---- setup SQL --------------------------------------------------------- */
 function setupSql(){
-  const s = secret();
-  const guard = s
-    ? `  using      (current_setting('request.headers', true)::json ->> 'x-planner-key' = '${s.replace(/'/g,"''")}')\n  with check (current_setting('request.headers', true)::json ->> 'x-planner-key' = '${s.replace(/'/g,"''")}')`
-    : `  using (true)\n  with check (true)`;
   return `-- Baliston planner setup. Paste into the Supabase SQL Editor and press Run.
-${s ? "-- Access requires the phrase carried in your planner link." : "-- WARNING: no phrase set, so anyone with the address has full access."}
+-- This makes the planner public: anyone with the web address can read and edit it.
 
 create table if not exists ${TABLE} (
   id          text primary key,
@@ -950,10 +1061,12 @@ create index if not exists ${TABLE}_week_idx on ${TABLE} (week_id);
 alter table ${TABLE} enable row level security;
 
 drop policy if exists "planner link access" on ${TABLE};
-create policy "planner link access"
+drop policy if exists "public planner access" on ${TABLE};
+create policy "public planner access"
   on ${TABLE} for all
   to anon
-${guard};`;
+  using (true)
+  with check (true);`;
 }
 
 async function checkTable(){
@@ -970,25 +1083,22 @@ function renderSqlGate(kind){
   const v = document.getElementById("view");
   document.getElementById("tabs").innerHTML = "";
   document.getElementById("weekPick").innerHTML = "";
-  chip(kind==="denied" ? "Link phrase rejected" : "One step left");
+  chip(kind==="denied" ? "Access blocked" : "One step left");
 
   const denied = kind==="denied";
   const ref = (cfg()?.url||"").replace(/^https?:\/\//,"").split(".")[0];
   const sqlUrl = ref ? "https://supabase.com/dashboard/project/"+ref+"/sql/new" : "https://supabase.com/dashboard";
-  const s = secret();
 
   v.innerHTML = `
   <div class="gate wide">
     <span class="eyebrow">${denied?"Access":"Setup · one time"}</span>
-    <h2>${denied?"The database refused this link":"Create the table"}</h2>
+    <h2>${denied?"The database is refusing access":"Create the table"}</h2>
     <p>${denied
-      ? "The table exists, but the phrase in your link doesn't match the one in the security policy. Either open the planner using the correct link, or re-run the SQL below to set the phrase you're using now."
+      ? "The table exists but the database is refusing access. Run the SQL below to open it up."
       : "A browser can't create database tables — that needs a key which would be unsafe to publish. This is the only manual step, and you do it once."}</p>
 
-    <div class="gate-note ${s?"":"err"}" style="margin-top:0;margin-bottom:18px">
-      ${s
-        ? `This link carries the phrase <strong>${esc(s)}</strong>. The policy below requires it, so only people with the full link can read or write. Share the link from the ••• menu once setup is done.`
-        : `<strong>No phrase in this link, so the planner will be completely open</strong> — anyone with the address can read and edit everything, including the KOL contact details. To lock it down, reopen this page with <code>#k=your-phrase</code> on the end of the address, then copy the SQL.`}
+    <div class="gate-note" style="margin-top:0;margin-bottom:18px">
+      This planner will be public — anyone with the web address can open and edit it, with no sign-in.
     </div>
 
     <ol class="steps">
@@ -1035,22 +1145,13 @@ async function initSupabase(){
     try{ ({createClient} = await import(url)); if(createClient) break; }catch(e){}
   }
   if(!createClient){ netError = "Could not load the Supabase library from a CDN."; return false; }
-  const s = secret();
-  sb = createClient(c.url, c.key, {
-    auth:{persistSession:false, autoRefreshToken:false},
-    global: s ? {headers:{"x-planner-key": s}} : {}
-  });
+  sb = createClient(c.url, c.key, {auth:{persistSession:false, autoRefreshToken:false}});
   return true;
 }
 
 async function boot(){
   hydrate(state);
   try{ const w = localStorage.getItem(WEEK_KEY); if(w) state.currentWeek = w; }catch(e){}
-
-  // tidy the phrase out of the address bar once it's remembered
-  if(readSecretFromUrl() && history.replaceState){
-    try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){}
-  }
 
   const configured = await initSupabase();
   if(!configured && !cfg()){ renderCfgGate(); return; }
@@ -1068,7 +1169,6 @@ async function boot(){
       clearInterval(pollTimer); pollTimer = setInterval(poll, POLL_MS);
       liveChip();
       render(); renderPresence();
-      if(!myName()) askName();
       return;
     }catch(e){
       netError = e.message || String(e);
@@ -1185,6 +1285,7 @@ function meter(used, cap){
 const TABS = [
   {k:"dash",     n:"Dashboard"},
   {k:"week",     n:"Week"},
+  {k:"kpis",     n:"KPIs"},
   {k:"pipeline", n:"Pipeline"},
   {k:"funnel",   n:"Funnel"},
   {k:"ideas",    n:"Idea bank"},
@@ -1196,6 +1297,7 @@ const TABS = [
 function tabCount(k){
   const w = week();
   if(k==="week") return (w.tasks||[]).length;
+  if(k==="kpis"){ const ks=w.kpis||[]; return ks.length ? (ks.filter(x=>x.done).length+"/"+ks.length) : ""; }
   if(k==="pipeline") return state.pipeline.length;
   if(k==="ideas") return state.ideas.length;
   if(k==="kols") return state.kols.length;
@@ -1278,6 +1380,21 @@ function viewDash(){
         ${qGroups ? `<div class="queue">${qGroups}</div>` : `<div class="empty">Nothing is waiting on you. Clear.</div>`}
       </div>
       <div class="card pad">
+        <span class="eyebrow">KPIs this week</span>
+        ${(()=>{ const {ks,total,doneH,done} = kpiStats(w);
+          if(!ks.length) return `<div class="empty">None set. <button class="btn ghost sm" data-act="go" data-tab="kpis">Set them up</button></div>`;
+          return `<div class="meter-read" style="margin-top:8px">
+              <span class="big num">${done}</span><span class="of">of ${ks.length} delivered</span>
+            </div>
+            <div class="kpibar" style="margin-top:12px">${ks.map(k=>{const c=wsOf(k.workstream).c;
+              return `<i style="flex:${Number(k.hours)||1};background:${k.done?c:"var(--line-soft)"}"></i>`;}).join("")}</div>
+            <ul class="revlist" style="margin-top:12px">${ks.filter(k=>!k.done).slice(0,4).map(k=>
+              `<li><span>${esc(k.name)}</span><span class="num" style="color:var(--muted)">${num(k.hours)}h</span></li>`).join("")
+              || `<li style="color:var(--ok)">All delivered.</li>`}</ul>
+            <button class="btn ghost sm" style="margin-top:10px" data-act="go" data-tab="kpis">Open KPIs</button>`;
+        })()}
+      </div>
+      <div class="card pad">
         <span class="eyebrow">Upcoming deadlines</span>
         ${dl.length ? `<ul class="deadlines">${dl.map(x=>`<li><span>${esc(x.n)}</span><span class="when ${x.d<=TODAY?"due":""}">${short(x.d)}</span></li>`).join("")}</ul>` : `<div class="empty">No dates set yet.</div>`}
       </div>
@@ -1331,6 +1448,7 @@ function viewWeek(){
       <p>Drag a task to move it to another day. Click any task to edit every field.</p>
     </div>
     <div class="rowbar" style="margin:0">
+      <button class="btn" data-act="loadWeekPlan">Load this week's plan</button>
       <button class="btn" data-act="newTask" data-day="mon">Add task</button>
       <button class="btn" data-act="go" data-tab="review">Weekly review →</button>
     </div>
@@ -1344,6 +1462,94 @@ function viewWeek(){
       <p class="hint" style="margin-top:9px">Change this for holiday weeks or extra hours. Everything recalculates against it.</p>
     </div>
   </div>`;
+}
+
+/* ---------- KPIs ---------- */
+function kpiStats(w){
+  const ks = w.kpis||[];
+  const total = ks.reduce((a,k)=>a+(Number(k.hours)||0),0);
+  const doneH = ks.filter(k=>k.done).reduce((a,k)=>a+(Number(k.hours)||0),0);
+  return {ks, total, doneH, done:ks.filter(k=>k.done).length};
+}
+
+function viewKpis(){
+  const w = week();
+  const {ks, total, doneH, done} = kpiStats(w);
+  const pct = total ? Math.round((doneH/total)*100) : 0;
+
+  const rows = ks.map(k=>{
+    const ws = wsOf(k.workstream);
+    return `<article class="kpi ${k.done?"is-done":""}" style="--ws:${ws.c}">
+      <button class="tick" data-act="toggleKpi" data-id="${k.id}" role="checkbox"
+        aria-checked="${k.done}" aria-label="${esc(k.name)}">${k.done?"✓":""}</button>
+      <div class="kpimain">
+        <div class="kpiname" data-act="openKpi" data-id="${k.id}">${esc(k.name)}</div>
+        <p class="kpidel">${esc(k.deliverable)}</p>
+        ${k.notes?`<p class="kpinote">${esc(k.notes)}</p>`:""}
+      </div>
+      <div class="kpiright">
+        <span class="kpih num">${num(k.hours)}h</span>
+        <span class="ws">${esc(ws.name.split(" ")[0])}</span>
+      </div>
+    </article>`;
+  }).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">Week of ${weekLabel(w.start)}</span>
+      <h2>KPIs this week</h2>
+      <p>The commitments the hours are being spent against. Tick one off when the deliverable is actually done, not when it's started.</p>
+    </div>
+    <div class="rowbar" style="margin:0">
+      <button class="btn ${ks.length?'':'primary'}" data-act="loadKpis">Load this week&#39;s KPI set</button>
+      <button class="btn" data-act="newKpi">Add a KPI</button>
+    </div>
+  </div>
+
+  <div class="card pad" style="margin-bottom:14px">
+    <div class="kpitop">
+      <div>
+        <span class="eyebrow">Delivered</span>
+        <div class="meter-read" style="margin-top:6px">
+          <span class="big num">${done}</span>
+          <span class="of">of ${ks.length} KPIs · ${num(doneH)} of ${num(total)} committed hours</span>
+          ${total>w.capacity?`<span class="flag over">${num(total-w.capacity)}h over capacity</span>`
+            :`<span class="flag good">${num(w.capacity-total)}h left for anything else</span>`}
+        </div>
+      </div>
+      <span class="kpipct num">${pct}%</span>
+    </div>
+    <div class="kpibar">${ks.map(k=>{
+      const ws = wsOf(k.workstream);
+      return `<i style="flex:${Number(k.hours)||1};background:${k.done?ws.c:"var(--line-soft)"}" title="${esc(k.name)}"></i>`;
+    }).join("")}</div>
+  </div>
+
+  ${ks.length ? `<div class="kpilist">${rows}</div>`
+              : `<div class="card empty">No KPIs set for this week yet.</div>`}
+
+  <div class="briefgrid">
+    <div class="card pad">
+      <span class="eyebrow">Success criteria for the week</span>
+      <ul class="crit">${SUCCESS_CRITERIA.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+    </div>
+    <div class="card pad">
+      <span class="eyebrow">Send to Emma for review</span>
+      <ul class="crit review">${REVIEW_POINTS.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+      <p class="hint" style="margin-top:12px">Set the task to <strong>Waiting / Review</strong> rather than messaging — it appears on the dashboard.</p>
+    </div>
+    <div class="card pad guard">
+      <span class="eyebrow">Guardrails this week</span>
+      <ul class="crit">${GUARDRAILS.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+    </div>
+  </div>
+
+  <p class="hint" style="margin-top:16px;max-width:80ch">
+    Planning principle: 14 hours are assigned to defined deliverables, leaving 1 hour of genuine capacity
+    for feedback, revisions or an unexpected priority. SEO, AEO and GEO work this week is measurement and
+    mapping, not article writing.
+  </p>`;
 }
 
 /* ---------- Pipeline ---------- */
@@ -1560,6 +1766,15 @@ function viewReview(){
         <ul class="revlist">${done.map(x=>`<li><span>${esc(x.name)}</span><span class="num" style="color:var(--muted)">${num(x.actual||x.hours)}h</span></li>`).join("") || `<li style="color:var(--faint)">Nothing marked complete yet.</li>`}</ul>
       </div>
       <div class="card pad">
+        <span class="eyebrow">KPIs delivered</span>
+        ${(()=>{ const {ks,total,doneH,done} = kpiStats(w);
+          if(!ks.length) return `<div class="empty">No KPIs were set for this week.</div>`;
+          return `<ul class="revlist">${ks.map(k=>
+            `<li><span>${k.done?"✓":"○"} ${esc(k.name)}</span><span class="num" style="color:${k.done?"var(--ok)":"var(--muted)"}">${num(k.hours)}h</span></li>`
+          ).join("")}</ul><p class="hint" style="margin-top:8px">${done} of ${ks.length} delivered · ${num(doneH)} of ${num(total)} committed hours.</p>`;
+        })()}
+      </div>
+      <div class="card pad">
         <span class="eyebrow">Content published · ${pub.length}</span>
         <ul class="revlist">${pub.map(c=>`<li><span>${esc(c.title)}</span><span class="num" style="color:var(--muted)">${esc(c.platform)}</span></li>`).join("") || `<li style="color:var(--faint)">Nothing went live in this week's dates.</li>`}</ul>
       </div>
@@ -1685,7 +1900,7 @@ function renderModal(){
         <div class="mbody">${esc(m.body||"")}</div>
         ${m.input!==undefined ? `<div style="padding:12px 22px 0"><textarea class="field" id="modalInput" style="min-height:120px">${esc(m.input)}</textarea></div>` : ""}
         <div class="mfoot">
-          <button class="btn" data-act="closeModal">${esc(m.cancelLabel||"Cancel")}</button>
+          <button class="btn" data-act="${m.onNo?"cancelModal":"closeModal"}">${esc(m.cancelLabel||"Cancel")}</button>
           <button class="btn primary" data-act="confirmModal">${esc(m.confirmLabel||"Confirm")}</button>
         </div>
       </div>
@@ -1695,6 +1910,12 @@ function renderModal(){
 }
 
 function closeModal(){ modal=null; renderModal(); }
+
+function cancelModal(){
+  const fn = modal && modal.onNo;
+  modal = null; renderModal();
+  if(fn) fn();
+}
 
 function confirmModal(){
   if(!modal) return;
@@ -1723,6 +1944,13 @@ const SCHEMA = {
     {k:"owner",l:"Owner",t:"list",o:OWNERS},
     {k:"recurrence",l:"Recurring or one-off",t:"select",o:RECUR},
     {k:"link",l:"Link to file or document",t:"text",wide:1},
+    {k:"notes",l:"Notes",t:"textarea",wide:1}
+  ]},
+  kpi: {title:"KPI", fields:[
+    {k:"name",l:"KPI",t:"text",wide:1},
+    {k:"deliverable",l:"Deliverable — what done actually looks like",t:"textarea",wide:1},
+    {k:"hours",l:"Time target (hours)",t:"number"},
+    {k:"workstream",l:"Workstream",t:"select",o:WS.map(w=>w.id),labels:WS.map(w=>w.name)},
     {k:"notes",l:"Notes",t:"textarea",wide:1}
   ]},
   content: {title:"Content piece", fields:[
@@ -1796,6 +2024,7 @@ let drawer = null; // {type, id}
 
 function collectionOf(type){
   if(type==="task") return state.tasks;
+  if(type==="kpi") return state.kpis;
   if(type==="content") return state.pipeline;
   if(type==="idea") return state.ideas;
   if(type==="funnel") return state.funnel;
@@ -1868,6 +2097,41 @@ function newTask(day){
     status:"Not Started",priority:"Medium",due:"",format:"Other",platform:"Instagram",
     owner:"Narindra",recurrence:"One-off",link:"",notes:""};
   t.weekId = state.currentWeek; state.tasks.push(t); save(); render(); openDrawer("task",t.id);
+}
+function newKpi(){
+  const k = {id:uid(), weekId:state.currentWeek, name:"New KPI", deliverable:"",
+    hours:1, workstream:"content", done:false, notes:""};
+  state.kpis.push(k); save(); render(); openDrawer("kpi",k.id);
+}
+function loadKpis(){
+  const existing = (week().kpis||[]);
+  const go = ()=>{
+    existing.forEach(k=>{ const i = state.kpis.findIndex(x=>x.id===k.id); if(i>-1) state.kpis.splice(i,1); });
+    makeKpis(state.currentWeek).forEach(k=>state.kpis.push(k));
+    save(); render(); toast("This week's KPI set loaded.");
+  };
+  if(!existing.length){ go(); return; }
+  ask({
+    eyebrow:"KPIs", title:"Replace this week's KPIs?",
+    body:"The "+existing.length+" currently here will be removed and the standard set from the brief loaded in their place, unticked.",
+    confirmLabel:"Replace them", onYes:go
+  });
+}
+
+function loadWeekPlan(){
+  const existing = (week().tasks||[]);
+  const go = (clear)=>{
+    if(clear) existing.forEach(t=>{ const i = state.tasks.findIndex(x=>x.id===t.id); if(i>-1) state.tasks.splice(i,1); });
+    makeWeekPlan(state.currentWeek).forEach(t=>state.tasks.push(t));
+    save(); render(); toast("This week's plan loaded — 14 hours across 12 tasks.");
+  };
+  if(!existing.length){ go(false); return; }
+  ask({
+    eyebrow:"Weekly plan", title:"Load the plan from the brief?",
+    body:"This adds the 12 tasks from the weekly brief, totalling 14 hours. You have "+existing.length+" tasks in this week already — replace them, or keep both?",
+    confirmLabel:"Replace what's here", cancelLabel:"Keep both",
+    onYes:()=>go(true), onNo:()=>go(false)
+  });
 }
 function newContent(stage){
   const c = {id:uid(),title:"New content piece",pillar:"",funnel:"Education",format:"Static Post",
@@ -1952,6 +2216,10 @@ function doArchive(w){
     }
   });
   carried.forEach(t=>state.tasks.push(t));
+  const priorKpis = (w.kpis||[]);
+  const freshKpis = (priorKpis.length ? priorKpis.map(k=>({...k, id:uid(), weekId:nextStart, done:false, notes:""}))
+                                      : makeKpis(nextStart));
+  freshKpis.forEach(k=>state.kpis.push(k));
   const nextPr = ((w.review||{}).nextPriorities||[]).filter(Boolean);
   state.weeks[nextStart] = hydrateWeek({
     id:nextStart, start:nextStart, capacity:w.capacity, archived:false,
@@ -2062,6 +2330,7 @@ function renderMain(){
   v.innerHTML =
     state.tab==="dash" ? viewDash() :
     state.tab==="week" ? viewWeek() :
+    state.tab==="kpis" ? viewKpis() :
     state.tab==="pipeline" ? viewPipeline() :
     state.tab==="funnel" ? viewFunnel() :
     state.tab==="ideas" ? viewIdeas() :
@@ -2082,6 +2351,15 @@ document.addEventListener("click", e=>{
     case "go": state.tab = el.dataset.tab; save(); render(); break;
     case "newTask": newTask(el.dataset.day); break;
     case "newContent": newContent(el.dataset.stage); break;
+    case "newKpi": newKpi(); break;
+    case "loadKpis": loadKpis(); break;
+    case "loadWeekPlan": loadWeekPlan(); break;
+    case "openKpi": openDrawer("kpi", id); break;
+    case "toggleKpi": {
+      const k = state.kpis.find(x=>x.id===id);
+      if(k){ k.done = !k.done; save(); renderMain(); }
+      break;
+    }
     case "newIdea": newIdea(); break;
     case "newFunnel": newFunnel(el.dataset.stage); break;
     case "newKol": newKol(); break;
@@ -2096,6 +2374,7 @@ document.addEventListener("click", e=>{
     case "closeDrawer": closeDrawer(); break;
     case "closeModal": closeModal(); break;
     case "confirmModal": confirmModal(); break;
+    case "cancelModal": cancelModal(); break;
     case "deleteItem": {
       if(!drawer) break;
       const d = {type:drawer.type, id:drawer.id};
@@ -2103,7 +2382,8 @@ document.addEventListener("click", e=>{
         eyebrow:"Delete", title:"Delete this permanently?",
         body:"It won't be recoverable.", confirmLabel:"Delete",
         onYes:()=>{
-          const col = (d.type==="task") ? state.tasks
+          const col = (d.type==="kpi") ? state.kpis
+            : (d.type==="task") ? state.tasks
             : d.type==="content" ? state.pipeline
             : d.type==="idea" ? state.ideas
             : d.type==="funnel" ? state.funnel
@@ -2153,18 +2433,15 @@ document.addEventListener("click", e=>{
     }
     case "setName": { askName(); break; }
     case "account": {
-      const s = secret();
       ask({
         eyebrow: MODE==="cloud" ? "Shared planner" : "This browser only",
-        title: MODE==="cloud" ? (s ? "Live · protected by link" : "Live · open link") : "Not connected",
+        title: MODE==="cloud" ? "Live · public link" : "Not connected",
         body: MODE==="cloud"
-          ? (s
-              ? "Anyone with the full link can open and edit this planner. No sign-in needed. Copy the link below to share it — and treat it like a password, because that is what it is."
-              : "This planner is completely open: anyone with the web address can read and edit everything. To lock it down, reopen it with #k=your-phrase on the end of the address and re-run the setup SQL.")
+          ? "Anyone with this web address can open and edit the planner. No sign-in. Copy the link and send it to whoever needs it."
           : "No database connected, so this planner saves to this browser and nobody else sees it.",
-        confirmLabel: MODE==="cloud" ? "Copy the share link" : "Close",
-        cancelLabel: "Change my name",
-        onYes: ()=>{ if(MODE==="cloud") document.querySelector('[data-act="copyLink"]')?.click(); }
+        confirmLabel: MODE==="cloud" ? "Copy the link" : "Close",
+        cancelLabel: "Close",
+        onYes: ()=>{ if(MODE==="cloud") document.getElementById("copyLinkHidden").click(); }
       });
       break;
     }
