@@ -1,0 +1,2989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Baliston Health — Content &amp; Marketing Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F2F3;
+  --surface:#FFFFFF;
+  --surface-2:#F8F9F9;
+  --ink:#101416;
+  --ink-2:#3E4649;
+  --muted:#767F83;
+  --faint:#9AA3A7;
+  --line:#E2E5E6;
+  --line-soft:#EDEFF0;
+  --accent:#0F4C4A;
+  --accent-soft:#E7EFEE;
+  --warn:#A8641B;
+  --alert:#9E3A2C;
+  --ok:#2E6B4F;
+  --info:#2E6F9E;
+  --block:#63549C;
+
+  --ws-content:#1F5E63;
+  --ws-funnel:#414781;
+  --ws-video:#7A4560;
+  --ws-kol:#55693C;
+  --ws-stories:#A2682F;
+  --ws-design:#3F566B;
+
+  --r:3px;
+  --sans:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;}
+button{cursor:pointer;background:none;border:none;padding:0;}
+a{color:var(--accent);}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+.eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;
+}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+
+/* ---------- shell ---------- */
+.shell{max-width:1440px;margin:0 auto;padding:0 28px 80px;}
+header.top{
+  position:sticky;top:0;z-index:40;background:rgba(241,242,243,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+}
+.top-inner{max-width:1440px;margin:0 auto;padding:16px 28px 0;}
+.brandrow{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;justify-content:space-between;}
+.brand{display:flex;align-items:baseline;gap:12px;}
+.brand h1{
+  font-family:var(--serif);font-weight:400;font-size:22px;letter-spacing:-.01em;margin:0;
+}
+.brand .sub{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.topctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.weeknav{display:inline-flex;align-items:center;gap:2px;}
+.navbtn{width:26px;height:28px;border:1px solid var(--line);background:var(--surface);
+  border-radius:var(--r);color:var(--muted);font-size:15px;line-height:1;}
+.navbtn:hover{border-color:var(--ink-2);color:var(--ink);}
+.weeknav select{border-radius:var(--r);}
+.savechip{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);white-space:nowrap;}
+.savechip.on{color:var(--ok);}
+
+.tabs{display:flex;gap:2px;margin-top:14px;overflow-x:auto;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{
+  padding:10px 14px;border-bottom:2px solid transparent;color:var(--muted);
+  font-size:13px;font-weight:500;white-space:nowrap;letter-spacing:-.005em;
+}
+.tab:hover{color:var(--ink-2);}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+.tab .cnt{font-family:var(--mono);font-size:10px;color:var(--faint);margin-left:6px;}
+
+/* ---------- generic ---------- */
+.viewhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:30px 0 16px;}
+.viewhead h2{font-family:var(--serif);font-weight:400;font-size:26px;margin:2px 0 0;letter-spacing:-.015em;}
+.viewhead p{margin:5px 0 0;color:var(--muted);max-width:60ch;font-size:13px;}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);}
+.pad{padding:18px 20px;}
+
+.btn{
+  border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:var(--r);
+  font-size:12.5px;font-weight:500;color:var(--ink-2);transition:border-color .12s,background .12s;
+}
+.btn:hover{border-color:var(--ink-2);color:var(--ink);}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.btn.primary:hover{background:#0b3d3b;}
+.btn.ghost{border-color:transparent;color:var(--muted);}
+.btn.ghost:hover{border-color:var(--line);color:var(--ink);}
+.btn.danger:hover{border-color:var(--alert);color:var(--alert);}
+.btn.sm{padding:4px 9px;font-size:11.5px;}
+
+select.bare,input.bare{
+  border:1px solid var(--line);background:var(--surface);border-radius:var(--r);
+  padding:6px 10px;font-size:12.5px;
+}
+
+/* ---------- meter (signature) ---------- */
+.meter{margin-top:14px;}
+.meter-track{position:relative;height:34px;background:var(--surface-2);border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+.meter-segs{position:absolute;inset:0;display:flex;}
+.meter-seg{height:100%;opacity:.9;}
+.meter-over{
+  position:absolute;top:0;bottom:0;
+  background:repeating-linear-gradient(135deg,rgba(158,58,44,.75),rgba(158,58,44,.75) 3px,rgba(158,58,44,.35) 3px,rgba(158,58,44,.35) 7px);
+}
+.meter-ticks{position:absolute;inset:0;pointer-events:none;}
+.meter-tick{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.5);}
+.meter-tick.major{background:rgba(255,255,255,.85);}
+.meter-tick.empty{background:var(--line);}
+.meter-cap{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);}
+.meter-scale{display:flex;justify-content:space-between;margin-top:5px;}
+.meter-scale span{font-family:var(--mono);font-size:9.5px;color:var(--faint);}
+.meter-read{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+.meter-read .big{font-family:var(--serif);font-size:42px;line-height:1;font-weight:300;letter-spacing:-.02em;}
+.meter-read .of{font-family:var(--mono);font-size:12px;color:var(--muted);}
+.meter-read .flag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 7px;border-radius:2px;
+}
+.flag.over{background:#fbecea;color:var(--alert);}
+.flag.under{background:#fdf4e8;color:var(--warn);}
+.flag.good{background:var(--accent-soft);color:var(--accent);}
+
+/* ---------- dashboard ---------- */
+.dash{display:grid;grid-template-columns:1.25fr .9fr;gap:14px;align-items:start;}
+.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line-soft);margin-top:18px;}
+.stat{padding:14px 0 4px;border-right:1px solid var(--line-soft);}
+.stat:last-child{border-right:none;}
+.stat .v{font-family:var(--serif);font-size:27px;font-weight:400;line-height:1;}
+.stat .l{margin-top:6px;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);}
+
+.wsbar{display:grid;grid-template-columns:1fr;gap:11px;}
+.wsrow{display:grid;grid-template-columns:1fr 76px;gap:12px;align-items:center;}
+.wsname{display:flex;align-items:center;gap:8px;font-size:12.5px;}
+.dot{width:7px;height:7px;border-radius:50%;flex:none;}
+.wstrack{height:4px;background:var(--line-soft);border-radius:2px;position:relative;margin-top:6px;}
+.wsfill{height:100%;border-radius:2px;}
+.wstarget{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--ink-2);opacity:.55;}
+.wsnums{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;}
+.wsnums b{color:var(--ink);font-weight:500;}
+
+.queue{display:grid;gap:1px;background:var(--line-soft);border-top:1px solid var(--line-soft);margin-top:14px;}
+.qrow{background:var(--surface);padding:10px 0;display:flex;gap:10px;align-items:center;justify-content:space-between;}
+.qrow .t{font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.qgrouphead{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);background:var(--surface);padding:12px 0 4px;}
+
+.deadlines li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:12.5px;}
+.deadlines{list-style:none;margin:10px 0 0;padding:0;}
+.deadlines .when{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;}
+.deadlines .when.due{color:var(--alert);}
+
+.prio-list{list-style:none;margin:12px 0 0;padding:0;counter-reset:p;}
+.prio-list li{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid var(--line-soft);font-size:13px;align-items:flex-start;}
+.prio-list li:before{counter-increment:p;content:counter(p);font-family:var(--mono);font-size:10px;color:var(--faint);padding-top:3px;}
+
+/* ---------- week board ---------- */
+.board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start;}
+.daycol{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-height:150px;display:flex;flex-direction:column;}
+.daycol.dragover{border-color:var(--accent);background:var(--accent-soft);}
+.dayhead{padding:12px 13px 10px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+.dayhead .d{font-size:13px;font-weight:600;letter-spacing:-.01em;}
+.dayhead .dt{font-family:var(--mono);font-size:10px;color:var(--faint);display:block;font-weight:400;margin-top:2px;letter-spacing:.06em;}
+.dayhead .h{font-family:var(--mono);font-size:11px;color:var(--ink-2);white-space:nowrap;}
+.daybody{padding:9px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.dayfoot{padding:0 9px 10px;}
+
+.task{
+  border:1px solid var(--line);border-left:3px solid var(--ws);border-radius:2px;
+  padding:9px 10px;background:var(--surface);cursor:grab;transition:box-shadow .12s,border-color .12s;
+}
+.task:hover{box-shadow:0 1px 6px rgba(16,20,22,.07);}
+.task.done{opacity:.5;}
+.task .tn{font-size:12.5px;line-height:1.35;font-weight:500;letter-spacing:-.005em;}
+.task .tmeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:7px;}
+.task .ws{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ws);}
+.task .hrs{font-family:var(--mono);font-size:10px;color:var(--muted);margin-left:auto;}
+.task .rec{font-family:var(--mono);font-size:9px;color:var(--faint);}
+
+.pill{
+  display:inline-flex;align-items:center;gap:5px;font-size:10.5px;padding:2px 7px;border-radius:10px;
+  border:1px solid var(--line);color:var(--ink-2);white-space:nowrap;background:var(--surface);
+}
+.pill .pd{width:5px;height:5px;border-radius:50%;flex:none;}
+.pill.plain{border-color:transparent;background:var(--surface-2);color:var(--muted);}
+.prio{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;}
+.prio.High{color:var(--alert);}
+.prio.Medium{color:var(--warn);}
+.prio.Low{color:var(--faint);}
+
+.addtask{
+  width:100%;text-align:left;padding:8px 10px;border:1px dashed var(--line);border-radius:2px;
+  color:var(--faint);font-size:12px;
+}
+.addtask:hover{border-color:var(--accent);color:var(--accent);}
+
+.weekfoot{margin-top:14px;display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:center;}
+
+/* ---------- kanban ---------- */
+.kanban{display:flex;gap:11px;overflow-x:auto;padding-bottom:10px;align-items:start;}
+.kcol{flex:0 0 232px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);}
+.kcol.dragover{border-color:var(--accent);background:var(--accent-soft);}
+.khead{padding:11px 12px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;}
+.khead .kn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);}
+.khead .kc{font-family:var(--mono);font-size:10px;color:var(--faint);}
+.kbody{padding:9px;display:flex;flex-direction:column;gap:8px;min-height:60px;}
+.kcard{border:1px solid var(--line);border-radius:2px;padding:9px 10px;cursor:grab;background:var(--surface);}
+.kcard:hover{box-shadow:0 1px 6px rgba(16,20,22,.07);}
+.kcard .kt{font-size:12.5px;font-weight:500;line-height:1.35;}
+.kcard .kmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px;align-items:center;}
+
+/* ---------- funnel ---------- */
+.funnel{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:start;}
+.fcol{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);}
+.fcol.dragover{border-color:var(--accent);background:var(--accent-soft);}
+.fhead{padding:12px;border-bottom:1px solid var(--line-soft);}
+.fstage{font-size:12.5px;font-weight:600;letter-spacing:-.01em;}
+.fnum{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.1em;}
+.fmix{display:flex;gap:2px;margin-top:9px;height:3px;}
+.fmix i{display:block;height:100%;border-radius:1px;}
+.fgap{margin-top:8px;font-size:10.5px;color:var(--warn);line-height:1.35;}
+.fgap.ok{color:var(--faint);}
+.fbody{padding:9px;display:flex;flex-direction:column;gap:7px;}
+.fitem{border:1px solid var(--line);border-radius:2px;padding:8px 9px;cursor:grab;font-size:12px;line-height:1.35;}
+.fitem .fk{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;display:block;}
+.fk.Existing{color:var(--ok);}
+.fk.Creating{color:var(--info);}
+.fk.Idea{color:var(--faint);}
+.fk.Gap{color:var(--alert);}
+
+/* ---------- tables / lists ---------- */
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);}
+table{border-collapse:collapse;width:100%;min-width:900px;}
+th{
+  text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap;
+}
+td{padding:12px 14px;border-bottom:1px solid var(--line-soft);font-size:12.5px;vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tbody tr{cursor:pointer;}
+tbody tr:hover{background:var(--surface-2);}
+td .sub{color:var(--muted);font-size:11.5px;display:block;margin-top:2px;}
+
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;}
+.ideacard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 15px;display:flex;flex-direction:column;gap:10px;}
+.ideacard .it{font-size:13.5px;font-weight:500;line-height:1.35;letter-spacing:-.005em;cursor:pointer;}
+.ideacard .meta{display:flex;flex-wrap:wrap;gap:6px;}
+.ideacard .acts{display:flex;gap:6px;margin-top:auto;padding-top:4px;border-top:1px solid var(--line-soft);}
+
+.scriptcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:15px 16px;}
+.scriptcard .hook{
+  font-family:var(--serif);font-size:16px;line-height:1.4;font-weight:400;margin:10px 0 0;
+  padding-left:12px;border-left:2px solid var(--accent);color:var(--ink-2);
+}
+
+/* ---------- review ---------- */
+.rev{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+.revlist{list-style:none;margin:10px 0 0;padding:0;}
+.revlist li{padding:8px 0;border-bottom:1px solid var(--line-soft);display:flex;gap:10px;justify-content:space-between;font-size:12.5px;}
+.revlist li:last-child{border-bottom:none;}
+textarea.field,input.field,select.field{
+  width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);
+  padding:8px 10px;font-size:13px;line-height:1.45;
+}
+textarea.field{resize:vertical;min-height:78px;}
+input.field:focus,textarea.field:focus,select.field:focus{border-color:var(--accent);outline:none;}
+.hcheck{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;}
+.hcheck .b{border:1px solid var(--line-soft);border-radius:2px;padding:10px 12px;}
+.hcheck .b .v{font-family:var(--serif);font-size:22px;}
+
+.archrow{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:9px;}
+.archhead{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 18px;width:100%;text-align:left;}
+.archhead .w{font-family:var(--serif);font-size:17px;}
+.archstats{display:flex;gap:18px;flex-wrap:wrap;}
+.archstats span{font-family:var(--mono);font-size:11px;color:var(--muted);}
+.archbody{padding:0 18px 18px;border-top:1px solid var(--line-soft);}
+
+/* ---------- drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(16,20,22,.28);z-index:60;}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:430px;max-width:100%;background:var(--surface);
+  border-left:1px solid var(--line);z-index:61;display:flex;flex-direction:column;
+  box-shadow:-8px 0 32px rgba(16,20,22,.10);
+}
+.dhead{padding:18px 22px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.dhead h3{font-family:var(--serif);font-weight:400;font-size:19px;margin:4px 0 0;}
+.dbody{padding:18px 22px 30px;overflow-y:auto;flex:1;}
+.dfoot{padding:12px 22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.f{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.f.wide{grid-column:1 / -1;}
+.f label{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);}
+
+
+.modalwrap{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);width:460px;max-width:100%;
+  box-shadow:0 12px 48px rgba(16,20,22,.18);position:relative;z-index:81;}
+.modal .mhead{padding:20px 22px 0;}
+.modal h3{font-family:var(--serif);font-weight:400;font-size:20px;margin:6px 0 0;letter-spacing:-.01em;}
+.modal .mbody{padding:12px 22px 4px;font-size:13px;color:var(--ink-2);line-height:1.5;white-space:pre-line;}
+.modal .mfoot{padding:16px 22px 18px;display:flex;justify-content:flex-end;gap:8px;}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:90;background:var(--ink);color:#fff;
+  padding:10px 16px;border-radius:3px;font-size:12.5px;box-shadow:0 6px 24px rgba(16,20,22,.24);max-width:90vw;}
+.notice{background:var(--accent-soft);border:1px solid #cfe0de;border-radius:var(--r);padding:14px 16px;
+  margin-bottom:14px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.notice p{margin:0;font-size:12.5px;color:var(--accent);max-width:70ch;}
+
+.presence{display:flex;align-items:center;gap:4px;}
+.who{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);
+  font-size:10px;background:var(--line);color:var(--ink-2);border:1px solid var(--surface);}
+.who.me{background:var(--accent);color:#fff;}
+.wholabel{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-left:5px;}
+.gate{max-width:520px;margin:70px auto;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);padding:34px 34px 30px;}
+.gate.wide{max-width:720px;}
+.gate .steps{margin:0 0 18px;padding-left:20px;color:var(--ink-2);font-size:13px;line-height:1.7;}
+.gate .steps li{margin-bottom:3px;}
+textarea.field.sql{font-family:var(--mono);font-size:11px;line-height:1.55;min-height:250px;
+  background:var(--surface-2);white-space:pre;overflow-x:auto;}
+.gate h2{font-family:var(--serif);font-weight:400;font-size:27px;margin:6px 0 0;letter-spacing:-.015em;}
+.gate p{color:var(--muted);font-size:13px;margin:10px 0 22px;line-height:1.55;}
+.gate .f{margin-bottom:14px;}
+.gate-note{background:var(--surface-2);border-radius:2px;padding:11px 13px;font-size:11.5px;
+  color:var(--muted);line-height:1.5;margin-top:16px;}
+.gate-note.err{background:#fbecea;color:var(--alert);}
+
+.kpitop{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.kpipct{font-family:var(--serif);font-size:34px;font-weight:300;color:var(--muted);line-height:1;}
+.kpibar{display:flex;gap:2px;height:6px;margin-top:16px;}
+.kpibar i{display:block;height:100%;border-radius:1px;transition:background .18s;}
+.kpilist{display:grid;gap:8px;}
+.lastweek{margin-bottom:14px;border-left:3px solid var(--line);}
+.lwhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.lwline{font-size:13px;color:var(--ink-2);margin-top:5px;}
+.lwgrid{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;}
+.lwitem{font-size:12px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;}
+.lwitem i{font-style:normal;font-size:11px;}
+.kpi{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ws);
+  border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;
+  gap:14px;align-items:start;}
+.kpi{position:relative;}
+.kpi .rowdel{opacity:0;transition:opacity .12s;}
+.kpi:hover .rowdel,.kpi:focus-within .rowdel{opacity:1;}
+.kpi.r-met{background:var(--surface-2);border-left-color:#2E6B4F;}
+.kpi.r-met .kpiname{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px;}
+.kpi.r-met .kpidel{color:var(--faint);}
+.kpi.r-partly{border-left-color:#A8641B;}
+.kpi.r-missed{border-left-color:#9E3A2C;}
+.kpi .tick{border-color:var(--line);}
+.kpi.r-met .tick{background:#2E6B4F;border-color:#2E6B4F;}
+.kpi.r-partly .tick{background:#A8641B;border-color:#A8641B;}
+.kpi.r-missed .tick{background:#9E3A2C;border-color:#9E3A2C;}
+.reslabel{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--res);}
+.reskey{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;}
+.reskey span{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--muted);}
+.reskey i{width:7px;height:7px;border-radius:2px;display:block;}
+.kpi.is-done{background:var(--surface-2);border-left-color:var(--ok);}
+.kpi.is-done .kpiname{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px;}
+.kpi.is-done .kpidel{color:var(--faint);}
+.tick{width:22px;height:22px;border:1px solid var(--line);border-radius:3px;display:grid;
+  place-items:center;font-size:12px;color:#fff;background:var(--surface);margin-top:1px;flex:none;
+  transition:background .15s,border-color .15s;}
+.tick:hover{border-color:var(--accent);}
+.kpi.is-done .tick{background:var(--ok);border-color:var(--ok);}
+.kpiname{font-size:14px;font-weight:600;letter-spacing:-.01em;cursor:pointer;}
+.kpidel{margin:5px 0 0;font-size:12.5px;color:var(--ink-2);line-height:1.5;max-width:74ch;}
+.kpinote{margin:7px 0 0;font-size:11.5px;color:var(--muted);line-height:1.45;}
+.kpiright{text-align:right;display:flex;flex-direction:column;gap:5px;align-items:flex-end;}
+.kpih{font-family:var(--mono);font-size:13px;}
+.kpiright .ws{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ws);}
+@media (max-width:720px){
+  .kpi{grid-template-columns:auto 1fr;}
+  .kpiright{grid-column:2;flex-direction:row;justify-content:flex-start;gap:10px;}
+}
+
+.briefgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px;align-items:start;}
+.briefgrid .guard{grid-column:1 / -1;border-left:3px solid var(--warn);}
+ul.crit{list-style:none;margin:12px 0 0;padding:0;}
+ul.crit li{position:relative;padding:7px 0 7px 20px;font-size:12.5px;line-height:1.5;
+  border-bottom:1px solid var(--line-soft);color:var(--ink-2);}
+ul.crit li:last-child{border-bottom:none;}
+ul.crit li:before{content:"";position:absolute;left:2px;top:14px;width:5px;height:5px;
+  border-radius:50%;background:var(--accent);}
+ul.crit.review li:before{background:var(--warn);}
+.guard ul.crit li:before{background:var(--warn);}
+@media (max-width:720px){ .briefgrid{grid-template-columns:1fr;} }
+
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);
+  border-radius:14px;padding:5px 12px;font-size:12px;color:var(--ink-2);}
+.chip i{width:7px;height:7px;border-radius:50%;display:block;}
+.chip b{font-weight:500;color:var(--faint);font-size:10.5px;}
+.chip:hover{border-color:var(--ink-2);}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+.chip.on b{color:rgba(255,255,255,.6);}
+.libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;}
+.libcard{background:var(--surface);border:1px solid var(--line);border-top:2px solid var(--c);
+  border-radius:var(--r);padding:15px 16px;display:flex;flex-direction:column;gap:9px;}
+.libhead{display:flex;align-items:center;gap:8px;}
+.libtype{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--c);}
+.libtitle{font-size:14px;font-weight:600;line-height:1.4;letter-spacing:-.01em;cursor:pointer;}
+.libbits{display:flex;flex-wrap:wrap;gap:6px;}
+.libbits span{font-family:var(--mono);font-size:10px;color:var(--muted);background:var(--surface-2);
+  padding:2px 7px;border-radius:2px;}
+.libbody{margin:0;font-size:12.5px;line-height:1.5;color:var(--ink-2);}
+.libfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;
+  padding-top:9px;border-top:1px solid var(--line-soft);}
+.liblink{font-size:11.5px;text-decoration:none;font-family:var(--mono);}
+.liblink:hover{text-decoration:underline;}
+.empty{padding:26px 20px;text-align:center;color:var(--faint);font-size:12.5px;}
+.hint{font-size:11.5px;color:var(--muted);}
+.rowbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}
+
+@media (max-width:1180px){
+  .dash{grid-template-columns:1fr;}
+  .board{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .funnel{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .weekfoot{grid-template-columns:1fr;}
+}
+@media (max-width:720px){
+  .shell{padding:0 14px 60px;}
+  .top-inner{padding:14px 14px 0;}
+  .board,.funnel,.rev{grid-template-columns:1fr;}
+  .statgrid{grid-template-columns:repeat(2,1fr);}
+  .stat{border-right:none;}
+  .fgrid{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brandrow">
+      <div class="brand">
+        <h1>Baliston Health</h1>
+        <span class="sub">Content &amp; marketing planner</span>
+      </div>
+      <div class="topctl">
+        <span class="presence" id="presence"></span>
+        <span class="weeknav">
+          <button class="navbtn" data-act="stepWeek" data-d="-1" title="Previous week" aria-label="Previous week">‹</button>
+          <select class="bare" id="weekPick" aria-label="Choose week"></select>
+          <button class="navbtn" data-act="stepWeek" data-d="1" title="Next week" aria-label="Next week">›</button>
+        </span>
+        <button class="btn ghost sm" data-act="newWeek" title="Start the following week">+ Week</button>
+        <span class="savechip" id="saveChip">Loading</span>
+        <button class="btn ghost sm" data-act="copyLink" title="Copy the share link">Share</button>
+        <button class="btn ghost sm" data-act="account" title="Status">•••</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" role="tablist"></nav>
+  </div>
+</header>
+
+<main class="shell" id="view"></main>
+<div id="drawerHost"></div>
+<div id="modalHost"></div>
+<div id="toastHost"></div>
+<button data-act="copyLink" id="copyLinkHidden" style="display:none" aria-hidden="true" tabindex="-1"></button>
+
+<script type="module">
+/* ============================================================
+   Baliston Health — Content & Marketing Planner
+   Single-file working planner. Data saved to shared storage.
+   ============================================================ */
+
+const KEY = "baliston-planner-v1";
+
+const WS = [
+  {id:"seo",     name:"Search & Discoverability",      target:4.5,  c:"#6B3F8C"},
+  {id:"content", name:"Content Creation",              target:4,    c:"#1F5E63"},
+  {id:"kol",     name:"KOL & Creator Research",        target:1.75, c:"#55693C"},
+  {id:"stories", name:"Stories & Reactive Content",    target:1,    c:"#A2682F"},
+  {id:"video",   name:"Video & Script Bank",           target:0.75, c:"#7A4560"},
+  {id:"buffer",  name:"Review & Revisions",            target:1,    c:"#767F83"},
+  {id:"funnel",  name:"Content Funnel & Strategy",     target:0,    c:"#414781"},
+  {id:"design",  name:"Marketing Design Support",      target:0,    c:"#3F566B"}
+];
+const wsOf = id => WS.find(w=>w.id===id) || WS[0];
+
+const STATUS = [
+  {n:"Not Started",      c:"#9AA3A7"},
+  {n:"In Progress",      c:"#2E6F9E"},
+  {n:"Waiting / Review", c:"#A8641B"},
+  {n:"Changes Needed",   c:"#9E3A2C"},
+  {n:"Blocked",          c:"#63549C"},
+  {n:"Approved",         c:"#2E6B4F"},
+  {n:"Completed",        c:"#6E7A7E"}
+];
+const stColor = n => (STATUS.find(s=>s.n===n)||STATUS[0]).c;
+const REVIEW_STATES = ["Waiting / Review","Changes Needed","Blocked","Approved"];
+
+const PRIORITIES = ["High","Medium","Low"];
+const RECUR = ["Recurring","One-off"];
+const DAYS = [{k:"mon",n:"Monday"},{k:"tue",n:"Tuesday"},{k:"wed",n:"Wednesday"},{k:"thu",n:"Thursday"},{k:"fri",n:"Friday"}];
+const FORMATS = ["Reel / Short Video","Carousel","Static Post","Story","Long-form Video","Article","Email","PDF / Document","Other"];
+const PLATFORMS = ["Instagram","LinkedIn","YouTube","Email","Website","Other"];
+const PIPE = ["Idea","Briefed","Creating","Internal Review","Changes","Approved","Scheduled","Published"];
+const FUNNEL = ["Awareness","Problem Awareness","Education","Trust & Proof","Consideration","Conversion"];
+const FKIND = ["Existing","Creating","Idea","Gap"];
+const CAPTION = ["Not started","Drafted","Ready","Approved"];
+const KOL_STATUS = ["Researching","Ready to Contact","Contacted","Responded","Conversation","Collaboration","Not Relevant"];
+const SCRIPT_STATUS = ["Idea","Writing","Review","Approved","Ready to Film","Filmed","Edited","Published"];
+/* Each week gets its own named set. Weeks keep the set they were given —
+   loading a different set only ever touches the week you are looking at. */
+const KPI_SETS = [
+  {id:"w1", label:"Week 1 — discovery and mapping (14h)", items:[
+    {name:"3 Series Posts", ws:"content", hours:4,
+     deliverable:"Create 3 posts — 1 Myth/Fact, 1 Educational, 1 Parameter Explainer — including captions."},
+    {name:"Meet Our Users", ws:"content", hours:2,
+     deliverable:"Complete 1 Meet Our Users carousel plus caption and prepare it for manager review."},
+    {name:"Instagram Stories", ws:"stories", hours:0.75,
+     deliverable:"Create 2 Story sets supporting the week, including at least one interactive Story."},
+    {name:"Short-form Video Bank", ws:"video", hours:0.75,
+     deliverable:"Develop 3 face-to-camera video concepts with a strong hook and key talking points."},
+    {name:"KOL Research + Outreach", ws:"kol", hours:1.5,
+     deliverable:"Find 3 strong new KOLs not already in the database, and prepare a personalised email and DM for the best 2."},
+    {name:"SEO/AEO Question Research", ws:"seo", hours:1.5,
+     deliverable:"Add 10–15 real practitioner questions to the Question Bank, with source, audience type, topic cluster, and whether Baliston already answers it."},
+    {name:"Community Research", ws:"seo", hours:1,
+     deliverable:"Verify 2–3 priority practitioner communities and qualify 3 strong discussion threads. Do not post yet."},
+    {name:"Editorial / Backlink Research", ws:"seo", hours:1,
+     deliverable:"Research and qualify 5 relevant publications, associations, directories or podcasts. Do not send outreach yet."},
+    {name:"SEO / AEO / GEO Learning", ws:"seo", hours:0.5,
+     deliverable:"Build familiarity with SEO, AEO and GEO, and add concise notes to the working strategy."},
+    {name:"Review / Revisions Buffer", ws:"buffer", hours:1,
+     deliverable:"Reserved time for manager feedback, corrections and small unexpected requests."}
+  ]},
+  {id:"w2", label:"Week 2 — categorise and recommend (13h)", items:[
+    {name:"3 Series Posts", ws:"content", hours:4,
+     deliverable:"Create 3 posts — 1 Myth/Fact, 1 Educational, 1 Parameter Explainer — including captions, ready for review."},
+    {name:"Instagram Stories", ws:"stories", hours:1,
+     deliverable:"Create 2–3 Story sets, including at least one interactive Story and one supporting a weekly post."},
+    {name:"Short-form Video Bank", ws:"video", hours:0.75,
+     deliverable:"Develop 3 new face-to-camera concepts, based where possible on questions found through audience and SEO research."},
+    {name:"KOL Research", ws:"kol", hours:1,
+     deliverable:"Find and qualify 5 new KOLs not already in the database."},
+    {name:"KOL Outreach Prep", ws:"kol", hours:0.75,
+     deliverable:"Prepare personalised email and DM copy for the KOLs, for the Marketing Manager to send."},
+    {name:"SEO/AEO/GEO: Question Bank", ws:"seo", hours:1.5,
+     deliverable:"Add 10–15 new practitioner questions, categorised by topic cluster, search intent and audience."},
+    {name:"SEO/AEO/GEO: Content Opportunities", ws:"seo", hours:1,
+     deliverable:"Take the 5 strongest questions found so far and recommend what Baliston should create for each — FAQ, article, social post, video, and so on."},
+    {name:"Community Intelligence", ws:"seo", hours:1,
+     deliverable:"Research 2–3 relevant communities and extract 5 recurring questions, pain points or content insights — not just a list of communities."},
+    {name:"Editorial / Authority Research", ws:"seo", hours:1,
+     deliverable:"Add 5 new high-quality editorial and authority opportunities, and prioritise the strongest found across both weeks."},
+    {name:"Review / Revisions", ws:"buffer", hours:1,
+     deliverable:"Feedback, corrections and small unexpected requests."}
+  ]}
+];
+const CURRENT_SET = "w2";
+const kpiSet = id => KPI_SETS.find(x=>x.id===id) || KPI_SETS[KPI_SETS.length-1];
+const KPI_TEMPLATE = kpiSet(CURRENT_SET).items;
+
+const SUCCESS_CRITERIA = [
+  "3 series posts completed with captions and ready for review.",
+  "2–3 Instagram Story sets created, at least one interactive and one supporting a weekly post.",
+  "3 new face-to-camera video concepts developed, drawn from real audience questions where possible.",
+  "5 new qualified KOLs added, with personalised email and DM copy prepared.",
+  "10–15 new practitioner questions added, each tagged with topic cluster, search intent and audience.",
+  "The 5 strongest questions turned into concrete content recommendations.",
+  "5 recurring questions, pain points or insights extracted from 2–3 communities.",
+  "5 new editorial and authority opportunities added, with the strongest across both weeks prioritised."
+];
+
+const GUARDRAILS = [
+  "Still no outreach and no posting. Editorial and community work stays research and prioritisation this week.",
+  "Depth over volume. Five well-qualified questions beat twenty thin ones.",
+  "Community work is for question discovery, audience language and content insight — never link dropping.",
+  "Everything found goes into the Library so it is searchable later, not into a personal document."
+];
+
+const REVIEW_POINTS = [
+  "Meet Our Users carousel",
+  "Final social posts, as needed",
+  "Personalised KOL email and DM copy",
+  "Any editorial target, before outreach",
+  "Any proposed community participation, before posting"
+];
+
+const WEEK_PLAN_W1 = [
+  {day:"mon", ws:"content", name:"Meet Our Users carousel — Marie: slides + caption", hours:2, priority:"High", due:1,
+   format:"Carousel", platform:"Instagram", notes:"Ready for manager review, not published."},
+  {day:"mon", ws:"content", name:"Series post 1 — Myth/Fact, incl. caption", hours:1.5, priority:"High", due:2,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"content", name:"Series post 2 — Educational, incl. caption", hours:1.25, priority:"High", due:3,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"seo", name:"SEO/AEO question research — 10–15 practitioner questions", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Website", notes:"Source, audience type, topic cluster, and whether we already answer it."},
+  {day:"wed", ws:"content", name:"Series post 3 — Parameter Explainer, incl. caption", hours:1.25, priority:"High", due:4,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"wed", ws:"seo", name:"Community research — verify 2–3 communities, qualify 3 threads", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Do not post."},
+  {day:"wed", ws:"stories", name:"Instagram Stories — 2 sets, one interactive", hours:0.75, priority:"Medium", due:4,
+   format:"Story", platform:"Instagram", notes:""},
+  {day:"thu", ws:"kol", name:"KOL research + outreach copy for the best 2", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"Outreach copy goes to Emma to send."},
+  {day:"thu", ws:"seo", name:"Editorial / backlink research — qualify 5 opportunities", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"No outreach this week."},
+  {day:"thu", ws:"video", name:"Short-form video bank — 3 face-to-camera concepts", hours:0.75, priority:"Medium", due:4,
+   format:"Reel / Short Video", platform:"Instagram", notes:""},
+  {day:"fri", ws:"seo", name:"SEO / AEO / GEO learning — notes into the working strategy", hours:0.5, priority:"Low", due:4,
+   format:"Other", platform:"Other", notes:""},
+  {day:"fri", ws:"buffer", name:"Review and revisions buffer", hours:1, priority:"Medium", due:null,
+   format:"Other", platform:"Other", notes:""}
+];
+const WEEK_PLAN_W2 = [
+  {day:"mon", ws:"content", name:"Series post 1 — Myth/Fact, incl. caption", hours:1.5, priority:"High", due:2,
+   format:"Static Post", platform:"Instagram", notes:"Ready for review, not published. Useful rather than promotional."},
+  {day:"mon", ws:"seo", name:"Question Bank — add 10–15 new practitioner questions", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Website", notes:"Each one tagged with topic cluster, search intent and audience. Add them in the Library."},
+  {day:"tue", ws:"content", name:"Series post 2 — Educational, incl. caption", hours:1.25, priority:"High", due:3,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"seo", name:"Community intelligence — extract 5 recurring questions or pain points", hours:1, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"2–3 communities. What people actually ask and how they word it, not just a list of communities. Do not post."},
+  {day:"wed", ws:"content", name:"Series post 3 — Parameter Explainer, incl. caption", hours:1.25, priority:"High", due:4,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"wed", ws:"stories", name:"Instagram Stories — 2–3 sets, one interactive", hours:1, priority:"Medium", due:4,
+   format:"Story", platform:"Instagram", notes:"At least one supporting a weekly post, and one interactive — poll, quiz or question."},
+  {day:"wed", ws:"video", name:"Short-form video bank — 3 face-to-camera concepts", hours:0.75, priority:"Medium", due:4,
+   format:"Reel / Short Video", platform:"Instagram", notes:"Build them from questions in the Question Bank where possible."},
+  {day:"thu", ws:"seo", name:"Content opportunities — recommend a format for the 5 strongest questions", hours:1, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"FAQ, article, social post, video. Record the recommendation against each question in the Library."},
+  {day:"thu", ws:"seo", name:"Editorial / authority research — 5 new opportunities, then prioritise", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Rank the strongest across both weeks. No outreach yet."},
+  {day:"thu", ws:"kol", name:"KOL research — 5 new names not already in the tracker", hours:1, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"Check the KOL tab before adding — the database already holds 35."},
+  {day:"fri", ws:"kol", name:"KOL outreach prep — personalised email and DM copy", hours:0.75, priority:"High", due:4,
+   format:"Email", platform:"Email", notes:"Goes to Emma to review and send. Do not send."},
+  {day:"fri", ws:"buffer", name:"Review and revisions", hours:1, priority:"Medium", due:null,
+   format:"Other", platform:"Other", notes:"Held for feedback, corrections and small unexpected requests."}
+];
+const WEEK_PLANS = {w1:WEEK_PLAN_W1, w2:WEEK_PLAN_W2};
+const WEEK_PLAN = WEEK_PLAN_W2;
+function makeWeekPlan(weekStart, setId){
+  return (WEEK_PLANS[setId||CURRENT_SET]||WEEK_PLAN_W2).map(t=>({
+    id:uid(), weekId:weekStart, day:t.day, workstream:t.ws, name:t.name,
+    hours:t.hours, actual:0, status:"Not Started", priority:t.priority,
+    due: t.due==null ? "" : addDays(weekStart, t.due),
+    format:t.format, platform:t.platform, owner:"Narindra",
+    recurrence:"One-off", link:"", notes:t.notes
+  }));
+}
+
+/* A KPI is met, partly met, missed, or not yet judged. The older builds only
+   had a done flag, so read through this rather than touching .done directly. */
+const KRESULTS = [
+  {k:"",       label:"Not judged yet", mark:"",  c:"var(--line)"},
+  {k:"met",    label:"Met",            mark:"✓", c:"#2E6B4F"},
+  {k:"partly", label:"Partly met",     mark:"◐", c:"#A8641B"},
+  {k:"missed", label:"Missed",         mark:"✕", c:"#9E3A2C"}
+];
+const kres = k => k.result || (k.done ? "met" : "");
+const kresInfo = k => KRESULTS.find(r=>r.k===kres(k)) || KRESULTS[0];
+function setKres(k, v){ k.result = v; k.done = (v==="met"); }
+function cycleKres(k){
+  const order = ["","met","partly","missed"];
+  setKres(k, order[(order.indexOf(kres(k))+1) % order.length]);
+}
+
+function makeKpis(weekId, setId){
+  return kpiSet(setId||CURRENT_SET).items.map(k=>({id:uid(), weekId, name:k.name,
+    deliverable:k.deliverable, hours:k.hours, workstream:k.ws, setId:setId||CURRENT_SET,
+    result:"", done:false, notes:""}));
+}
+
+const LIB_TYPES = [
+  {k:"community",  n:"Community",       c:"#6B3F8C", hint:"Reddit, Facebook, LinkedIn or forum groups worth listening to"},
+  {k:"question",   n:"Question",        c:"#1F5E63", hint:"Real practitioner or patient questions for the Question Bank"},
+  {k:"opportunity",n:"Content idea",    c:"#A2682F", hint:"A question turned into something we should make"},
+  {k:"editorial",  n:"Editorial",       c:"#55693C", hint:"Publications, associations, directories and podcasts"},
+  {k:"resource",   n:"Resource",        c:"#3F566B", hint:"Learning links, tools, competitor examples, anything useful"}
+];
+const libType = k => LIB_TYPES.find(t=>t.k===k) || LIB_TYPES[4];
+const PLATFORMS_COMM = ["Reddit","Facebook group","LinkedIn group","Forum","Discord / Slack","YouTube","Other"];
+const INTENT = ["Informational","Commercial","Navigational","Transactional","Unclear"];
+const COVERED = ["Not yet","Partly","Yes"];
+const LIB_STATUS = ["New","Reviewing","Shortlisted","Actioned","Not relevant"];
+
+const OWNERS = ["Narindra","Emma","Shared"];
+
+const uid = () => Math.random().toString(36).slice(2,9);
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const num = n => { const v = Number(n)||0; return v % 1 === 0 ? String(v) : v.toFixed(2).replace(/0$/,""); };
+
+/* ---- dates ---- */
+const iso = d => d.toISOString().slice(0,10);
+function parse(s){ const [y,m,d]=String(s).split("-").map(Number); return new Date(Date.UTC(y,m-1,d)); }
+function addDays(s,n){ const d=parse(s); d.setUTCDate(d.getUTCDate()+n); return iso(d); }
+function mondayOf(date){ const d=new Date(date); const wd=(d.getUTCDay()+6)%7; d.setUTCDate(d.getUTCDate()-wd); return iso(d); }
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function short(s){ if(!s) return ""; const d=parse(s); return d.getUTCDate()+" "+MON[d.getUTCMonth()]; }
+function weekLabel(start){
+  const end = parse(addDays(start,4)), st = parse(start);
+  const sameM = st.getUTCMonth()===end.getUTCMonth();
+  return st.getUTCDate()+(sameM?"":" "+MON[st.getUTCMonth()])+"–"+end.getUTCDate()+" "+MON[end.getUTCMonth()]+" "+end.getUTCFullYear();
+}
+const TODAY = iso(new Date());
+
+/* Outreach list imported from the KOL & Social Outreach Target List v0.2.
+   France is deliberately excluded — that market is still being worked. */
+const KOL_LIST = [
+  {name:"Physiotutors",specialty:"Physiotherapy education platform",org:"Physiotutors (Velserbroek / Haarlem)",country:"Netherlands",instagram:"@physiotutors",linkedin:"",other:"physiotutors.com · YouTube 979K",audience:"299K IG / 979K YT",why:"Strongest European practitioner-facing account on the list. English-language, EU-based, built for physiotherapists and students, so it reaches the buyer rather than a consumer audience.",collab:"Tier 2 — sponsored educational content or a course module on objective movement assessment, plus kit for the teaching team.",priority:"High",contact:"",status:"Contacted",notes:"Evidence-led: they will expect the peer-reviewed validation, not marketing copy. EU medical device advertising rules apply directly. Commercial education business, so expect a rate card. Route through their partnerships contact, not a DM."},
+  {name:"[P]rehab — The Prehab Guys",specialty:"Doctorate-level physiotherapy collective",org:"",country:"United States",instagram:"@theprehabguys",linkedin:"",other:"",audience:"~1.0M",why:"A team of DPTs with a genuinely clinical editorial line and their own digital product, so they already think in assessment, programme, reassessment.",collab:"Tier 2 — kit for their clinic plus a co-produced educational piece on tracking objective progress through rehabilitation.",priority:"Medium",contact:"",status:"Contacted",notes:"They sell a competing digital rehabilitation product — agree scope so the relationship reads complementary rather than competitive. Expect commercial expectations from the outset."},
+  {name:"Dr. Caleb Burgess",specialty:"Orthopaedic physiotherapy and strength (DPT OCS CSCS)",org:"",country:"United States",instagram:"@dr.caleb.burgess",linkedin:"",other:"",audience:"~1.0M",why:"One of the most-followed individual clinicians in orthopaedic rehabilitation. Condition-specific, mechanism-led content that suits before-and-after gait and symmetry data.",collab:"Tier 2 — kit plus a case-led collaboration built around a real patient journey, with separate written consent for any patient footage.",priority:"Low",contact:"",status:"Contacted",notes:"Heavily monetised feed — expect a rate card rather than a gifting conversation. Confirm his current clinical practice setting. Lowest strategic priority of the US macro entries."},
+  {name:"Dr. Jen Fraboni",specialty:"Mobility, musculoskeletal care and pain (PT DPT)",org:"",country:"United States",instagram:"@docjenfit",linkedin:"",other:"",audience:"696K",why:"A mainstream mobility audience reached by someone with real clinical credentials. Her strength is patient engagement and adherence — our third messaging pillar.",collab:"Tier 1 or 2 — kit, with patient-facing content on seeing your own movement measured.",priority:"Low",contact:"",status:"Contacted",notes:"Consumer-wellness audience with low practitioner conversion. Treat as awareness, not lead generation. Keep every claim non-diagnostic and avoid any home or self-assessment framing."},
+  {name:"Dr. Brian Sutterer, MD",specialty:"Physical medicine, rehabilitation and sports medicine physician",org:"",country:"United States",instagram:"",linkedin:"",other:"YouTube — Brian Sutterer MD",audience:"~590K YT (unverified)",why:"Physician credibility, analytical long-form format, and an audience already interested in injury mechanism and return-to-play.",collab:"Tier 2 — access for an explainer or review piece, positioned as expert commentary rather than endorsement.",priority:"Medium",contact:"",status:"Contacted",notes:"He analyses named athletes' injuries from public footage — the brand must never attach to speculation about a real person's condition. Physician endorsement carries higher regulatory sensitivity: nothing beyond CE marked and FDA registered, Class II, 510(k) exempt. Subscriber figure came from secondary reporting — verify."},
+  {name:"The Foot Collective",specialty:"Foot health and natural movement",org:"",country:"Global (Canadian origin)",instagram:"@thefootcollective",linkedin:"",other:"@thefootcollective.spanish (~17K)",audience:"585K",why:"The largest foot-and-gait community online, with an audience already primed to care about how feet load and move.",collab:"Tier 1 — product access and an educational collaboration on measuring foot function objectively.",priority:"Low",contact:"",status:"Contacted",notes:"Strong barefoot and minimalist position that conflicts with orthotic-prescribing podiatrists, a core commercial audience. Genuine risk of alienating the buyers we most want. Awareness only, and leadership sign-off recommended."},
+  {name:"E3 Rehab",specialty:"Evidence-based rehabilitation",org:"",country:"United States",instagram:"@e3rehab",linkedin:"",other:"YouTube and podcast",audience:"479K",why:"An explicitly evidence-first editorial line, which makes them the most credible large US account for a regulated platform to be associated with.",collab:"Tier 1 — kit plus full access to the published validation, with an open invitation to review it honestly and publicly.",priority:"High",contact:"",status:"Contacted",notes:"They will scrutinise our claims in public. Only proceed once the science page and peer-reviewed validation are ready to share. Do not ask for scripted content — the value is that they are not scripted."},
+  {name:"The Ready State — Dr. Kelly Starrett",specialty:"Mobility, durability and performance (DPT)",org:"The Ready State",country:"United States",instagram:"@thereadystate",linkedin:"",other:"thereadystate.com · X",audience:"466K",why:"A long-standing authority bridging the clinic and the performance floor — our Performance & Conditioning application. Reach extends well beyond social media.",collab:"Tier 2 — kit for his own assessment work and a performance-framed collaboration.",priority:"Medium",contact:"",status:"Contacted",notes:"Large existing partner roster, so cut-through is harder. Drop CE and FDA language entirely — this audience does not respond to regulatory framing. Pitch training-floor credibility instead."},
+  {name:"The Running Channel",specialty:"Running media platform",org:"Founded by Andy Baddeley and Adam Tranter",country:"United Kingdom",instagram:"@runningchannel",linkedin:"",other:"YouTube 810K · therunningchannel.com",audience:"810K YT",why:"The largest UK running media platform, professionally produced. Their presenter line-up is built around different runner archetypes — a ready-made structure for showing how one assessment reads differently across bodies.",collab:"Tier 2 — a produced segment on what objective in-shoe capture actually shows, using their own presenters as subjects.",priority:"Medium",contact:"",status:"Contacted",notes:"Consumer running audience, not practitioners. Commercial media business that will quote a rate. Presenters are not clinicians, so nothing they say carries clinical weight. UK ASA and CAP disclosure rules apply."},
+  {name:"Adam Meakins — The Sports Physio",specialty:"Musculoskeletal physiotherapy and S&C",org:"",country:"United Kingdom",instagram:"@adammeakins",linkedin:"",other:"X",audience:"388K",why:"The most influential sceptic in musculoskeletal physiotherapy, in a target ambassador geography. He reaches the practitioners who decide what gets bought. A fair hearing from him would be worth more than ten uncritical posts.",collab:"Tier 1 with no content ask whatsoever — the kit and the validation data purely for honest evaluation.",priority:"High",contact:"",status:"Contacted",notes:"The highest-risk and highest-credibility contact on the list. He publicly and forcefully criticises overclaiming and biomechanics-heavy marketing. Completely disciplined language and leadership sign-off; expect public commentary either way."},
+  {name:"Physio Network",specialty:"Continuing education platform for physiotherapists",org:"",country:"Multi-market (multilingual)",instagram:"@physionetwork",linkedin:"",other:"Spanish 86K · Portuguese 18K · Italian 3.8K · linktr.ee/physionetwork",audience:"346K",why:"Not an individual but a practitioner education platform, so it reaches the exact buyer in the right mindset. The Spanish and Portuguese channels open markets we have not yet considered.",collab:"Tier 2 or 3 — a single multi-market partnership covering several language channels at once, rather than influencer content.",priority:"High",contact:"",status:"Contacted",notes:"Commercial media partner: expect a rate card rather than gifting. Route through their partnerships team, not a DM. Negotiate the language channels together. The French channel is excluded here and sits with the France list."},
+  {name:"Mick Hughes",specialty:"Sports and exercise physiotherapist",org:"Learn.Physio · The ACL Hub",country:"Australia (Melbourne)",instagram:"@mickhughes.physio",linkedin:"",other:"mickhughes.physio · Substack ~5.1K",audience:"122K",why:"Arguably the best specialty match on the whole list. His entire practice is ACL rehabilitation and return-to-sport decision-making, which runs on limb symmetry indices and asymmetry under load — what our Jump and Run analyses measure.",collab:"Tier 1, and strongly consider the ambassador pipeline — kit for his ACL caseload, with return-to-sport symmetry data as the focus.",priority:"High",contact:"",status:"Contacted",notes:"Highly evidence-literate and publishes critically; he will test the symmetry data against published RTP criteria. Bring the validation, not the brochure. Australia sits outside our ambassador geographies — confirm we can support kit there."},
+  {name:"Tom Goom — Running Physio",specialty:"Running injury specialist",org:"Running Repairs course (taught via Clinical Edge)",country:"United Kingdom (Brighton)",instagram:"@running.physio",linkedin:"",other:"running-physio.com · X 56K",audience:"70K",why:"He teaches gait analysis to UK clinicians for a living. There is no closer alignment on the list between what someone already teaches and what our platform does.",collab:"Tier 2 — kit for the course, with objective gait capture built into a teaching session rather than an advertisement.",priority:"High",contact:"",status:"Contacted",notes:"His course teaches that running mechanics are more complicated than commonly claimed, and he has been openly critical of social media overclaiming. Position the platform as a measurement tool that supports his teaching, never as an answer to gait retraining. UK ASA and CAP rules apply."},
+  {name:"Doctors of Running",specialty:"Physiotherapists reviewing running footwear and mechanics",org:"",country:"United States",instagram:"@doctorsofrunning",linkedin:"linkedin.com/company/doctors-of-running",other:"doctorsofrunning.com",audience:"61K",why:"The closest editorial match on the list to what our platform actually measures. They already discuss gait mechanics and footwear effects in technical detail.",collab:"Tier 1 or 2 — kit for review, framed as a before-and-after footwear or orthotic comparison series.",priority:"High",contact:"",status:"Contacted",notes:"A review-led account: they will publish an honest verdict, including anything they dislike. Only proceed if we are comfortable with that."},
+  {name:"Physio Matters — Jack Chew",specialty:"MSK media platform, podcast and Substack",org:"Chews Health · MSKReform · Therapy Live",country:"United Kingdom (North of England)",instagram:"",linkedin:"linkedin.com/in/jackachew",other:"physio-matters.com · mskmag.substack.com",audience:"Podcast + Substack",why:"The most significant UK MSK media platform, and already running serious AI content — the CSP Statement of Principles on AI in physiotherapy, and a regulated AI physiotherapy service. They are working through exactly our conversation.",collab:"Tier 2 — a podcast appearance for our clinical lead on objective measurement and its limits, or a sponsored MSKMag piece.",priority:"High",contact:"",status:"Contacted",notes:"A deliberately sceptical house. MSKMag has published Matt Phillips asking whether running gait analysis is really that useful. Do not approach without the peer-reviewed validation and a clear account of what we do not claim. Coordinate with the Matt Phillips approach."},
+  {name:"Healthy Feet Podiatry",specialty:"Practising podiatry group",org:"",country:"United States (Tampa)",instagram:"@healthyfeetpodiatry",linkedin:"",other:"YouTube",audience:"56K",why:"A practising podiatry group with real patient volume and an established content habit. Genuinely strong candidate to convert into a Clinical Ambassador rather than a creator partner.",collab:"Move to the ambassador pipeline — open the full programme conversation, not a gifting arrangement.",priority:"Medium",contact:"",status:"Contacted",notes:"Confirm their content mix is clinically oriented rather than procedure-shock content before associating the brand with it."},
+  {name:"Clinical Edge",specialty:"MSK and sports injury education for physiotherapists",org:"",country:"Australia",instagram:"@clinicaledge",linkedin:"",other:"Podcast and online courses",audience:"12K",why:"An established Australian physiotherapy education business whose podcast and course reach far exceeds its social following. They host Tom Goom's and Benoy Mathew's courses.",collab:"Tier 2 — podcast appearance or a course module on objective movement measurement.",priority:"Medium",contact:"",status:"Contacted",notes:"Practitioner audience that expects evidence-led content. Commercial education business, so expect a partnership rate. Coordinate with the Goom and Mathew approaches so we are not arriving three times through the same door."},
+  {name:"Bartold Clinical",specialty:"Lower-limb sports medicine and footwear biomechanics",org:"",country:"Australia",instagram:"@bartold_clinical",linkedin:"",other:"",audience:"6.3K",why:"A small audience with disproportionate authority among podiatrists and footwear scientists internationally — the kind of technical endorsement that travels by word of mouth. Our strongest individual podiatry voice.",collab:"Tier 1 — technical review access and an invitation to comment as an expert.",priority:"High",contact:"",status:"Contacted",notes:"A technically demanding audience. Bring the validation methodology and the published concordance data, not marketing copy."},
+  {name:"The Running Lab",specialty:"Running injury and performance clinic",org:"",country:"United Kingdom (London)",instagram:"@therunninglab_",linkedin:"",other:"",audience:"5.6K",why:"A London clinic whose entire positioning is technology-led running assessment. Reads more like a sales prospect or ambassador candidate than a KOL — precisely the kind of practice that buys this platform.",collab:"Route to sales or the ambassador pipeline first. Only treat as a content partnership if they decline the commercial conversation.",priority:"Medium",contact:"",status:"Contacted",notes:"They may already run a competing gait analysis system, which would be a conflict under the Ambassador Agreement. Check what technology they currently use."},
+  {name:"Benoy Mathew",specialty:"Specialist lower limb physiotherapist — hip, groin, running",org:"Venn Health Care (UK head of education)",country:"United Kingdom (Central London)",instagram:"@function2fitness",linkedin:"",other:"function2fitness.co.uk",audience:"3.7K",why:"The clearest example of why follower count is the wrong measure. Under 4,000 followers, but 2,500+ clinicians taught over eight years, and he lectures for both Clinical Edge and Physiotutors. Influence travels through classrooms, not feeds.",collab:"Tier 1 — kit for his London practice and his teaching, with no content obligation.",priority:"High",contact:"",status:"Contacted",notes:"Published researcher and MSK sonographer — he assesses lower limb objectively already and will compare our data against ultrasound. Bring the methodology. His links to Clinical Edge and Physiotutors mean an approach here has knock-on effects."},
+  {name:"Physio Network Italiano",specialty:"Italian-language physiotherapy education",org:"Physio Network",country:"Italy",instagram:"@physionetworkitaliano",linkedin:"",other:"",audience:"3.8K",why:"An Italian-language physiotherapy audience matching one of our existing ambassador geographies. The value is localisation and language, not volume.",collab:"Tier 2 — localised educational content, ideally featuring an Italian ambassador once one is active.",priority:"Low",contact:"",status:"Contacted",notes:"Small standalone reach. Only worth pursuing as part of the wider multi-language Physio Network conversation."},
+  {name:"Matt Phillips",specialty:"Running gait analysis specialist and writer",org:"MSKMag / Physio Matters",country:"United Kingdom (South Coast)",instagram:"",linkedin:"",other:"mskmag.substack.com",audience:"Not verified",why:"A decade of publicly arguing that running gait analysis is oversold, including an MSKMag piece asking whether it is time we accept it is really not that useful. He knows the equipment and the literature and is not impressed by any of it.",collab:"Tier 1 with no content ask at all — send the validation and invite him to take it apart.",priority:"Medium",contact:"",status:"Contacted",notes:"The highest-risk contact in the UK section; he will publish a critical view if he has one. Overlaps with Physio Matters — do not approach both cold in the same week."},
+  {name:"Prof. Bastiaan (Bas) Bloem",specialty:"Consultant neurologist, Professor of Movement Disorders Neurology",org:"Radboud UMC · ParkinsonNet (4,000+ providers)",country:"Netherlands (Nijmegen)",instagram:"",linkedin:"",other:"radboudumc.nl · neurologyacademy.org",audience:"No social presence",why:"The single most authoritative person in Europe on exactly what our Neuro analysis measures. His two stated research interests are gait and balance, and healthcare innovation, and his work integrates wearable sensors, machine learning and AI.",collab:"Not a creator approach — a scientific and clinical relationship. Research collaboration, advisory input or a validation conversation, routed through clinical and scientific leadership.",priority:"High",contact:"",status:"Contacted",notes:"He publishes rigorously and sits on the Michael J. Fox Foundation scientific advisory board — marketing language would be actively counterproductive. Only make contact with the peer-reviewed validation and a genuine scientific question. Expect a long timeline and no promotional output."},
+  {name:"Parkinson's UK",specialty:"National Parkinson's charity",org:"",country:"United Kingdom",instagram:"@parkinsonsuk",linkedin:"",other:"",audience:"35K",why:"The credible institutional route into UK Parkinson's. The relationship worth having is with their research programmes, professional networks and information services, not the Instagram account.",collab:"Tier 1 as an organisational conversation — research, professional education or information partnership.",priority:"Medium",contact:"",status:"Contacted",notes:"A charity with its own governance and ethics review; expect a slow process and scrutiny of every claim. They will be alert to anything resembling commercial exploitation of a patient community. No prediction or progression language under any circumstances."},
+  {name:"Parkinson's Europe",specialty:"Pan-European Parkinson's organisation, publishes Parkinson's Life",org:"",country:"Europe-wide",instagram:"@parkinsonseurope",linkedin:"",other:"parkinsonseurope.org",audience:"",why:"Both a partnership target and a publication target. Its president, Josefa Domingos, is a Parkinson's specialist physiotherapist rather than an administrator, so she would understand what objective gait tracking offers and what it does not.",collab:"Tier 1 — an editorial contribution to Parkinson's Life on measuring movement change over time, or a conversation with the physiotherapy network.",priority:"Medium",contact:"",status:"Contacted",notes:"Patient-facing publication across many jurisdictions with different advertising rules. Any contribution must be genuinely educational, not promotional, or it will be rejected."},
+  {name:"Jimmy Choi — JC Fox Ninja",specialty:"Patient advocate and athlete, living with young-onset Parkinson's since 2003",org:"Michael J. Fox Foundation Patient Council",country:"United States",instagram:"@jcfoxninja",linkedin:"",other:"TikTok 150K+ · facebook.com/jcfoxninja",audience:"91K",why:"The strongest single candidate in the neuro group and the only person who is simultaneously an elite athlete, a Parkinson's patient and a documented early adopter of health technology. His message that movement is treatment is our Neuro proposition stated by a patient rather than a vendor.",collab:"Tier 2 — access to track his own movement over time, told in his voice, positioned as a longitudinal record rather than a product placement.",priority:"High",contact:"",status:"Contacted",notes:"A patient, not a clinician — nothing he says can be framed as clinical endorsement, and the platform must never appear to be managing his condition. Michael J. Fox Foundation review expectations apply. No progression or prediction claims. Clinical and regulatory sign-off mandatory. One approach only — do not also approach him as an athlete."},
+  {name:"Rock Steady Boxing",specialty:"Parkinson's exercise programme, 800+ affiliate locations",org:"Parkinson's Foundation accredited",country:"United States (international affiliates)",instagram:"@rock_steady_boxing",linkedin:"",other:"",audience:"7.5K (50,000+ participants)",why:"Not an influencer at all — a distribution network dressed as a small social account. Many affiliates run an initial physiotherapist assessment of functional status and fall risk, which is exactly where objective movement capture would sit.",collab:"Tier 1 as an organisational partnership — pilot the platform at a small number of affiliate sites as part of their intake assessment.",priority:"High",contact:"",status:"Contacted",notes:"Business development, not marketing: approach head office, not the Instagram account. Affiliates vary widely in clinical staffing, so any pilot needs practitioner supervision. Programme accreditation means a slow review process."},
+  {name:"Teepa Snow — Positive Approach to Care",specialty:"Occupational therapist and dementia specialist (MS, OTR/L, FAOTA)",org:"Positive Approach to Care",country:"United States",instagram:"@teepasnows_pac",linkedin:"",other:"teepasnow.com · TikTok and YouTube",audience:"37K",why:"The most recognised dementia educator working today, and a clinician rather than a commentator. Long record on clinical research teams and advisory boards, so she evaluates evidence rather than accepting claims.",collab:"Tier 1 — an honest conversation about where objective gait tracking does and does not help in dementia care, with access for her team to evaluate.",priority:"Low",contact:"",status:"Contacted",notes:"Her subject is care communication and practical caregiving technique, not movement measurement — the fit is genuine but partial, and overstating it would be obvious to her immediately. Lead with falls and gait change, not the platform. Do not expect a product endorsement."},
+  {name:"Modern Management of the Older Adult (MMOA)",specialty:"Geriatric rehabilitation education",org:"Institute of Clinical Excellence",country:"United States",instagram:"@mmoa.icephysio",linkedin:"",other:"mmoa.online · podcast",audience:"8K",why:"The leading continuing-education brand in geriatric rehabilitation, reaching the clinicians who actually run falls assessments. The most commercially direct contact in the neuro group.",collab:"Tier 2 — a podcast conversation on objective gait tracking in older adults, plus kit access for their faculty.",priority:"High",contact:"",status:"Contacted",notes:"Frail population — keep all language to screening and longitudinal tracking, never prediction. Practitioner audience that will expect the validation data."},
+  {name:"Parkinson Wellness Recovery (PWR!)",specialty:"Parkinson-specific exercise therapy and rehabilitation",org:"",country:"United States (Tucson)",instagram:"@pwrgymtucson",linkedin:"",other:"Certification programme used nationally",audience:"5K",why:"Specialists in exactly the longitudinal gait-tracking use case our Neuro analysis is built for, with reach beyond their own gym through their certification network.",collab:"Tier 1, and consider moving to the ambassador pipeline — clinical evaluation partnership with a possible case study.",priority:"Medium",contact:"",status:"Contacted",notes:"Vulnerable patient group. No claims about disease progression, prediction or treatment effect under any circumstances. Patient consent for footage is a separate written step from case study consent."},
+  {name:"Dementia Careblazers — Dr. Natali Edmonds",specialty:"Board-certified geropsychologist",org:"",country:"United States",instagram:"",linkedin:"",other:"YouTube-first · podcast 175+ episodes",audience:"",why:"A clinically qualified voice with a large, engaged caregiver audience. Useful for understanding how families actually think about decline, which is worth knowing before we build any Neuro messaging.",collab:"Tier 1 at most — an informational conversation rather than a content ask. Treat the first contact as research.",priority:"Low",contact:"",status:"Contacted",notes:"Caregiver audience with no purchasing power and no clinical role, so commercial value is low. Emotional stakes are very high and any perceived overclaiming would be damaging. Lowest priority in this group."},
+  {name:"Steve Magness",specialty:"Exercise physiologist, coach and author",org:"Science of Running podcast",country:"United States",instagram:"@stevemagness",linkedin:"",other:"youtube.com/stevemagness · X",audience:"236K",why:"The most credible coaching voice in endurance sport, and one who writes explicitly about running biomechanics. A physiologist by training, so he reads data properly, and he reaches elite coaches as well as a large general audience.",collab:"Tier 2 — access for his own coaching work, or a Science of Running podcast appearance on what in-shoe capture adds to coaching decisions.",priority:"High",contact:"",status:"Contacted",notes:"Performance audience: no medical framing, no CE or FDA language. Analytically demanding, with a long record of publicly correcting oversimplified training claims. Cut-through requires substance rather than a fee."},
+  {name:"Trail Runner Nation",specialty:"Trail running podcast and community",org:"",country:"United States",instagram:"@trailrunnernation",linkedin:"",other:"Podcast",audience:"31K",why:"Trail and ultra running is where movement efficiency, fatigue-related mechanical breakdown and asymmetry under load matter most. Long-form educational format suits a technical subject.",collab:"Tier 2 — a podcast conversation on measuring movement quality and fatigue-related change, ideally with data from a real athlete over a training block.",priority:"Medium",contact:"",status:"Contacted",notes:"Consumer audience with modest purchasing power. Value is awareness within a highly engaged niche. The podcast is the asset here, not the Instagram account."},
+  {name:"Paul Mackinnon — The Balanced Runner",specialty:"Running technique and gait retraining specialist",org:"",country:"Australia (Melbourne and Brisbane)",instagram:"@thebalancedrunner",linkedin:"",other:"",audience:"75K",why:"A gait retraining specialist with a coach-and-athlete audience — a rare candidate whose entire subject is what our platform measures. He already sells gait assessment, so the conversation is about better measurement rather than a new idea.",collab:"Tier 2 — kit for his coaching practice, with before-and-after gait capture as the natural content that falls out of it.",priority:"Medium",contact:"",status:"Contacted",notes:"He already offers gait assessment commercially, so in a sense a competitor. Frame the platform as making his existing service more objective, not as replacing his expertise. Australia is outside our supported territories — confirm hardware support first."},
+  {name:"Steph Pi, DPT",specialty:"Doctor of Physical Therapy, running coach and hybrid athlete",org:"",country:"United States",instagram:"@stephpiruns",linkedin:"",other:"",audience:"110K",why:"Sits in both the coach and clinician categories: a qualified DPT who is also genuinely fast. She can speak to the data credibly and demonstrate it on herself, which avoids coach endorsement carrying no clinical weight.",collab:"Tier 2 — kit for her own training and her coaching clients, with an honest running-mechanics series.",priority:"Medium",contact:"",status:"Contacted",notes:"Her profile states she is open to brand partnerships, so expect a rate card and a professional negotiation. US-based, so lower strategic priority than a European equivalent."}
+];
+function makeKols(){ return KOL_LIST.map(k=>Object.assign({id:uid()},k)); }
+
+/* ============================================================
+   Seed data
+   ============================================================ */
+function seedLibrary(){
+  const L = (type,title,f)=>Object.assign({id:uid(), type, title, url:"", notes:"",
+    status:"New", priority:"Medium", audience:"", cluster:"", intent:"", covered:"",
+    platform:"", rules:"", insight:"", angle:"", route:"", contributed:"", format:""}, f||{});
+  return [
+    L("community","r/physicaltherapy",{url:"https://www.reddit.com/r/physicaltherapy/",
+      platform:"Reddit", audience:"Practising physios, students, new grads",
+      rules:"Self-promotion effectively banned. Vendor accounts are spotted immediately — read the sidebar before anything.",
+      insight:"Recurring threads on objective outcome measures and what to actually document for insurers.",
+      status:"Reviewing", priority:"High"}),
+    L("question","What objective measures should I use for return-to-run after ACL?",{
+      audience:"Physiotherapists", cluster:"Return to sport", intent:"Informational",
+      covered:"Not yet", status:"Shortlisted", priority:"High",
+      notes:"Asked repeatedly and phrased almost identically each time. Strong candidate for a proper answer page."}),
+    L("opportunity","FAQ page: objective measures for return-to-run",{
+      format:"Article", audience:"Physiotherapists", cluster:"Return to sport",
+      status:"New", priority:"High",
+      notes:"Answer the question directly in the first 40 words so it can be quoted by AI search."}),
+    L("editorial","Physio Network — contributed articles",{url:"https://www.physio-network.com/",
+      audience:"Practising physiotherapists internationally",
+      angle:"Objective gait measurement in return-to-sport decisions",
+      route:"Partnerships contact rather than a general enquiry form",
+      contributed:"Yes", status:"Reviewing", priority:"High"}),
+    L("resource","Google Search Central — how search works",{url:"https://developers.google.com/search",
+      status:"New", priority:"Low", notes:"Primary source for SEO fundamentals rather than a blog summary of it."})
+  ];
+}
+
+function seed(){
+  /* Dates come from today, so the planner is never seeded into the past. */
+  const thisMon = mondayOf(new Date());
+  const prevMon = addDays(thisMon,-7);
+  const prev2Mon = addDays(thisMon,-14);
+
+  const T = (day,workstream,name,hours,status,priority,dueOffset,format,platform,owner,recurrence,notes,actual)=>({
+    id:uid(), day, workstream, name, hours, actual:actual??0, status, priority,
+    due: dueOffset==null?"":addDays(thisMon,dueOffset),
+    format:format||"Other", platform:platform||"Other", owner:owner||"Narindra",
+    recurrence:recurrence||"One-off", link:"", notes:notes||""
+  });
+
+  const tasks = makeWeekPlan(thisMon);
+
+  const prevTasks = makeWeekPlan(prevMon, "w1").map(t=>({
+    ...t, status:"Completed", actual:t.hours, due:""
+  }));
+
+  const E = (day,ws,name,hours,actual)=>({id:uid(), weekId:prev2Mon, day, workstream:ws, name,
+    hours, actual, status:"Completed", priority:"Medium", due:"", format:"Other",
+    platform:"Instagram", owner:"Narindra", recurrence:"One-off", link:"", notes:""});
+  const prev2Tasks = [
+    E("mon","content","Meet Our Users carousel — Thomas",2,2),
+    E("mon","stories","Instagram Stories — 3 sets",1.5,1.5),
+    E("tue","content","Educational post — pronation explained",1.5,2),
+    E("tue","funnel","Set up the funnel mapping sheet and stage definitions",2,2),
+    E("wed","video","Script — why we measure gait, not steps",1.5,1.5),
+    E("wed","content","Captions for the week",1,1),
+    E("thu","kol","First 8 KOL candidates — running creators",2,2.5),
+    E("thu","design","Event graphic — practitioner day banner",1.5,1.5),
+    E("fri","content","Article draft — why we measure gait, not steps",2,2)
+  ];
+
+  const C = (title,pillar,funnel,format,platform,stage,deadline,pub,cta,caption,notes)=>({
+    id:uid(), title, pillar, funnel, format, platform, owner:"Narindra",
+    stage, deadline: deadline==null?"":addDays(thisMon,deadline),
+    publishDate: pub==null?"":addDays(thisMon,pub),
+    cta, asset:"", caption, notes:notes||""
+  });
+
+  const pipeline = [
+    C("Meet Our Users — Marie, 12 weeks after her ACL repair","Patient stories","Trust & Proof","Carousel","Instagram","Creating",2,4,"Read Marie's full story","Drafted"),
+    C("What your gait says about knee pain","Education","Education","Static Post","Instagram","Briefed",3,7,"Save this for your next run","Not started"),
+    C("Baliston Care AI — the 3 numbers practitioners ask about","Product proof","Trust & Proof","Static Post","LinkedIn","Internal Review",4,10,"Book a 15-minute walkthrough","Ready"),
+    C("Foot health basics — Reel 1 of 3","Education","Problem Awareness","Reel / Short Video","Instagram","Idea",9,null,"Follow for part 2","Not started"),
+    C("Practitioner demo — setting up a patient in 4 minutes","Product","Consideration","Long-form Video","YouTube","Idea",null,null,"Request a demo","Not started"),
+    C("August practitioner newsletter","Practitioner","Education","Email","Email","Scheduled",8,9,"Read the full case note","Approved"),
+    C("Behind the scenes — fitting day at the lab","Brand","Awareness","Story","Instagram","Approved",0,1,"Ask us anything","Ready"),
+    C("Why we measure gait, not steps","Category","Awareness","Article","Website","Published",-7,-6,"See how it works","Approved")
+  ];
+
+  const F = (stage,kind,title,format,platform,notes)=>({id:uid(),stage,kind,title,format:format||"Other",platform:platform||"Other",notes:notes||""});
+  const funnel = [
+    F("Awareness","Existing","Why we measure gait, not steps","Article","Website"),
+    F("Awareness","Creating","Behind the scenes — fitting day at the lab","Story","Instagram"),
+    F("Awareness","Idea","What 10,000 steps doesn't tell you","Reel / Short Video","Instagram"),
+    F("Problem Awareness","Creating","Foot health basics — Reel series","Reel / Short Video","Instagram"),
+    F("Problem Awareness","Idea","3 signs your shoes are working against you","Reel / Short Video","Instagram"),
+    F("Education","Existing","Pronation explained","Carousel","Instagram"),
+    F("Education","Existing","How gait changes after an injury","Static Post","Instagram"),
+    F("Education","Existing","Practitioner newsletter — gait basics series","Email","Email"),
+    F("Education","Creating","What your gait says about knee pain","Static Post","Instagram"),
+    F("Education","Idea","Gait and ageing — what changes after 60","Carousel","Instagram"),
+    F("Trust & Proof","Creating","Meet Our Users — Marie","Carousel","Instagram"),
+    F("Trust & Proof","Creating","Baliston Care AI — the 3 numbers","Static Post","LinkedIn"),
+    F("Consideration","Idea","Practitioner demo — 4-minute setup","Long-form Video","YouTube"),
+    F("Conversion","Gap","No content answers \"how do I actually get these?\"","Other","Website","Needs a page plus one Reel. Blocking conversions from Instagram.")
+  ];
+
+  const I = (idea,pillar,audience,fs,format,platform,priority,notes)=>({id:uid(),idea,pillar,audience,funnel:fs,format,platform,priority,notes:notes||"",ref:""});
+  const ideas = [
+    I("Meet Our Users — the 60-year-old marathoner","Patient stories","Runners","Trust & Proof","Carousel","Instagram","High","Already agreed to be filmed."),
+    I("Insurance and reimbursement explained (NL and FR)","Conversion","Patients","Conversion","Article","Website","High","Fills the conversion gap."),
+    I("Ask a podiatrist — 5 questions in 5 minutes","Practitioner","Practitioners","Education","Long-form Video","YouTube","Medium",""),
+    I("Before and after gait comparison, animated","Product proof","Practitioners","Consideration","Reel / Short Video","Instagram","Medium","Needs two clean data sets."),
+    I("What 10,000 steps doesn't tell you","Category","General","Awareness","Reel / Short Video","Instagram","Medium",""),
+    I("Lab tour — how a gait profile is built","Brand","All","Trust & Proof","Reel / Short Video","Instagram","Low","")
+  ];
+
+  const kols = makeKols();
+
+  const S = (title,topic,audience,fs,type,len,hook,body,cta,status,filmed,published)=>({
+    id:uid(),title,topic,audience,funnel:fs,videoType:type,length:len,hook,body,cta,status,filmed,published,link:""
+  });
+  const scripts = [
+    S("What your gait says about knee pain","Gait and knee pain","Patients","Education","Educational Reel","45s",
+      "Your knee hurts. But the problem probably started at your foot.",
+      "1. Open on a slow-motion side view of a foot striking the ground.\n2. Voiceover: the way your foot lands changes the load on the knee, every single step.\n3. Cut to the gait readout on screen — point at the asymmetry.\n4. Explain in one line what a practitioner does with that number.\n5. Close on the shoe, no hard sell.",
+      "Follow for the rest of the foot health basics series","Writing","No","No"),
+    S("Balia — setting up your first patient","Product walkthrough","Practitioners","Consideration","Product demo","90s",
+      "Four minutes from box to first gait profile. Here's the whole thing.",
+      "1. Screen recording, no talking head.\n2. Create the patient record.\n3. Pair the shoe.\n4. Walk 20 steps, show the profile building live.\n5. End on the practitioner dashboard.",
+      "Book a 15-minute walkthrough","Ready to Film","No","No"),
+    S("3 signs your shoes are working against you","Footwear and load","Patients","Problem Awareness","Educational Reel","30s",
+      "If your shoes wear down like this, they are changing how you walk.",
+      "Talking head, three quick signs, one visual per sign. Keep each under 8 seconds.",
+      "Save this and check your own pair tonight","Idea","No","No")
+  ];
+
+  /* KPIs began with the week-1 brief, so the earliest week has tasks but no KPI set.
+     Each week keeps the set it was actually given. */
+  const lastResults = ["met","met","met","met","partly","met","met","partly","met","met"];
+  const kpis = makeKpis(thisMon, "w2").concat(
+    makeKpis(prevMon, "w1").map((k,i)=>({...k, result:lastResults[i]||"met", done:(lastResults[i]||"met")==="met"}))
+  );
+
+  const weeks = {};
+  weeks[prev2Mon] = {
+    start:prev2Mon, capacity:15, archived:true, tasks:prev2Tasks,
+    priorities:["Publish the gait article","Set up the funnel project","First KOL batch"],
+    review:{ keyProgress:"Funnel project properly started and stage definitions agreed. First 8 KOLs in the tracker with full details.", nextPriorities:[] }
+  };
+  weeks[prevMon] = {
+    start:prevMon, capacity:15, archived:true, tasks:prevTasks,
+    priorities:["Ship the Meet Our Users carousel","Question Bank started","First community and editorial research"],
+    review:{ keyProgress:"Question Bank opened with the first practitioner questions. Communities and editorial targets identified, nothing posted or sent as agreed.", nextPriorities:["Categorise the questions","Turn the best 5 into content recommendations","5 new KOLs"] }
+  };
+  weeks[thisMon] = {
+    start:thisMon, capacity:15, archived:false, tasks,
+    priorities:["3 series posts ready for review","Question Bank categorised","5 strongest questions turned into content recommendations","5 new KOLs with outreach copy prepared"],
+    review:{ keyProgress:"", nextPriorities:["","",""] }
+  };
+
+  const library = seedLibrary();
+  return { version:1, currentWeek:thisMon, weeks, kpis, library, pipeline, funnel, ideas, kols, scripts, tab:"week" };
+}
+
+/* ============================================================
+   State and sync — public planner, no login
+
+   How access works
+   ----------------
+   There is none. This planner is deliberately public: anyone who opens the
+   web address can read and edit everything, with no sign-in of any kind.
+
+   Because of that, don't put anything here you wouldn't be comfortable
+   seeing published — the KOL tracker's contact details are the part worth
+   thinking about.
+
+   Live updates
+   ------------
+   Changes are broadcast to everyone connected, and a slow poll runs as a
+   safety net in case a broadcast is missed. Each object is its own row, so
+   two people editing different things never overwrite each other.
+   ============================================================ */
+
+/* ---- configuration ---------------------------------------------------- */
+const SUPABASE_URL = "https://sclipfqhvsbhkqbqrtzw.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_Kq8yacps2xIkyz8YadyheA_aicI940u";
+
+/* Leave this empty. The phrase comes from the link, which is the whole point —
+   anything written here would be published along with the code. */
+const PLANNER_SECRET_FALLBACK = "";
+
+const TABLE = "planner_items";
+const CFG_KEY = "baliston-planner-config";
+const WEEK_KEY = "baliston-planner-week";
+const SECRET_KEY = "baliston-planner-secret";
+const NAME_KEY = "baliston-planner-name";
+const POLL_MS = 30000;
+
+let state = seed();
+let sb = null;
+let channel = null;
+let saveTimer = null;
+let pollTimer = null;
+let peers = [];
+let netError = "";
+let tableMissing = false;
+let MODE = "local";
+const lastSynced = new Map();
+const clientId = Math.random().toString(36).slice(2,10);
+
+/* ---- the shared phrase ------------------------------------------------- */
+/* This planner is public. No sign-in, no phrase, no gate — anyone with the
+   web address can open it and edit it. That is the intended behaviour here. */
+function readSecretFromUrl(){ return ""; }
+function secret(){ return ""; }
+function shareLink(){ return location.origin + location.pathname; }
+function myName(){
+  try{ return localStorage.getItem(NAME_KEY) || "Guest"; }catch(e){ return "Guest"; }
+}
+function setMyName(n){ try{ localStorage.setItem(NAME_KEY, n); }catch(e){} }
+
+function cfg(){
+  if(SUPABASE_URL && SUPABASE_ANON_KEY) return {url:SUPABASE_URL, key:SUPABASE_ANON_KEY};
+  try{
+    const raw = localStorage.getItem(CFG_KEY);
+    if(raw){ const c = JSON.parse(raw); if(c.url && c.key) return c; }
+  }catch(e){}
+  return null;
+}
+function setCfg(url,key){ try{ localStorage.setItem(CFG_KEY, JSON.stringify({url:url.trim(), key:key.trim()})); }catch(e){} }
+function clearCfg(){ try{ localStorage.removeItem(CFG_KEY); }catch(e){} }
+
+function chip(text, on){
+  const c = document.getElementById("saveChip");
+  if(c){ c.textContent = text; c.classList.toggle("on", !!on); }
+}
+function liveChip(){
+  chip(peers.length ? "Live · "+(peers.length+1)+" here" : "Live · synced", true);
+}
+function valid(p){ return p && typeof p === "object" && p.weeks && Object.keys(p.weeks).length; }
+
+/* ---- week objects expose a live tasks view ----------------------------- */
+function hydrateWeek(w){
+  if(!w) return w;
+  const d = Object.getOwnPropertyDescriptor(w,"tasks");
+  if(!d || !d.get){
+    const stored = Array.isArray(w.tasks) ? w.tasks : null;
+    delete w.tasks;
+    Object.defineProperty(w, "tasks", {
+      get(){ return state.tasks.filter(t=>t.weekId===w.start); },
+      enumerable:false, configurable:true
+    });
+    if(stored) stored.forEach(t=>{ t.weekId = w.start; state.tasks.push(t); });
+  }
+  const dk = Object.getOwnPropertyDescriptor(w,"kpis");
+  if(!dk || !dk.get){
+    const storedK = Array.isArray(w.kpis) ? w.kpis : null;
+    delete w.kpis;
+    Object.defineProperty(w, "kpis", {
+      get(){ return state.kpis.filter(x=>x.weekId===w.start); },
+      enumerable:false, configurable:true
+    });
+    if(storedK) storedK.forEach(x=>{ x.weekId = w.start; state.kpis.push(x); });
+  }
+  return w;
+}
+function hydrate(st){
+  st.tasks = st.tasks || [];
+  st.kpis = st.kpis || [];
+  Object.keys(st.weeks||{}).forEach(k=>{
+    const w = st.weeks[k]; w.start = w.start || k; w.id = w.start; hydrateWeek(w);
+  });
+  ["pipeline","funnel","ideas","kols","scripts","library"].forEach(k=>{ st[k] = st[k]||[]; });
+  return st;
+}
+
+/* ---- rows -------------------------------------------------------------- */
+const COLS = {content:"pipeline", idea:"ideas", funnel:"funnel", kol:"kols", script:"scripts", library:"library"};
+function colByKind(kind){
+  if(kind==="task") return state.tasks;
+  if(kind==="kpi") return state.kpis;
+  return state[COLS[kind]] || [];
+}
+const WEEK_SCOPED = ["task","kpi"];
+
+function collectRows(){
+  const rows = [];
+  Object.keys(state.weeks).forEach(k=>{
+    const w = state.weeks[k];
+    rows.push({id:"week:"+w.start, kind:"week", week_id:w.start,
+      data:{start:w.start, capacity:w.capacity, archived:!!w.archived,
+            priorities:w.priorities||[], review:w.review||{}}});
+  });
+  state.tasks.forEach(t=>{
+    const {id, weekId, ...rest} = t;
+    rows.push({id:"task:"+id, kind:"task", week_id:weekId, data:{...rest, _id:id}});
+  });
+  state.kpis.forEach(k=>{
+    const {id, weekId, ...rest} = k;
+    rows.push({id:"kpi:"+id, kind:"kpi", week_id:weekId, data:{...rest, _id:id}});
+  });
+  Object.keys(COLS).forEach(kind=>{
+    (state[COLS[kind]]||[]).forEach(o=>{
+      const {id, ...rest} = o;
+      rows.push({id:kind+":"+id, kind, week_id:null, data:{...rest, _id:id}});
+    });
+  });
+  return rows;
+}
+
+function applyRow(r){
+  lastSynced.set(r.id, JSON.stringify(r.data));
+  const d = r.data || {};
+  if(r.kind==="week"){
+    const ex = state.weeks[d.start];
+    if(ex){ ex.capacity=d.capacity; ex.archived=d.archived; ex.priorities=d.priorities||[]; ex.review=d.review||{}; }
+    else state.weeks[d.start] = hydrateWeek({id:d.start, start:d.start, capacity:d.capacity,
+      archived:d.archived, priorities:d.priorities||[], review:d.review||{}});
+    return;
+  }
+  const col = colByKind(r.kind);
+  const obj = {...d, id:d._id}; delete obj._id;
+  if(WEEK_SCOPED.includes(r.kind)) obj.weekId = r.week_id;
+  const ix = col.findIndex(x=>x.id===obj.id);
+  if(ix>-1) col[ix] = obj; else col.push(obj);
+}
+
+function dropRow(id){
+  lastSynced.delete(id);
+  const kind = id.slice(0, id.indexOf(":"));
+  const rest = id.slice(id.indexOf(":")+1);
+  if(kind==="week"){ delete state.weeks[rest]; return; }
+  const col = colByKind(kind);
+  const ix = col.findIndex(x=>x.id===rest);
+  if(ix>-1) col.splice(ix,1);
+}
+
+/* ---- saving ------------------------------------------------------------ */
+function save(){
+  clearTimeout(saveTimer);
+  chip("Saving…");
+  saveTimer = setTimeout(flush, 500);
+}
+
+async function flush(){
+  if(MODE!=="cloud"){
+    try{ localStorage.setItem(KEY, JSON.stringify(serialise())); chip("Saved in this browser", true); }
+    catch(e){ chip("Save failed — export a backup"); }
+    return;
+  }
+  const rows = collectRows();
+  const seen = new Set(rows.map(r=>r.id));
+  const ups = rows.filter(r=>lastSynced.get(r.id) !== JSON.stringify(r.data));
+  const dels = [...lastSynced.keys()].filter(id=>!seen.has(id));
+  if(!ups.length && !dels.length){ liveChip(); return; }
+  try{
+    if(ups.length){
+      const payload = ups.map(r=>({id:r.id, kind:r.kind, week_id:r.week_id, data:r.data,
+        updated_by: myName()||"someone", updated_at:new Date().toISOString()}));
+      const {error} = await sb.from(TABLE).upsert(payload, {onConflict:"id"});
+      if(error) throw error;
+      ups.forEach(r=>lastSynced.set(r.id, JSON.stringify(r.data)));
+    }
+    if(dels.length){
+      const {error} = await sb.from(TABLE).delete().in("id", dels);
+      if(error) throw error;
+      dels.forEach(id=>lastSynced.delete(id));
+    }
+    if(channel){
+      channel.send({type:"broadcast", event:"change", payload:{
+        from:clientId,
+        rows: ups.map(r=>({id:r.id, kind:r.kind, week_id:r.week_id, data:r.data})),
+        deleted: dels
+      }});
+    }
+    netError = ""; liveChip();
+  }catch(e){
+    netError = e.message || "sync failed";
+    chip("Offline — changes held here");
+    try{ localStorage.setItem(KEY+"-pending", JSON.stringify(serialise())); }catch(_){}
+  }
+}
+
+function serialise(){
+  return {version:2, currentWeek:state.currentWeek, weeks:Object.fromEntries(
+      Object.entries(state.weeks).map(([k,w])=>[k,{start:w.start,capacity:w.capacity,
+        archived:w.archived,priorities:w.priorities,review:w.review}])),
+    tasks:state.tasks, kpis:state.kpis, library:state.library, pipeline:state.pipeline, funnel:state.funnel,
+    ideas:state.ideas, kols:state.kols, scripts:state.scripts, tab:state.tab};
+}
+
+/* ---- loading ----------------------------------------------------------- */
+async function loadCloud(){
+  const {data, error} = await sb.from(TABLE).select("*");
+  if(error) throw error;
+  if(!data.length) return false;
+  state.weeks = {}; state.tasks = [];
+  state.kpis=[]; state.library=[]; state.pipeline=[]; state.funnel=[]; state.ideas=[]; state.kols=[]; state.scripts=[];
+  lastSynced.clear();
+  data.filter(r=>r.kind==="week").forEach(applyRow);
+  data.filter(r=>r.kind!=="week").forEach(applyRow);
+  const keys = Object.keys(state.weeks).sort();
+  let want = null;
+  try{ want = localStorage.getItem(WEEK_KEY); }catch(e){}
+  const todayMon = mondayOf(new Date());
+  state.currentWeek = (want && state.weeks[want]) ? want
+    : state.weeks[todayMon] ? todayMon
+    : (keys.filter(k=>!state.weeks[k].archived).slice(-1)[0] || keys[keys.length-1]);
+  return true;
+}
+
+async function seedCloud(){
+  hydrate(state);
+  const rows = collectRows().map(r=>({id:r.id, kind:r.kind, week_id:r.week_id, data:r.data, updated_by:"setup"}));
+  const {error} = await sb.from(TABLE).upsert(rows, {onConflict:"id"});
+  if(error) throw error;
+  rows.forEach(r=>lastSynced.set(r.id, JSON.stringify(r.data)));
+}
+
+/* Safety net: broadcasts can be missed, so re-read periodically. Only
+   redraws when something actually differs from what we already hold. */
+async function poll(){
+  if(MODE!=="cloud" || document.hidden) return;
+  try{
+    const {data, error} = await sb.from(TABLE).select("*");
+    if(error || !data) return;
+    let changed = false;
+    const ids = new Set();
+    data.forEach(r=>{
+      ids.add(r.id);
+      if(lastSynced.get(r.id) !== JSON.stringify(r.data)){ applyRow(r); changed = true; }
+    });
+    [...lastSynced.keys()].forEach(id=>{ if(!ids.has(id)){ dropRow(id); changed = true; } });
+    if(changed) softRender();
+  }catch(e){}
+}
+
+/* ---- realtime ---------------------------------------------------------- */
+let rerenderTimer = null;
+function softRender(){
+  clearTimeout(rerenderTimer);
+  rerenderTimer = setTimeout(()=>{ renderMain(); if(drawer) renderDrawer(); }, 120);
+}
+
+function subscribe(){
+  if(channel) sb.removeChannel(channel);
+  channel = sb.channel("planner", {config:{presence:{key: clientId}, broadcast:{self:false}}});
+
+  channel.on("broadcast", {event:"change"}, ({payload})=>{
+    if(!payload || payload.from===clientId) return;
+    (payload.rows||[]).forEach(applyRow);
+    (payload.deleted||[]).forEach(dropRow);
+    softRender();
+  });
+
+  channel.on("presence", {event:"sync"}, ()=>{
+    const st = channel.presenceState();
+    peers = Object.keys(st).filter(k=>k!==clientId)
+      .map(k=>(st[k][0]&&st[k][0].name)||"Someone");
+    liveChip(); renderPresence();
+  });
+
+  channel.subscribe(async status=>{
+    if(status==="SUBSCRIBED") await channel.track({name: myName()||"Guest", at:Date.now()});
+  });
+}
+
+function renderPresence(){
+  const host = document.getElementById("presence");
+  if(!host) return;
+  if(MODE!=="cloud"){ host.innerHTML=""; return; }
+  const all = [myName()||"You", ...peers];
+  host.innerHTML = all.map((n,i)=>
+    `<span class="who ${i===0?"me":""}" title="${esc(n)}">${esc((n[0]||"?").toUpperCase())}</span>`
+  ).join("") + (peers.length ? `<span class="wholabel">${peers.length+1} editing</span>` : "");
+}
+
+/* ---- setup SQL --------------------------------------------------------- */
+function setupSql(){
+  return `-- Baliston planner setup. Paste into the Supabase SQL Editor and press Run.
+-- This makes the planner public: anyone with the web address can read and edit it.
+
+create table if not exists ${TABLE} (
+  id          text primary key,
+  kind        text not null,
+  week_id     text,
+  data        jsonb not null,
+  updated_at  timestamptz not null default now(),
+  updated_by  text
+);
+
+create index if not exists ${TABLE}_kind_idx on ${TABLE} (kind);
+create index if not exists ${TABLE}_week_idx on ${TABLE} (week_id);
+
+alter table ${TABLE} enable row level security;
+
+drop policy if exists "planner link access" on ${TABLE};
+drop policy if exists "public planner access" on ${TABLE};
+create policy "public planner access"
+  on ${TABLE} for all
+  to anon
+  using (true)
+  with check (true);`;
+}
+
+async function checkTable(){
+  const {error} = await sb.from(TABLE).select("id").limit(1);
+  if(!error) return "ok";
+  const m = ((error.message||"")+" "+(error.code||"")).toLowerCase();
+  if(error.code==="42P01" || m.includes("does not exist") || m.includes("could not find the table")) return "missing";
+  if(error.code==="42501" || m.includes("permission") || m.includes("row-level security") || m.includes("violates")) return "denied";
+  return "error:"+(error.message||"unknown");
+}
+
+/* ---- screens ----------------------------------------------------------- */
+function renderSqlGate(kind){
+  const v = document.getElementById("view");
+  document.getElementById("tabs").innerHTML = "";
+  document.getElementById("weekPick").innerHTML = "";
+  chip(kind==="denied" ? "Access blocked" : "One step left");
+
+  const denied = kind==="denied";
+  const ref = (cfg()?.url||"").replace(/^https?:\/\//,"").split(".")[0];
+  const sqlUrl = ref ? "https://supabase.com/dashboard/project/"+ref+"/sql/new" : "https://supabase.com/dashboard";
+
+  v.innerHTML = `
+  <div class="gate wide">
+    <span class="eyebrow">${denied?"Access":"Setup · one time"}</span>
+    <h2>${denied?"The database is refusing access":"Create the table"}</h2>
+    <p>${denied
+      ? "The table exists but the database is refusing access. Run the SQL below to open it up."
+      : "A browser can't create database tables — that needs a key which would be unsafe to publish. This is the only manual step, and you do it once."}</p>
+
+    <div class="gate-note" style="margin-top:0;margin-bottom:18px">
+      This planner will be public — anyone with the web address can open and edit it, with no sign-in.
+    </div>
+
+    <ol class="steps">
+      <li>Open the <a href="${sqlUrl}" target="_blank" rel="noopener">Supabase SQL Editor</a> for your project.</li>
+      <li>Copy the SQL below and paste it in.</li>
+      <li>Press <strong>Run</strong>, then come back and check again.</li>
+    </ol>
+
+    <textarea class="field sql" id="sqlBox" readonly>${esc(setupSql())}</textarea>
+
+    <div class="rowbar" style="margin-top:12px">
+      <button class="btn" data-act="copySql">Copy the SQL</button>
+      <button class="btn primary" data-act="recheck">I've run it — check again</button>
+    </div>
+  </div>`;
+}
+
+function renderCfgGate(){
+  chip("Not connected");
+  document.getElementById("tabs").innerHTML = "";
+  document.getElementById("view").innerHTML = `
+  <div class="gate">
+    <span class="eyebrow">Setup</span>
+    <h2>Connect a Supabase project</h2>
+    <p>Paste the project URL and the publishable (anon) key from Settings → API.</p>
+    ${netError?`<div class="gate-note err">${esc(netError)}</div>`:""}
+    <div class="f wide"><label>Project URL</label><input class="field" id="cfgUrl" placeholder="https://xxxx.supabase.co"></div>
+    <div class="f wide"><label>Publishable / anon key</label><input class="field" id="cfgKey" placeholder="sb_publishable_..."></div>
+    <div class="rowbar" style="margin-top:6px">
+      <button class="btn primary" data-act="saveCfg">Connect</button>
+      <button class="btn" data-act="useLocal">Skip — this browser only</button>
+    </div>
+    <div class="gate-note">Never paste the secret or service_role key. Only the publishable key belongs in a page like this.</div>
+  </div>`;
+}
+
+/* ---- boot -------------------------------------------------------------- */
+async function initSupabase(){
+  const c = cfg();
+  if(!c) return false;
+  let createClient;
+  for(const url of ["https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm",
+                    "https://esm.sh/@supabase/supabase-js@2"]){
+    try{ ({createClient} = await import(url)); if(createClient) break; }catch(e){}
+  }
+  if(!createClient){ netError = "Could not load the Supabase library from a CDN."; return false; }
+  sb = createClient(c.url, c.key, {auth:{persistSession:false, autoRefreshToken:false}});
+  return true;
+}
+
+async function boot(){
+  hydrate(state);
+  try{ const w = localStorage.getItem(WEEK_KEY); if(w) state.currentWeek = w; }catch(e){}
+
+  const configured = await initSupabase();
+  if(!configured && !cfg()){ renderCfgGate(); return; }
+
+  if(configured){
+    MODE = "cloud";
+    try{
+      const st = await checkTable();
+      if(st==="missing" || st==="denied"){ tableMissing = true; renderSqlGate(st); return; }
+      if(st.indexOf("error:")===0) throw new Error(st.slice(6));
+      tableMissing = false;
+      const had = await loadCloud();
+      if(!had){ hydrate(state); await seedCloud(); }
+      subscribe();
+      clearInterval(pollTimer); pollTimer = setInterval(poll, POLL_MS);
+      liveChip();
+      render(); renderPresence();
+      return;
+    }catch(e){
+      netError = e.message || String(e);
+      MODE = "local";
+      chip("Cloud unavailable — using this browser");
+      toast("Could not reach the database: "+netError);
+    }
+  }
+
+  MODE = "local";
+  let loaded = false;
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){ const p = JSON.parse(raw); if(valid(p)){ state = hydrate(p); loaded = true; } }
+  }catch(e){}
+  if(!loaded){
+    try{
+      const res = await fetch("data.json?t="+Date.now(), {cache:"no-store"});
+      if(res.ok){ const p = await res.json(); if(valid(p)){ state = hydrate(p); save(); } }
+    }catch(e){}
+  }
+  chip("Saved in this browser", true);
+  render();
+}
+
+function askName(){
+  ask({
+    eyebrow:"Welcome", title:"What should we call you?",
+    body:"Just so the other person can see who's in the planner. Stored on this device only.",
+    input:"", confirmLabel:"Start",
+    onYes:(v)=>{
+      setMyName(String(v||"").trim().split("\n")[0].slice(0,40) || "Guest");
+      if(channel) channel.track({name:myName(), at:Date.now()});
+      renderPresence();
+    }
+  });
+}
+
+async function pullRepo(){
+  let repo = null;
+  try{
+    const res = await fetch("data.json?t="+Date.now(), {cache:"no-store"});
+    if(res.ok){ const p = await res.json(); if(valid(p)) repo = p; }
+  }catch(e){}
+  if(!repo){ toast("No data.json found next to this page."); return; }
+  ask({
+    eyebrow:"Repo version", title:"Replace everything with the committed version?",
+    body:"In cloud mode this overwrites the shared database for everyone.",
+    confirmLabel:"Load the repo version",
+    onYes:()=>{
+      state = hydrate(repo);
+      if(!state.weeks[state.currentWeek]) state.currentWeek = weekKeys().slice(-1)[0];
+      save(); render(); toast("Loaded from the repo.");
+    }
+  });
+}
+
+/* ---- accessors ---- */
+const week = () => state.weeks[state.currentWeek];
+const weekKeys = () => Object.keys(state.weeks).sort();
+const activeWeeks = () => weekKeys().filter(k=>!state.weeks[k].archived);
+const planned = w => (w.tasks||[]).reduce((s,t)=>s+(Number(t.hours)||0),0);
+const actualH = w => (w.tasks||[]).reduce((s,t)=>s+(Number(t.actual)||0),0);
+const dayHours = (w,d) => (w.tasks||[]).filter(t=>t.day===d).reduce((s,t)=>s+(Number(t.hours)||0),0);
+
+/* ============================================================
+   Shared bits
+   ============================================================ */
+function statusPill(n){
+  return `<span class="pill"><i class="pd" style="background:${stColor(n)}"></i>${esc(n)}</span>`;
+}
+function opts(list, val){
+  return list.map(o=>`<option value="${esc(o)}"${o===val?" selected":""}>${esc(o)}</option>`).join("");
+}
+
+function meter(used, cap){
+  const denom = Math.max(cap, used, 1);
+  const w = week();
+  const segs = WS.map(ws=>{
+    const h = (w.tasks||[]).filter(t=>t.workstream===ws.id).reduce((s,t)=>s+(Number(t.hours)||0),0);
+    return h>0 ? `<i class="meter-seg" style="width:${(h/denom)*100}%;background:${ws.c}" title="${esc(ws.name)} — ${num(h)}h"></i>` : "";
+  }).join("");
+  const over = used>cap
+    ? `<i class="meter-over" style="left:${(cap/denom)*100}%;width:${((used-cap)/denom)*100}%"></i>` : "";
+  let ticks="";
+  for(let i=1;i<Math.ceil(denom);i++){
+    ticks += `<i class="meter-tick ${i%5===0?"major":""} ${i>used?"empty":""}" style="left:${(i/denom)*100}%"></i>`;
+  }
+  const capLine = `<i class="meter-cap" style="left:${(cap/denom)*100}%"></i>`;
+  const diff = used - cap;
+  let flag;
+  if(diff > 0.001) flag = `<span class="flag over">${num(diff)}h over capacity</span>`;
+  else if(diff < -2) flag = `<span class="flag under">${num(-diff)}h unassigned</span>`;
+  else flag = `<span class="flag good">On capacity</span>`;
+
+  return `
+  <div class="meter-read">
+    <span class="big num">${num(used)}</span>
+    <span class="of">of ${num(cap)} hours planned</span>
+    ${flag}
+  </div>
+  <div class="meter">
+    <div class="meter-track">
+      <div class="meter-segs">${segs}${over}</div>
+      <div class="meter-ticks">${over}${ticks}${capLine}</div>
+    </div>
+    <div class="meter-scale"><span>0h</span><span>${num(Math.max(cap,used))}h</span></div>
+  </div>`;
+}
+
+/* ============================================================
+   Views
+   ============================================================ */
+const TABS = [
+  {k:"dash",     n:"Dashboard"},
+  {k:"week",     n:"Week"},
+  {k:"kpis",     n:"KPIs"},
+  {k:"pipeline", n:"Pipeline"},
+  {k:"funnel",   n:"Funnel"},
+  {k:"library",  n:"Library"},
+  {k:"ideas",    n:"Idea bank"},
+  {k:"kols",     n:"KOLs"},
+  {k:"scripts",  n:"Scripts"},
+  {k:"review",   n:"Review &amp; archive"}
+];
+
+function tabCount(k){
+  const w = week();
+  if(k==="week") return (w.tasks||[]).length;
+  if(k==="kpis"){ const ks=w.kpis||[]; return ks.length ? (ks.filter(x=>x.done).length+"/"+ks.length) : ""; }
+  if(k==="pipeline") return state.pipeline.length;
+  if(k==="library") return (state.library||[]).length;
+  if(k==="ideas") return state.ideas.length;
+  if(k==="kols") return state.kols.length;
+  if(k==="scripts") return state.scripts.length;
+  if(k==="dash"){
+    const n = (w.tasks||[]).filter(t=>REVIEW_STATES.includes(t.status)).length
+            + state.pipeline.filter(c=>["Internal Review","Changes"].includes(c.stage)).length;
+    return n||"";
+  }
+  return "";
+}
+
+/* ---------- Dashboard ---------- */
+function viewDash(){
+  const w = week();
+  const t = w.tasks||[];
+  const used = planned(w);
+  const done = t.filter(x=>x.status==="Completed").length;
+  const wip  = t.filter(x=>["In Progress","Waiting / Review","Changes Needed"].includes(x.status)).length;
+
+  const wsRows = WS.map(ws=>{
+    const h = t.filter(x=>x.workstream===ws.id).reduce((s,x)=>s+(Number(x.hours)||0),0);
+    const max = Math.max(ws.target, h, 1);
+    return `<div class="wsrow">
+      <div>
+        <div class="wsname"><i class="dot" style="background:${ws.c}"></i>${esc(ws.name)}</div>
+        <div class="wstrack"><div class="wsfill" style="width:${(h/max)*100}%;background:${ws.c}"></div><i class="wstarget" style="left:${(ws.target/max)*100}%"></i></div>
+      </div>
+      <div class="wsnums"><b>${num(h)}</b> / ${num(ws.target)}h</div>
+    </div>`;
+  }).join("");
+
+  const qGroups = REVIEW_STATES.map(s=>{
+    const rows = t.filter(x=>x.status===s);
+    const extra = s==="Waiting / Review" ? state.pipeline.filter(c=>c.stage==="Internal Review") :
+                  s==="Changes Needed"   ? state.pipeline.filter(c=>c.stage==="Changes") : [];
+    if(!rows.length && !extra.length) return "";
+    const label = s==="Waiting / Review" ? "Waiting for your review"
+                : s==="Changes Needed"   ? "Changes requested"
+                : s==="Blocked"          ? "Blocked — needs your input" : "Approved";
+    return `<div class="qgrouphead">${label} · ${rows.length+extra.length}</div>` +
+      rows.map(x=>`<div class="qrow"><span class="t">${esc(x.name)}</span><button class="btn sm" data-act="openTask" data-id="${x.id}">Open</button></div>`).join("") +
+      extra.map(c=>`<div class="qrow"><span class="t">${esc(c.title)}</span><button class="btn sm" data-act="openContent" data-id="${c.id}">Open</button></div>`).join("");
+  }).join("");
+
+  const dl = [
+    ...t.filter(x=>x.due && x.status!=="Completed").map(x=>({n:x.name,d:x.due,tag:"Task"})),
+    ...state.pipeline.filter(c=>c.deadline && c.stage!=="Published").map(c=>({n:c.title,d:c.deadline,tag:"Content"}))
+  ].sort((a,b)=>a.d.localeCompare(b.d)).slice(0,7);
+
+  const prios = (w.priorities||[]).filter(Boolean);
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">Week of ${weekLabel(w.start)}</span>
+      <h2>Dashboard</h2>
+      <p>Where the 15 hours are going this week, and what is sitting with you.</p>
+    </div>
+    <button class="btn" data-act="go" data-tab="week">Open the week →</button>
+  </div>
+
+  <div class="dash">
+    <div class="card pad">
+      <span class="eyebrow">Capacity</span>
+      ${meter(used, w.capacity)}
+      <div class="statgrid">
+        <div class="stat"><div class="v num">${num(used)}</div><div class="l">Hours allocated</div></div>
+        <div class="stat"><div class="v num">${num(Math.max(0,w.capacity-used))}</div><div class="l">Hours remaining</div></div>
+        <div class="stat"><div class="v num">${done}</div><div class="l">Tasks completed</div></div>
+        <div class="stat"><div class="v num">${wip}</div><div class="l">Tasks in progress</div></div>
+      </div>
+      <div style="margin-top:26px"><span class="eyebrow">Hours by workstream · marker shows the target</span></div>
+      <div class="wsbar" style="margin-top:14px">${wsRows}</div>
+    </div>
+
+    <div style="display:grid;gap:14px">
+      <div class="card pad">
+        <span class="eyebrow">Needs you</span>
+        ${qGroups ? `<div class="queue">${qGroups}</div>` : `<div class="empty">Nothing is waiting on you. Clear.</div>`}
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">KPIs this week</span>
+        ${(()=>{ const {ks,total,doneH,done} = kpiStats(w);
+          if(!ks.length) return `<div class="empty">None set. <button class="btn ghost sm" data-act="go" data-tab="kpis">Set them up</button></div>`;
+          return `<div class="meter-read" style="margin-top:8px">
+              <span class="big num">${done}</span><span class="of">of ${ks.length} met</span>
+            </div>
+            <div class="kpibar" style="margin-top:12px">${ks.map(k=>{const r=kres(k);
+              return `<i style="flex:${Number(k.hours)||1};background:${r==="met"?wsOf(k.workstream).c:r==="missed"?"#E8CFCB":"var(--line-soft)"}"></i>`;}).join("")}</div>
+            <ul class="revlist" style="margin-top:12px">${ks.filter(k=>kres(k)!=="met").slice(0,4).map(k=>
+              `<li><span>${esc(k.name)}</span><span class="num" style="color:var(--muted)">${num(k.hours)}h</span></li>`).join("")
+              || `<li style="color:var(--ok)">All met.</li>`}</ul>
+            <button class="btn ghost sm" style="margin-top:10px" data-act="go" data-tab="kpis">Open KPIs</button>`;
+        })()}
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">Upcoming deadlines</span>
+        ${dl.length ? `<ul class="deadlines">${dl.map(x=>`<li><span>${esc(x.n)}</span><span class="when ${x.d<=TODAY?"due":""}">${short(x.d)}</span></li>`).join("")}</ul>` : `<div class="empty">No dates set yet.</div>`}
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">Priorities this week</span>
+        ${prios.length ? `<ul class="prio-list">${prios.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>` : `<div class="empty">Set them in Review &amp; archive.</div>`}
+        <button class="btn ghost sm" style="margin-top:10px" data-act="editPriorities">Edit priorities</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------- Week ---------- */
+function taskCard(t){
+  const ws = wsOf(t.workstream);
+  return `<article class="task ${t.status==="Completed"?"done":""}" draggable="true" data-drag="task" data-id="${t.id}" data-act="openTask" tabindex="0" style="--ws:${ws.c}">
+    <div class="tn">${esc(t.name)}</div>
+    <div class="tmeta">
+      <span class="ws">${esc(ws.name.split(" ")[0])}</span>
+      <span class="prio ${t.priority}">${esc(t.priority)}</span>
+      <span class="hrs num">${num(t.hours)}h</span>
+    </div>
+    <div class="tmeta">
+      ${statusPill(t.status)}
+      ${t.due?`<span class="pill plain">Due ${short(t.due)}</span>`:""}
+      ${t.recurrence==="Recurring"?`<span class="rec">↻</span>`:""}
+    </div>
+  </article>`;
+}
+
+function viewWeek(){
+  const w = week();
+  const used = planned(w);
+  const cols = DAYS.map((d,i)=>{
+    const list = (w.tasks||[]).filter(t=>t.day===d.k);
+    return `<section class="daycol" data-drop="day" data-day="${d.k}">
+      <div class="dayhead">
+        <div><span class="d">${d.n}</span><span class="dt">${short(addDays(w.start,i))}</span></div>
+        <span class="h num">${num(dayHours(w,d.k))}h</span>
+      </div>
+      <div class="daybody">${list.map(taskCard).join("") || `<div class="empty" style="padding:14px 4px">No tasks yet</div>`}</div>
+      <div class="dayfoot"><button class="addtask" data-act="newTask" data-day="${d.k}">+ Add task</button></div>
+    </section>`;
+  }).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">Week of ${weekLabel(w.start)}${w.archived?" · archived":""}</span>
+      <h2>Weekly calendar</h2>
+      <p>Drag a task to move it to another day. Click any task to edit every field.</p>
+    </div>
+    <div class="rowbar" style="margin:0">
+      <button class="btn" data-act="loadWeekPlan">Load this week's plan</button>
+      <button class="btn" data-act="newTask" data-day="mon">Add task</button>
+      <button class="btn" data-act="newWeek">Start next week</button>
+      <button class="btn" data-act="go" data-tab="review">Weekly review →</button>
+    </div>
+  </div>
+  <div class="board">${cols}</div>
+  <div class="weekfoot">
+    <div class="card pad">${meter(used, w.capacity)}</div>
+    <div class="card pad">
+      <span class="eyebrow">Available hours this week</span>
+      <div style="margin-top:9px"><input class="field num" type="number" min="0" step="0.5" value="${w.capacity}" data-act="setCap" style="max-width:120px"></div>
+      <p class="hint" style="margin-top:9px">Change this for holiday weeks or extra hours. Everything recalculates against it.</p>
+    </div>
+  </div>`;
+}
+
+/* ---------- KPIs ---------- */
+function kpiStats(w){
+  const ks = w.kpis||[];
+  const total = ks.reduce((a,k)=>a+(Number(k.hours)||0),0);
+  const met    = ks.filter(k=>kres(k)==="met");
+  const partly = ks.filter(k=>kres(k)==="partly");
+  const missed = ks.filter(k=>kres(k)==="missed");
+  const hrs = a => a.reduce((x,k)=>x+(Number(k.hours)||0),0);
+  const doneH = hrs(met) + hrs(partly)*0.5;
+  const judged = met.length + partly.length + missed.length;
+  return {ks, total, doneH, done:met.length,
+          met:met.length, partly:partly.length, missed:missed.length, judged};
+}
+
+function viewKpis(){
+  const w = week();
+  const st = kpiStats(w);
+  const {ks, total, doneH} = st;
+  const pct = total ? Math.round((doneH/total)*100) : 0;
+  const prev = weekKeys().filter(k=>k < w.start).slice(-1)[0];
+
+  const rows = ks.map(k=>{
+    const ws = wsOf(k.workstream);
+    const r = kresInfo(k);
+    return `<article class="kpi r-${kres(k)||"none"}" style="--ws:${ws.c};--res:${r.c}">
+      <button class="tick" data-act="cycleKpi" data-id="${k.id}"
+        title="${esc(r.label)} — click to change" aria-label="${esc(k.name)}: ${esc(r.label)}">${r.mark}</button>
+      <div class="kpimain">
+        <div class="kpiname" data-act="openKpi" data-id="${k.id}">${esc(k.name)}</div>
+        <p class="kpidel">${esc(k.deliverable)}</p>
+        ${k.notes?`<p class="kpinote">${esc(k.notes)}</p>`:""}
+        ${kres(k)?`<span class="reslabel">${esc(r.label)}</span>`:""}
+      </div>
+      <div class="kpiright">
+        <span class="kpih num">${num(k.hours)}h</span>
+        <span class="ws">${esc(ws.name.split(" ")[0])}</span>
+        <button class="btn ghost sm rowdel" data-act="deleteKpi" data-id="${k.id}" title="Remove this KPI">Remove</button>
+      </div>
+    </article>`;
+  }).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">Week of ${weekLabel(w.start)}</span>
+      <h2>KPIs this week</h2>
+      <p>Click the box to mark a KPI met, partly met or missed. Click the name to edit its wording, hours or target.</p>
+    </div>
+    <div class="rowbar" style="margin:0">
+      <button class="btn" data-act="newKpi">Add a KPI</button>
+      <button class="btn" data-act="kpiMenu">Change this week's set</button>
+      <button class="btn ghost" data-act="copyKpiReport">Copy for reporting</button>
+    </div>
+  </div>
+
+  <div class="card pad" style="margin-bottom:14px">
+    <div class="kpitop">
+      <div>
+        <span class="eyebrow">Delivered</span>
+        <div class="meter-read" style="margin-top:6px">
+          <span class="big num">${st.met}</span>
+          <span class="of">of ${ks.length} met · ${num(doneH)} of ${num(total)} committed hours</span>
+          ${total>w.capacity?`<span class="flag over">${num(total-w.capacity)}h over capacity</span>`
+            :`<span class="flag good">${num(w.capacity-total)}h left for anything else</span>`}
+        </div>
+        <div class="reskey">
+          <span><i style="background:#2E6B4F"></i>${st.met} met</span>
+          <span><i style="background:#A8641B"></i>${st.partly} partly</span>
+          <span><i style="background:#9E3A2C"></i>${st.missed} missed</span>
+          <span><i style="background:var(--line)"></i>${ks.length-st.judged} not judged</span>
+        </div>
+      </div>
+      <span class="kpipct num">${pct}%</span>
+    </div>
+    <div class="kpibar">${ks.map(k=>{
+      const r = kres(k);
+      const bg = r==="met" ? wsOf(k.workstream).c
+               : r==="partly" ? "repeating-linear-gradient(135deg,"+wsOf(k.workstream).c+","+wsOf(k.workstream).c+" 3px,var(--line-soft) 3px,var(--line-soft) 6px)"
+               : r==="missed" ? "#E8CFCB" : "var(--line-soft)";
+      return `<i style="flex:${Number(k.hours)||1};background:${bg}" title="${esc(k.name)}"></i>`;
+    }).join("")}</div>
+  </div>
+
+  ${prev ? (()=>{ const pw = state.weeks[prev]; const ps = kpiStats(pw);
+      if(!ps.ks.length) return "";
+      return `<div class="card pad lastweek">
+        <div class="lwhead">
+          <div>
+            <span class="eyebrow">Last week · ${weekLabel(prev)}</span>
+            <div class="lwline">
+              <strong>${ps.met} of ${ps.ks.length} met</strong>
+              ${ps.partly?`· ${ps.partly} partly`:""}${ps.missed?` · ${ps.missed} missed`:""}
+              · ${num(ps.doneH)} of ${num(ps.total)} committed hours delivered
+            </div>
+          </div>
+          <button class="btn sm" data-act="gotoWeek" data-w="${prev}">Open last week</button>
+        </div>
+        <div class="kpibar" style="margin-top:12px">${ps.ks.map(k=>{const r=kres(k);
+          return `<i style="flex:${Number(k.hours)||1};background:${r==="met"?wsOf(k.workstream).c:r==="partly"?"#E4C79E":r==="missed"?"#E8CFCB":"var(--line-soft)"}" title="${esc(k.name)}"></i>`;}).join("")}</div>
+        <div class="lwgrid">${ps.ks.map(k=>{const r=kresInfo(k);
+          return `<span class="lwitem"><i style="color:${r.c==="var(--line)"?"var(--faint)":r.c}">${r.mark||"○"}</i>${esc(k.name)}</span>`;}).join("")}</div>
+        ${ps.missed||ps.partly ? `<p class="hint" style="margin-top:12px">Anything short here is worth checking against this week's list before you commit the hours.</p>` : ""}
+      </div>`;
+    })() : ""}
+
+  ${ks.length ? `<div class="kpilist">${rows}</div>`
+              : `<div class="card empty">No KPIs set for this week yet. Use <strong>Change this week's set</strong> to load one${prev?", or copy last week's":""}.</div>`}
+
+  <div class="briefgrid">
+    <div class="card pad">
+      <span class="eyebrow">Success criteria for the week</span>
+      <ul class="crit">${SUCCESS_CRITERIA.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+    </div>
+    <div class="card pad">
+      <span class="eyebrow">Send to Emma for review</span>
+      <ul class="crit review">${REVIEW_POINTS.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+      <p class="hint" style="margin-top:12px">Set the task to <strong>Waiting / Review</strong> rather than messaging — it appears on the dashboard.</p>
+    </div>
+    <div class="card pad guard">
+      <span class="eyebrow">Guardrails this week</span>
+      <ul class="crit">${GUARDRAILS.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+    </div>
+  </div>
+
+  <p class="hint" style="margin-top:16px;max-width:80ch">
+    Planning principle: 13 hours are assigned to defined deliverables, leaving 2 hours of genuine capacity
+    within the 15-hour week. This week moves from finding things to judging them — categorising questions,
+    extracting insight, and recommending what to make.
+  </p>`;
+}
+
+/* ---------- Pipeline ---------- */
+function viewPipeline(){
+  const cols = PIPE.map(stage=>{
+    const items = state.pipeline.filter(c=>c.stage===stage);
+    return `<section class="kcol" data-drop="pipe" data-stage="${esc(stage)}">
+      <div class="khead"><span class="kn">${esc(stage)}</span><span class="kc num">${items.length}</span></div>
+      <div class="kbody">
+        ${items.map(c=>`<article class="kcard" draggable="true" data-drag="content" data-id="${c.id}" data-act="openContent" tabindex="0">
+          <div class="kt">${esc(c.title)}</div>
+          <div class="kmeta">
+            <span class="pill plain">${esc(c.platform)}</span>
+            <span class="pill plain">${esc(c.format)}</span>
+          </div>
+          <div class="kmeta">
+            <span class="pill"><i class="pd" style="background:var(--accent)"></i>${esc(c.funnel)}</span>
+            ${c.deadline?`<span class="pill plain">Due ${short(c.deadline)}</span>`:""}
+          </div>
+        </article>`).join("") || `<div class="empty" style="padding:14px 4px">Empty</div>`}
+      </div>
+      <div style="padding:0 9px 10px"><button class="addtask" data-act="newContent" data-stage="${esc(stage)}">+ Add</button></div>
+    </section>`;
+  }).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">${state.pipeline.length} pieces in production</span>
+      <h2>Content pipeline</h2>
+      <p>Every piece currently being produced, from first idea to published. Drag a card to change its stage.</p>
+    </div>
+    <button class="btn" data-act="newContent" data-stage="Idea">Add content</button>
+  </div>
+  <div class="kanban">${cols}</div>`;
+}
+
+/* ---------- Funnel ---------- */
+function viewFunnel(){
+  const cols = FUNNEL.map((stage,i)=>{
+    const items = state.funnel.filter(f=>f.stage===stage);
+    const counts = FKIND.map(k=>items.filter(f=>f.kind===k).length);
+    const total = items.filter(f=>f.kind!=="Gap").length;
+    const existing = counts[0];
+    const mix = FKIND.map((k,ix)=>counts[ix]?`<i style="flex:${counts[ix]};background:${["#2E6B4F","#2E6F9E","#C9CFD1","#9E3A2C"][ix]}"></i>`:"").join("") || `<i style="flex:1;background:var(--line)"></i>`;
+    let gap;
+    if(total===0) gap = `<div class="fgap">Nothing here. This stage is empty.</div>`;
+    else if(existing===0) gap = `<div class="fgap">Nothing published yet at this stage.</div>`;
+    else if(total<3) gap = `<div class="fgap">Thin — only ${total} pieces.</div>`;
+    else gap = `<div class="fgap ok">Covered.</div>`;
+
+    return `<section class="fcol" data-drop="funnel" data-stage="${esc(stage)}">
+      <div class="fhead">
+        <span class="fnum">0${i+1}</span>
+        <div class="fstage">${esc(stage)}</div>
+        <div class="fmix">${mix}</div>
+        ${gap}
+      </div>
+      <div class="fbody">
+        ${items.map(f=>`<article class="fitem" draggable="true" data-drag="funnel" data-id="${f.id}" data-act="openFunnel" tabindex="0">
+          ${esc(f.title)}<span class="fk ${f.kind}">${f.kind==="Gap"?"Gap":f.kind}</span>
+        </article>`).join("") || `<div class="empty" style="padding:12px 2px">—</div>`}
+        <button class="addtask" data-act="newFunnel" data-stage="${esc(stage)}">+ Add</button>
+      </div>
+    </section>`;
+  }).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">Awareness → Conversion</span>
+      <h2>Content funnel tracker</h2>
+      <p>Green is published, blue is in production, grey is an idea, red is a gap we have named. Drag items between stages.</p>
+    </div>
+  </div>
+  <div class="funnel">${cols}</div>`;
+}
+
+/* ---------- Ideas ---------- */
+function viewIdeas(){
+  const cards = state.ideas.map(i=>`
+    <article class="ideacard">
+      <div class="it" data-act="openIdea" data-id="${i.id}">${esc(i.idea)}</div>
+      <div class="meta">
+        <span class="pill"><i class="pd" style="background:var(--accent)"></i>${esc(i.funnel)}</span>
+        <span class="pill plain">${esc(i.format)}</span>
+        <span class="pill plain">${esc(i.platform)}</span>
+        <span class="prio ${i.priority}" style="align-self:center">${esc(i.priority)}</span>
+      </div>
+      ${i.notes?`<p class="hint" style="margin:0">${esc(i.notes)}</p>`:""}
+      <div class="acts">
+        <button class="btn sm" data-act="ideaToWeek" data-id="${i.id}">Send to this week</button>
+        <button class="btn sm" data-act="ideaToPipe" data-id="${i.id}">Send to pipeline</button>
+      </div>
+    </article>`).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">${state.ideas.length} ideas parked</span>
+      <h2>Idea bank</h2>
+      <p>Drop ideas here without committing them to a week. Send one onwards when it is ready.</p>
+    </div>
+    <button class="btn primary" data-act="newIdea">Add idea</button>
+  </div>
+  ${state.ideas.length?`<div class="cardgrid">${cards}</div>`:`<div class="card empty">Nothing parked yet. Add the first idea.</div>`}`;
+}
+
+/* ---------- Library ---------- */
+let libFilter = "all";
+
+function viewLibrary(){
+  const all = state.library||[];
+  const items = libFilter==="all" ? all : all.filter(x=>x.type===libFilter);
+  const count = k => all.filter(x=>x.type===k).length;
+
+  const chips = [`<button class="chip ${libFilter==="all"?"on":""}" data-act="libFilter" data-t="all">Everything <b class="num">${all.length}</b></button>`]
+    .concat(LIB_TYPES.map(t=>`<button class="chip ${libFilter===t.k?"on":""}" data-act="libFilter" data-t="${t.k}" style="--c:${t.c}">
+      <i style="background:${t.c}"></i>${esc(t.n)} <b class="num">${count(t.k)}</b></button>`)).join("");
+
+  const bits = (it)=>{
+    const t = it.type, out = [];
+    if(t==="community"){ if(it.platform) out.push(it.platform); if(it.audience) out.push(it.audience); }
+    if(t==="question"){ if(it.cluster) out.push(it.cluster); if(it.intent) out.push(it.intent);
+      if(it.covered) out.push("On site: "+it.covered); if(it.format) out.push("→ "+it.format); }
+    if(t==="opportunity"){ if(it.format) out.push(it.format); if(it.cluster) out.push(it.cluster); }
+    if(t==="editorial"){ if(it.audience) out.push(it.audience);
+      if(it.contributed && it.contributed!=="Unknown") out.push("Contributed: "+it.contributed); }
+    if(t==="resource" && it.audience) out.push(it.audience);
+    return out;
+  };
+
+  const cards = items.map(it=>{
+    const t = libType(it.type);
+    const body = it.insight || it.angle || it.rules || it.notes || "";
+    return `<article class="libcard" style="--c:${t.c}">
+      <div class="libhead">
+        <span class="libtype">${esc(t.n)}</span>
+        <span class="pill plain">${esc(it.status||"New")}</span>
+        <span class="prio ${it.priority}" style="margin-left:auto">${esc(it.priority||"")}</span>
+      </div>
+      <div class="libtitle" data-act="openLib" data-id="${it.id}">${esc(it.title||"Untitled")}</div>
+      ${bits(it).length?`<div class="libbits">${bits(it).map(b=>`<span>${esc(b)}</span>`).join("")}</div>`:""}
+      ${body?`<p class="libbody">${esc(body)}</p>`:""}
+      <div class="libfoot">
+        ${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer" class="liblink">Open link ↗</a>`:`<span class="hint">No link yet</span>`}
+        <button class="btn ghost sm" data-act="openLib" data-id="${it.id}">Edit</button>
+      </div>
+    </article>`;
+  }).join("");
+
+  const t = libFilter==="all" ? null : libType(libFilter);
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">${all.length} saved</span>
+      <h2>Library</h2>
+      <p>Everything found while researching, in one place — communities, real questions, content ideas, editorial targets and useful links. ${t?esc(t.hint)+"." : "Filter by type, or add anything that doesn't fit elsewhere."}</p>
+    </div>
+    <div class="rowbar" style="margin:0">
+      <button class="btn primary" data-act="newLib">Add to the Library</button>
+    </div>
+  </div>
+
+  <div class="chips">${chips}</div>
+
+  ${items.length ? `<div class="libgrid">${cards}</div>`
+    : `<div class="card empty">Nothing here yet. Add the first ${t?esc(t.n.toLowerCase()):"entry"}.</div>`}`;
+}
+
+/* ---------- KOLs ---------- */
+function kolColor(s){
+  return ({"Researching":"#9AA3A7","Ready to Contact":"#A8641B","Contacted":"#2E6F9E",
+    "Responded":"#2E6F9E","Conversation":"#2E6F9E","Collaboration":"#2E6B4F","Not Relevant":"#C9CFD1"})[s] || "#9AA3A7";
+}
+function missingKols(){
+  const have = new Set(state.kols.map(k=>(k.name||"").trim().toLowerCase()));
+  return KOL_LIST.filter(k=>!have.has(k.name.trim().toLowerCase())).length;
+}
+function viewKols(){
+  const rows = state.kols.map(k=>`
+    <tr data-act="openKol" data-id="${k.id}">
+      <td><strong>${esc(k.name)}</strong><span class="sub">${esc(k.specialty)}${k.org?" · "+esc(k.org):""}</span></td>
+      <td>${esc(k.country)}</td>
+      <td class="num">${esc(k.audience)}</td>
+      <td>${esc(k.instagram)}${k.linkedin?`<span class="sub">${esc(k.linkedin)}</span>`:""}</td>
+      <td style="max-width:280px">${esc(k.why)}</td>
+      <td><span class="prio ${k.priority}">${esc(k.priority)}</span></td>
+      <td><span class="pill"><i class="pd" style="background:${kolColor(k.status)}"></i>${esc(k.status)}</span></td>
+    </tr>`).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">${state.kols.length} candidates</span>
+      <h2>KOL &amp; creator research</h2>
+      <p>Click a row to edit. Everyone here has been emailed — update the outreach status as replies come in.</p>
+    </div>
+    <div class="rowbar" style="margin:0">
+      <button class="btn" data-act="loadKolList">Load the outreach list</button>
+      <button class="btn primary" data-act="newKol">Add candidate</button>
+    </div>
+  </div>
+  ${missingKols()>0 ? `<div class="notice">
+    <p><strong>${missingKols()} of the ${KOL_LIST.length} names on the outreach list aren't in this tracker yet.</strong> They come from the target list document, France excluded.</p>
+    <button class="btn primary" data-act="loadKolList">Add them now</button>
+  </div>` : ""}
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Name</th><th>Country</th><th>Audience</th><th>Channels</th><th>Why they fit Baliston</th><th>Priority</th><th>Outreach</th></tr></thead>
+      <tbody>${rows || `<tr><td colspan="7"><div class="empty">No candidates yet.</div></td></tr>`}</tbody>
+    </table>
+  </div>`;
+}
+
+/* ---------- Scripts ---------- */
+function viewScripts(){
+  const cards = state.scripts.map(s=>`
+    <article class="scriptcard">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start">
+        <div>
+          <span class="eyebrow">${esc(s.videoType)} · ${esc(s.length)} · ${esc(s.audience)}</span>
+          <div style="font-size:15px;font-weight:600;margin-top:5px;letter-spacing:-.01em;cursor:pointer" data-act="openScript" data-id="${s.id}">${esc(s.title)}</div>
+        </div>
+        <button class="btn sm" data-act="openScript" data-id="${s.id}">Edit</button>
+      </div>
+      <p class="hook">${esc(s.hook)}</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;align-items:center">
+        <span class="pill"><i class="pd" style="background:${s.status==="Ready to Film"?"var(--ok)":"var(--info)"}"></i>${esc(s.status)}</span>
+        <span class="pill plain">${esc(s.funnel)}</span>
+        <span class="pill plain">Filmed: ${esc(s.filmed)}</span>
+        <span class="pill plain">Published: ${esc(s.published)}</span>
+      </div>
+    </article>`).join("");
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">${state.scripts.filter(s=>s.status==="Ready to Film").length} ready to film · ${state.scripts.length} total</span>
+      <h2>Script bank</h2>
+      <p>Ready-to-film scripts so the team can shoot whenever there is a free hour.</p>
+    </div>
+    <button class="btn primary" data-act="newScript">Add script</button>
+  </div>
+  ${state.scripts.length?`<div class="cardgrid" style="grid-template-columns:repeat(auto-fill,minmax(360px,1fr))">${cards}</div>`:`<div class="card empty">No scripts yet.</div>`}`;
+}
+
+/* ---------- Review & archive ---------- */
+const archOpen = new Set();
+function viewReview(){
+  const w = week();
+  const t = w.tasks||[];
+  const done = t.filter(x=>x.status==="Completed");
+  const open = t.filter(x=>x.status!=="Completed");
+  const end = addDays(w.start,6);
+  const pub = state.pipeline.filter(c=>c.stage==="Published" && c.publishDate>=w.start && c.publishDate<=end);
+  const p = planned(w), a = actualH(w);
+  const rv = w.review || (w.review={keyProgress:"",nextPriorities:["","",""]});
+
+  const archived = weekKeys().filter(k=>state.weeks[k].archived).reverse();
+
+  return `
+  <div class="viewhead">
+    <div>
+      <span class="eyebrow">Week of ${weekLabel(w.start)}</span>
+      <h2>Weekly review</h2>
+      <p>Close the week, then archive it. Unfinished tasks move forward and recurring work starts fresh.</p>
+    </div>
+    ${w.archived?`<span class="flag good">Archived</span>`:`<button class="btn" data-act="archive">Mark this week closed</button>
+      <button class="btn primary" data-act="newWeek">Start next week</button>`}
+  </div>
+
+  <div class="rev">
+    <div style="display:grid;gap:14px">
+      <div class="card pad">
+        <span class="eyebrow">Completed this week · ${done.length}</span>
+        <ul class="revlist">${done.map(x=>`<li><span>${esc(x.name)}</span><span class="num" style="color:var(--muted)">${num(x.actual||x.hours)}h</span></li>`).join("") || `<li style="color:var(--faint)">Nothing marked complete yet.</li>`}</ul>
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">KPIs delivered</span>
+        ${(()=>{ const sx = kpiStats(w); const {ks,total,doneH} = sx;
+          if(!ks.length) return `<div class="empty">No KPIs were set for this week.</div>`;
+          return `<ul class="revlist">${ks.map(k=>{ const r=kresInfo(k);
+            return `<li><span style="color:${r.c==="var(--line)"?"var(--ink-2)":r.c}">${r.mark||"○"}</span><span style="flex:1;margin-left:9px">${esc(k.name)}</span><span class="num" style="color:var(--muted)">${num(k.hours)}h</span></li>`;
+          }).join("")}</ul><p class="hint" style="margin-top:8px">${sx.met} met · ${sx.partly} partly · ${sx.missed} missed · ${ks.length-sx.judged} not judged. ${num(doneH)} of ${num(total)} committed hours delivered.</p>`;
+        })()}
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">Content published · ${pub.length}</span>
+        <ul class="revlist">${pub.map(c=>`<li><span>${esc(c.title)}</span><span class="num" style="color:var(--muted)">${esc(c.platform)}</span></li>`).join("") || `<li style="color:var(--faint)">Nothing went live in this week's dates.</li>`}</ul>
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">Hours</span>
+        <div class="hcheck">
+          <div class="b"><div class="v num">${num(p)}</div><div class="l eyebrow">Planned</div></div>
+          <div class="b"><div class="v num">${num(a)}</div><div class="l eyebrow">Actual</div></div>
+          <div class="b"><div class="v num" style="color:${a>w.capacity?"var(--alert)":"var(--ink)"}">${a>=w.capacity?"+":""}${num(a-w.capacity)}</div><div class="l eyebrow">${a>w.capacity?"Over":"Remaining"}</div></div>
+        </div>
+        <p class="hint" style="margin-top:10px">Actual hours come from the "Actual hours" field on each task.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;gap:14px">
+      <div class="card pad">
+        <span class="eyebrow">Still outstanding · ${open.length}</span>
+        <ul class="revlist">${open.map(x=>`<li><span>${esc(x.name)}</span><span style="color:var(--muted)">${esc(x.status)}</span></li>`).join("") || `<li style="color:var(--faint)">Everything is closed out.</li>`}</ul>
+        <p class="hint" style="margin-top:8px">These carry into the next week when you archive.</p>
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">Key progress</span>
+        <textarea class="field" style="margin-top:9px" data-act="rev" data-k="keyProgress" placeholder="What actually moved forward this week?">${esc(rv.keyProgress||"")}</textarea>
+      </div>
+      <div class="card pad">
+        <span class="eyebrow">Next week's priorities · pick 3 to 5</span>
+        <div style="display:grid;gap:7px;margin-top:9px">
+          ${[0,1,2,3,4].map(i=>`<input class="field" data-act="revprio" data-i="${i}" value="${esc((rv.nextPriorities||[])[i]||"")}" placeholder="Priority ${i+1}">`).join("")}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="viewhead" style="margin-top:36px">
+    <div>
+      <span class="eyebrow">${archived.length} weeks on record</span>
+      <h2>Archive</h2>
+      <p>What she worked on, how the hours were used, and what was published — ready to report upward.</p>
+    </div>
+    <div class="rowbar" style="margin:0">
+      <button class="btn" data-act="exportData">Export data.json</button>
+      <button class="btn" data-act="importData">Import a file</button>
+      <button class="btn" data-act="pullRepo">Load the repo version</button>
+      <input type="file" id="importFile" accept="application/json,.json" style="display:none">
+    </div>
+  </div>
+  <div class="card pad" style="margin-bottom:16px">
+    <span class="eyebrow">How this copy syncs</span>
+    <p class="hint" style="margin:8px 0 0;max-width:78ch">
+      This planner saves to whichever browser you open it in, so you and Narindra each hold your own copy.
+      To hand work over: export <code>data.json</code>, send it, and the other person imports it.
+      To make a version official, commit that <code>data.json</code> into the repo — anyone can then pull it
+      with "Load the repo version", and git keeps the history of every week.
+    </p>
+  </div>
+  ${archived.map(k=>{
+    const aw = state.weeks[k];
+    const at = aw.tasks||[];
+    const ad = at.filter(x=>x.status==="Completed").length;
+    const openA = archOpen.has(k);
+    return `<div class="archrow">
+      <button class="archhead" data-act="toggleArch" data-arch="${k}">
+        <span class="w">${weekLabel(aw.start)}</span>
+        <span class="archstats">
+          <span>${num(actualH(aw))}h of ${num(aw.capacity)}</span>
+          <span>${ad} tasks completed</span>
+          <span>${at.length} planned</span>
+          <span>${openA?"Hide":"Open"}</span>
+        </span>
+      </button>
+      ${openA?`<div class="archbody">
+        <div class="rev" style="margin-top:16px">
+          <div>
+            <span class="eyebrow">Completed</span>
+            <ul class="revlist">${at.filter(x=>x.status==="Completed").map(x=>`<li><span>${esc(x.name)}</span><span class="num" style="color:var(--muted)">${num(x.actual||x.hours)}h</span></li>`).join("")||`<li style="color:var(--faint)">—</li>`}</ul>
+          </div>
+          <div>
+            <span class="eyebrow">Hours by workstream</span>
+            <ul class="revlist">${WS.map(ws=>{
+              const h = at.filter(x=>x.workstream===ws.id).reduce((s,x)=>s+(Number(x.actual||x.hours)||0),0);
+              return h?`<li><span><i class="dot" style="background:${ws.c};display:inline-block;margin-right:7px"></i>${esc(ws.name)}</span><span class="num" style="color:var(--muted)">${num(h)}h</span></li>`:"";
+            }).join("")}</ul>
+            <span class="eyebrow" style="display:block;margin-top:16px">Key progress</span>
+            <p style="margin:7px 0 0;font-size:13px">${esc((aw.review||{}).keyProgress||"—")}</p>
+          </div>
+        </div>
+        <button class="btn sm" style="margin-top:14px" data-act="copyReport" data-arch="${k}">Copy this week as a report</button>
+      </div>`:""}
+    </div>`;
+  }).join("") || `<div class="card empty">No archived weeks yet. Archive this one when it closes.</div>`}`;
+}
+
+
+/* ============================================================
+   In-page dialogs
+
+   Artifacts run in a sandboxed frame where window.confirm,
+   window.alert and window.prompt are blocked — they return
+   nothing and the calling code silently stops. Everything that
+   needs a yes/no or a text entry goes through here instead.
+   ============================================================ */
+let modal = null;
+let toastTimer = null;
+
+function ask(o){ modal = o; renderModal(); }
+
+function toast(msg){
+  const host = document.getElementById("toastHost");
+  host.innerHTML = `<div class="toast">${esc(msg)}</div>`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ host.innerHTML=""; }, 3200);
+}
+
+function renderModal(){
+  const host = document.getElementById("modalHost");
+  if(!modal){ host.innerHTML=""; return; }
+  const m = modal;
+  host.innerHTML = `
+    <div class="scrim" data-act="closeModal"></div>
+    <div class="modalwrap">
+      <div class="modal" role="dialog" aria-modal="true" aria-label="${esc(m.title)}">
+        <div class="mhead"><span class="eyebrow">${esc(m.eyebrow||"Confirm")}</span><h3>${esc(m.title)}</h3></div>
+        <div class="mbody">${esc(m.body||"")}</div>
+        ${m.choices ? `<div style="padding:12px 22px 0"><select class="field" id="modalChoice">${m.choices.map(c=>`<option value="${esc(c.v)}">${esc(c.n)}</option>`).join("")}</select></div>` : ""}
+        ${m.input!==undefined ? `<div style="padding:12px 22px 0"><textarea class="field" id="modalInput" style="min-height:120px">${esc(m.input)}</textarea></div>` : ""}
+        <div class="mfoot">
+          <button class="btn" data-act="${m.onNo?"cancelModal":"closeModal"}">${esc(m.cancelLabel||"Cancel")}</button>
+          <button class="btn primary" data-act="confirmModal">${esc(m.confirmLabel||"Confirm")}</button>
+        </div>
+      </div>
+    </div>`;
+  const f = host.querySelector("#modalInput") || host.querySelector("#modalChoice") || host.querySelector('[data-act="confirmModal"]');
+  if(f) f.focus();
+}
+
+function closeModal(){ modal=null; renderModal(); }
+
+function cancelModal(){
+  const fn = modal && modal.onNo;
+  modal = null; renderModal();
+  if(fn) fn();
+}
+
+function confirmModal(){
+  if(!modal) return;
+  const fn = modal.onYes;
+  const inp = document.getElementById("modalInput");
+  const sel = document.getElementById("modalChoice");
+  const val = inp ? inp.value : (sel ? sel.value : undefined);
+  modal = null; renderModal();
+  if(fn) fn(val);
+}
+
+/* ============================================================
+   Drawer / editor
+   ============================================================ */
+const SCHEMA = {
+  task: {title:"Task", fields:[
+    {k:"name",l:"Task name",t:"text",wide:1},
+    {k:"workstream",l:"Workstream",t:"select",o:WS.map(w=>w.id),labels:WS.map(w=>w.name),wide:1},
+    {k:"day",l:"Day",t:"select",o:DAYS.map(d=>d.k),labels:DAYS.map(d=>d.n)},
+    {k:"hours",l:"Estimated hours",t:"number"},
+    {k:"status",l:"Status",t:"select",o:STATUS.map(s=>s.n)},
+    {k:"priority",l:"Priority",t:"select",o:PRIORITIES},
+    {k:"due",l:"Due date",t:"date"},
+    {k:"actual",l:"Actual hours",t:"number"},
+    {k:"format",l:"Content format",t:"select",o:FORMATS},
+    {k:"platform",l:"Platform",t:"select",o:PLATFORMS},
+    {k:"owner",l:"Owner",t:"list",o:OWNERS},
+    {k:"recurrence",l:"Recurring or one-off",t:"select",o:RECUR},
+    {k:"link",l:"Link to file or document",t:"text",wide:1},
+    {k:"notes",l:"Notes",t:"textarea",wide:1}
+  ]},
+  library: {title:"Library entry", fields:(it)=>{
+    const base = [
+      {k:"type",l:"Type",t:"select",o:LIB_TYPES.map(t=>t.k),labels:LIB_TYPES.map(t=>t.n),wide:1},
+      {k:"title",l:it && it.type==="question" ? "The question, in their words" : "Title",t:"text",wide:1},
+      {k:"url",l:"Link",t:"text",wide:1}
+    ];
+    const tail = [
+      {k:"status",l:"Status",t:"select",o:LIB_STATUS},
+      {k:"priority",l:"Priority",t:"select",o:PRIORITIES},
+      {k:"notes",l:"Notes",t:"textarea",wide:1}
+    ];
+    const t = it ? it.type : "resource";
+    if(t==="community") return base.concat([
+      {k:"platform",l:"Platform",t:"select",o:PLATFORMS_COMM},
+      {k:"audience",l:"Who is actually there",t:"text"},
+      {k:"rules",l:"Participation rules — what gets you removed",t:"textarea",wide:1},
+      {k:"insight",l:"Recurring questions, pain points, how they word things",t:"textarea",wide:1}
+    ], tail);
+    if(t==="question") return base.concat([
+      {k:"cluster",l:"Topic cluster",t:"text"},
+      {k:"intent",l:"Search intent",t:"select",o:INTENT},
+      {k:"audience",l:"Audience",t:"text"},
+      {k:"covered",l:"Already answered on our site?",t:"select",o:COVERED},
+      {k:"format",l:"Recommended format",t:"select",o:["",...FORMATS]},
+      {k:"insight",l:"Where it came from — source or community",t:"text",wide:1}
+    ], tail);
+    if(t==="opportunity") return base.concat([
+      {k:"format",l:"What we should make",t:"select",o:FORMATS},
+      {k:"cluster",l:"Topic cluster",t:"text"},
+      {k:"audience",l:"Audience",t:"text"},
+      {k:"angle",l:"The answer, in one or two sentences",t:"textarea",wide:1}
+    ], tail);
+    if(t==="editorial") return base.concat([
+      {k:"audience",l:"Their audience",t:"text"},
+      {k:"contributed",l:"Accepts contributed content?",t:"select",o:["Unknown","Yes","No"]},
+      {k:"angle",l:"Opportunity or angle",t:"textarea",wide:1},
+      {k:"route",l:"Contact route",t:"text",wide:1}
+    ], tail);
+    return base.concat([{k:"audience",l:"Useful for",t:"text"}], tail);
+  }},
+  kpi: {title:"KPI", fields:[
+    {k:"name",l:"KPI",t:"text",wide:1},
+    {k:"deliverable",l:"Deliverable — what done actually looks like",t:"textarea",wide:1},
+    {k:"hours",l:"Time target (hours)",t:"number"},
+    {k:"workstream",l:"Workstream",t:"select",o:WS.map(w=>w.id),labels:WS.map(w=>w.name)},
+    {k:"result",l:"Result",t:"select",o:KRESULTS.map(r=>r.k),labels:KRESULTS.map(r=>r.label)},
+    {k:"notes",l:"Notes",t:"textarea",wide:1}
+  ]},
+  content: {title:"Content piece", fields:[
+    {k:"title",l:"Content title",t:"text",wide:1},
+    {k:"pillar",l:"Content pillar",t:"text"},
+    {k:"funnel",l:"Funnel stage",t:"select",o:FUNNEL},
+    {k:"format",l:"Format",t:"select",o:FORMATS},
+    {k:"platform",l:"Platform",t:"select",o:PLATFORMS},
+    {k:"stage",l:"Stage",t:"select",o:PIPE},
+    {k:"owner",l:"Owner",t:"list",o:OWNERS},
+    {k:"deadline",l:"Deadline",t:"date"},
+    {k:"publishDate",l:"Publication date",t:"date"},
+    {k:"caption",l:"Caption status",t:"select",o:CAPTION},
+    {k:"cta",l:"Call to action",t:"text"},
+    {k:"asset",l:"Asset or file link",t:"text",wide:1},
+    {k:"notes",l:"Notes",t:"textarea",wide:1}
+  ]},
+  idea: {title:"Idea", fields:[
+    {k:"idea",l:"Idea",t:"text",wide:1},
+    {k:"pillar",l:"Content pillar",t:"text"},
+    {k:"audience",l:"Audience",t:"text"},
+    {k:"funnel",l:"Funnel stage",t:"select",o:FUNNEL},
+    {k:"priority",l:"Priority",t:"select",o:PRIORITIES},
+    {k:"format",l:"Suggested format",t:"select",o:FORMATS},
+    {k:"platform",l:"Suggested platform",t:"select",o:PLATFORMS},
+    {k:"ref",l:"Inspiration or reference link",t:"text",wide:1},
+    {k:"notes",l:"Notes",t:"textarea",wide:1}
+  ]},
+  funnel: {title:"Funnel item", fields:[
+    {k:"title",l:"Content or gap",t:"text",wide:1},
+    {k:"stage",l:"Funnel stage",t:"select",o:FUNNEL},
+    {k:"kind",l:"Type",t:"select",o:FKIND,labels:["Existing content","Being created","Future idea","Named gap"]},
+    {k:"format",l:"Format",t:"select",o:FORMATS},
+    {k:"platform",l:"Platform",t:"select",o:PLATFORMS},
+    {k:"notes",l:"Notes",t:"textarea",wide:1}
+  ]},
+  kol: {title:"KOL or creator", fields:[
+    {k:"name",l:"Name",t:"text",wide:1},
+    {k:"specialty",l:"Profession or specialty",t:"text"},
+    {k:"org",l:"Organisation",t:"text"},
+    {k:"country",l:"Country",t:"text"},
+    {k:"audience",l:"Audience size",t:"text"},
+    {k:"instagram",l:"Instagram",t:"text"},
+    {k:"linkedin",l:"LinkedIn",t:"text"},
+    {k:"other",l:"Other channel",t:"text",wide:1},
+    {k:"why",l:"Why they are relevant to Baliston",t:"textarea",wide:1},
+    {k:"collab",l:"Potential collaboration",t:"textarea",wide:1},
+    {k:"priority",l:"Priority",t:"select",o:PRIORITIES},
+    {k:"status",l:"Outreach status",t:"select",o:KOL_STATUS},
+    {k:"contact",l:"Contact details",t:"text",wide:1},
+    {k:"notes",l:"Notes",t:"textarea",wide:1}
+  ]},
+  script: {title:"Script", fields:[
+    {k:"title",l:"Script title",t:"text",wide:1},
+    {k:"topic",l:"Topic",t:"text"},
+    {k:"audience",l:"Audience",t:"text"},
+    {k:"funnel",l:"Funnel stage",t:"select",o:FUNNEL},
+    {k:"videoType",l:"Video type",t:"text"},
+    {k:"length",l:"Estimated length",t:"text"},
+    {k:"status",l:"Status",t:"select",o:SCRIPT_STATUS},
+    {k:"hook",l:"Hook",t:"textarea",wide:1},
+    {k:"body",l:"Script",t:"textarea",wide:1,tall:1},
+    {k:"cta",l:"Call to action",t:"text",wide:1},
+    {k:"filmed",l:"Filmed?",t:"select",o:["No","Yes"]},
+    {k:"published",l:"Published?",t:"select",o:["No","Yes"]},
+    {k:"link",l:"Link to final content",t:"text",wide:1}
+  ]}
+};
+
+let drawer = null; // {type, id}
+
+function collectionOf(type){
+  if(type==="task") return state.tasks;
+  if(type==="kpi") return state.kpis;
+  if(type==="library") return state.library;
+  if(type==="content") return state.pipeline;
+  if(type==="idea") return state.ideas;
+  if(type==="funnel") return state.funnel;
+  if(type==="kol") return state.kols;
+  if(type==="script") return state.scripts;
+  return [];
+}
+const findItem = (type,id) => collectionOf(type).find(x=>x.id===id);
+
+function renderDrawer(){
+  const host = document.getElementById("drawerHost");
+  if(!drawer){ host.innerHTML=""; return; }
+  const sc = SCHEMA[drawer.type];
+  const it = findItem(drawer.type, drawer.id);
+  if(!it){ drawer=null; host.innerHTML=""; return; }
+  const schemaFields = typeof sc.fields === "function" ? sc.fields(it) : sc.fields;
+
+  const fields = schemaFields.map(f=>{
+    const v = it[f.k] ?? "";
+    let input;
+    if(f.t==="select"){
+      const labels = f.labels || f.o;
+      input = `<select class="field" data-fk="${f.k}">${f.o.map((o,i)=>`<option value="${esc(o)}"${o===v?" selected":""}>${esc(labels[i])}</option>`).join("")}</select>`;
+    } else if(f.t==="textarea"){
+      input = `<textarea class="field" data-fk="${f.k}"${f.tall?' style="min-height:170px"':""}>${esc(v)}</textarea>`;
+    } else if(f.t==="number"){
+      input = `<input class="field num" type="number" min="0" step="0.25" data-fk="${f.k}" value="${esc(v)}">`;
+    } else if(f.t==="date"){
+      input = `<input class="field" type="date" data-fk="${f.k}" value="${esc(v)}">`;
+    } else if(f.t==="list"){
+      input = `<input class="field" list="dl-${f.k}" data-fk="${f.k}" value="${esc(v)}"><datalist id="dl-${f.k}">${f.o.map(o=>`<option value="${esc(o)}">`).join("")}</datalist>`;
+    } else {
+      input = `<input class="field" type="text" data-fk="${f.k}" value="${esc(v)}">`;
+    }
+    return `<div class="f ${f.wide?"wide":""}"><label>${esc(f.l)}</label>${input}</div>`;
+  }).join("");
+
+  host.innerHTML = `
+    <div class="scrim" data-act="closeDrawer"></div>
+    <aside class="drawer" role="dialog" aria-label="Edit ${esc(sc.title)}">
+      <div class="dhead">
+        <div><span class="eyebrow">Edit</span><h3>${esc(sc.title)}</h3></div>
+        <button class="btn ghost" data-act="closeDrawer" aria-label="Close">Close</button>
+      </div>
+      <div class="dbody"><div class="fgrid">${fields}</div></div>
+      <div class="dfoot">
+        <button class="btn danger" data-act="deleteItem">Delete</button>
+        <button class="btn primary" data-act="closeDrawer">Done</button>
+      </div>
+    </aside>`;
+
+  host.querySelectorAll("[data-fk]").forEach(el=>{
+    el.addEventListener("input", e=>{
+      const k = e.target.dataset.fk;
+      const f = (typeof sc.fields==="function" ? sc.fields(it) : sc.fields).find(x=>x.k===k);
+      it[k] = f.t==="number" ? (Number(e.target.value)||0) : e.target.value;
+      if(drawer.type==="kpi" && k==="result") it.done = (it.result==="met");
+      save();
+      if(drawer.type==="library" && k==="type"){ renderMain(); renderDrawer(); return; }
+      renderMain();
+    });
+  });
+  const first = host.querySelector(".field"); if(first) first.focus();
+}
+
+function openDrawer(type,id){ drawer={type,id}; renderDrawer(); }
+function closeDrawer(){ drawer=null; renderDrawer(); }
+
+/* ============================================================
+   Actions
+   ============================================================ */
+function newTask(day){
+  const t = {id:uid(),day:day||"mon",workstream:"content",name:"New task",hours:1,actual:0,
+    status:"Not Started",priority:"Medium",due:"",format:"Other",platform:"Instagram",
+    owner:"Narindra",recurrence:"One-off",link:"",notes:""};
+  t.weekId = state.currentWeek; state.tasks.push(t); save(); render(); openDrawer("task",t.id);
+}
+function newKpi(){
+  const k = {id:uid(), weekId:state.currentWeek, name:"New KPI", deliverable:"",
+    hours:1, workstream:"content", done:false, notes:""};
+  state.kpis.push(k); save(); render(); openDrawer("kpi",k.id);
+}
+function kpiMenu(){
+  const w = week();
+  const prev = weekKeys().filter(k=>k < w.start).slice(-1)[0];
+  const n = (w.kpis||[]).length;
+  const choices = KPI_SETS.map(x=>({v:x.id, n:x.label}));
+  if(prev && state.kpis.some(k=>k.weekId===prev)) choices.unshift({v:"__last", n:"Copy last week's set, results cleared"});
+  ask({
+    eyebrow:"KPI set for this week only",
+    title:"Set the KPIs for "+weekLabel(w.start),
+    body:(n ? "This replaces the "+n+" KPI"+(n===1?"":"s")+" currently on this week. "
+            : "This week has no KPIs yet. ")
+      + "Only "+weekLabel(w.start)+" is affected — every other week keeps its own set and its own results, so your record of what was done stays intact.",
+    choices, confirmLabel:"Set them",
+    onYes:(v)=>{
+      if(v==="__last") copyLastKpis(prev);
+      else loadKpis(v);
+    }
+  });
+}
+
+function copyLastKpis(prevKey){
+  const src = state.kpis.filter(k=>k.weekId===prevKey);
+  if(!src.length){ toast("Last week has no KPIs to copy."); return; }
+  const go = ()=>{
+    (week().kpis||[]).forEach(k=>{ const i=state.kpis.findIndex(x=>x.id===k.id); if(i>-1) state.kpis.splice(i,1); });
+    src.forEach(k=>state.kpis.push({...k, id:uid(), weekId:state.currentWeek, result:"", done:false, notes:""}));
+    save(); render(); toast("Copied "+src.length+" KPIs from "+weekLabel(prevKey)+", results cleared.");
+  };
+  if(!(week().kpis||[]).length){ go(); return; }
+  ask({eyebrow:"KPIs", title:"Replace this week's KPIs with last week's?",
+    body:"The "+(week().kpis||[]).length+" currently here will be removed. Targets and wording carry over; results start clear.",
+    confirmLabel:"Copy them over", onYes:go});
+}
+
+function loadKpis(setId){
+  const wk = state.currentWeek;
+  (week().kpis||[]).forEach(k=>{ const i = state.kpis.findIndex(x=>x.id===k.id); if(i>-1) state.kpis.splice(i,1); });
+  makeKpis(wk, setId).forEach(k=>state.kpis.push(k));
+  save(); render();
+  toast(kpiSet(setId).label.split(" — ")[0]+" set loaded for "+weekLabel(wk)+".");
+}
+
+function loadWeekPlan(){
+  const existing = (week().tasks||[]);
+  const go = (clear)=>{
+    if(clear) existing.forEach(t=>{ const i = state.tasks.findIndex(x=>x.id===t.id); if(i>-1) state.tasks.splice(i,1); });
+    makeWeekPlan(state.currentWeek).forEach(t=>state.tasks.push(t));
+    save(); render(); toast("This week's plan loaded — 14 hours across 12 tasks.");
+  };
+  if(!existing.length){ go(false); return; }
+  ask({
+    eyebrow:"Weekly plan", title:"Load the plan from the brief?",
+    body:"This adds this week\u2019s tasks from the brief. You have "+existing.length+" already in "+weekLabel(week().start)+" — replace them, or keep both? Other weeks are never touched.",
+    confirmLabel:"Replace what's here", cancelLabel:"Keep both",
+    onYes:()=>go(true), onNo:()=>go(false)
+  });
+}
+function newContent(stage){
+  const c = {id:uid(),title:"New content piece",pillar:"",funnel:"Education",format:"Static Post",
+    platform:"Instagram",owner:"Narindra",stage:stage||"Idea",deadline:"",publishDate:"",cta:"",asset:"",caption:"Not started",notes:""};
+  state.pipeline.push(c); save(); render(); openDrawer("content",c.id);
+}
+function newLib(){
+  const type = libFilter==="all" ? "resource" : libFilter;
+  const it = {id:uid(), type, title:"", url:"", notes:"", status:"New", priority:"Medium",
+    audience:"", cluster:"", intent:"", covered:"", platform:"", rules:"", insight:"",
+    angle:"", route:"", contributed:"", format:""};
+  state.library.unshift(it); save(); render(); openDrawer("library", it.id);
+}
+function newIdea(){
+  const i = {id:uid(),idea:"New idea",pillar:"",audience:"",funnel:"Awareness",format:"Reel / Short Video",
+    platform:"Instagram",priority:"Medium",notes:"",ref:""};
+  state.ideas.unshift(i); save(); render(); openDrawer("idea",i.id);
+}
+function newFunnel(stage){
+  const f = {id:uid(),stage:stage||"Awareness",kind:"Idea",title:"New item",format:"Other",platform:"Instagram",notes:""};
+  state.funnel.push(f); save(); render(); openDrawer("funnel",f.id);
+}
+function loadKolList(){
+  const have = new Set(state.kols.map(k=>(k.name||"").trim().toLowerCase()));
+  const add = KOL_LIST.filter(k=>!have.has(k.name.trim().toLowerCase()));
+  if(!add.length){ toast("Every name on the outreach list is already in the tracker."); return; }
+  ask({
+    eyebrow:"Outreach list",
+    title:"Add "+add.length+" candidate"+(add.length===1?"":"s")+"?",
+    body:"These come from the KOL & Social Outreach Target List v0.2, with the France entries left out. Nothing already in your tracker is changed or removed.",
+    confirmLabel:"Add "+add.length,
+    onYes:()=>{
+      add.forEach(k=>state.kols.push(Object.assign({id:uid()},k)));
+      save(); render();
+      toast(add.length+" candidates added.");
+    }
+  });
+}
+function newKol(){
+  const k = {id:uid(),name:"New candidate",specialty:"",org:"",country:"",instagram:"",linkedin:"",other:"",
+    audience:"",why:"",collab:"",priority:"Medium",contact:"",status:"Researching",notes:""};
+  state.kols.unshift(k); save(); render(); openDrawer("kol",k.id);
+}
+function newScript(){
+  const s = {id:uid(),title:"New script",topic:"",audience:"Patients",funnel:"Education",videoType:"Educational Reel",
+    length:"45s",hook:"",body:"",cta:"",status:"Idea",filmed:"No",published:"No",link:""};
+  state.scripts.unshift(s); save(); render(); openDrawer("script",s.id);
+}
+
+function ideaToWeek(id){
+  const i = state.ideas.find(x=>x.id===id); if(!i) return;
+  const t = {id:uid(),day:"mon",workstream:"content",name:i.idea,hours:1,actual:0,status:"Not Started",
+    priority:i.priority,due:"",format:i.format,platform:i.platform,owner:"Narindra",
+    recurrence:"One-off",link:i.ref||"",notes:i.notes||""};
+  t.weekId = state.currentWeek; state.tasks.push(t);
+  state.ideas = state.ideas.filter(x=>x.id!==id);
+  state.tab="week"; save(); render(); openDrawer("task",t.id);
+}
+function ideaToPipe(id){
+  const i = state.ideas.find(x=>x.id===id); if(!i) return;
+  const c = {id:uid(),title:i.idea,pillar:i.pillar,funnel:i.funnel,format:i.format,platform:i.platform,
+    owner:"Narindra",stage:"Briefed",deadline:"",publishDate:"",cta:"",asset:"",caption:"Not started",notes:i.notes||""};
+  state.pipeline.push(c);
+  state.funnel.push({id:uid(),stage:i.funnel,kind:"Creating",title:i.idea,format:i.format,platform:i.platform,notes:""});
+  state.ideas = state.ideas.filter(x=>x.id!==id);
+  state.tab="pipeline"; save(); render(); openDrawer("content",c.id);
+}
+
+function stepWeek(dir){
+  const keys = weekKeys();
+  const i = keys.indexOf(state.currentWeek);
+  const j = i + dir;
+  if(j < 0){ toast("That's the earliest week on record."); return; }
+  if(j >= keys.length){
+    if(dir>0) newWeek();
+    return;
+  }
+  setCurrentWeek(keys[j]); render();
+}
+
+/* Creates the following week alongside the current one. Nothing is archived,
+   nothing is deleted, and the week you were on keeps every task, KPI and result. */
+function newWeek(){
+  const w = week();
+  const nextStart = addDays(w.start, 7);
+  if(state.weeks[nextStart]){ setCurrentWeek(nextStart); render(); toast("Already there."); return; }
+
+  const openTasks = (w.tasks||[]).filter(t=>t.status!=="Completed").length;
+  const recurring = (w.tasks||[]).filter(t=>t.status==="Completed" && t.recurrence==="Recurring").length;
+  const hasKpis = (w.kpis||[]).length;
+
+  ask({
+    eyebrow:"New week",
+    title:"Start the week of "+weekLabel(nextStart)+"?",
+    body:"Nothing is removed from "+weekLabel(w.start)+" — it stays exactly as it is, and you can come back to it any time."
+      + (openTasks||recurring||hasKpis ? "\n\nCarried into the new week:" : "\n\nThe new week starts empty.")
+      + (openTasks ? "\n  • "+openTasks+" unfinished task"+(openTasks===1?"":"s") : "")
+      + (recurring ? "\n  • "+recurring+" recurring task"+(recurring===1?"":"s")+", reset to Not Started" : "")
+      + (hasKpis ? "\n  • the same "+hasKpis+" KPIs, with results cleared" : ""),
+    confirmLabel:"Start the new week",
+    onYes:()=>{
+      const nextPr = ((w.review||{}).nextPriorities||[]).filter(Boolean);
+      state.weeks[nextStart] = hydrateWeek({
+        id:nextStart, start:nextStart, capacity:w.capacity, archived:false,
+        priorities: nextPr, review:{keyProgress:"", nextPriorities:["","",""]}
+      });
+      (w.tasks||[]).forEach(t=>{
+        if(t.status!=="Completed") state.tasks.push({...t, id:uid(), actual:0, weekId:nextStart});
+        else if(t.recurrence==="Recurring") state.tasks.push({...t, id:uid(), actual:0, status:"Not Started", due:"", weekId:nextStart});
+      });
+      (w.kpis||[]).forEach(k=>state.kpis.push({...k, id:uid(), weekId:nextStart, result:"", done:false, notes:""}));
+      setCurrentWeek(nextStart);
+      state.tab = "week";
+      save(); render();
+      toast("Week of "+weekLabel(nextStart)+" created. "+weekLabel(w.start)+" is untouched.");
+    }
+  });
+}
+
+function archiveWeek(){
+  const w = week();
+  ask({
+    eyebrow:"Close the week",
+    title:"Mark "+weekLabel(w.start)+" as closed?",
+    body:"It stays fully readable in the Archive and in the week picker — closing only marks it done so it is clear which week is live. Nothing is deleted.\n\nUse \u201c+ Week\u201d to start the next one.",
+    confirmLabel:"Mark it closed",
+    onYes:()=>{
+      w.archived = true;
+      const next = addDays(w.start,7);
+      save(); render();
+      toast(state.weeks[next] ? "Closed. The next week is ready." : "Closed. Use + Week to start the next one.");
+    }
+  });
+}
+
+function copyKpiReport(){
+  const w = week();
+  const prev = weekKeys().filter(k=>k < w.start).slice(-1)[0];
+  const block = (wk)=>{
+    const ww = state.weeks[wk]; if(!ww) return "";
+    const st = kpiStats(ww);
+    if(!st.ks.length) return "";
+    const mark = k => ({met:"[x] MET", partly:"[~] PARTLY", missed:"[ ] MISSED"})[kres(k)] || "[ ] not judged";
+    return ["Week of "+weekLabel(wk),
+      st.met+" of "+st.ks.length+" met · "+num(st.doneH)+" of "+num(st.total)+" committed hours delivered",
+      ...st.ks.map(k=>"  "+mark(k)+" — "+k.name+" ("+num(k.hours)+"h)"),
+      ((ww.review||{}).keyProgress ? "\nKey progress: "+ww.review.keyProgress : "")
+    ].join("\n");
+  };
+  const txt = ["BALISTON HEALTH — CONTENT CREATOR KPIs", "",
+    prev?"LAST WEEK\n"+block(prev)+"\n":"", "THIS WEEK\n"+block(w.start)].join("\n");
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>toast("Both weeks copied — paste it into your update."),
+      ()=>ask({eyebrow:"Report", title:"Copy this", body:"", input:txt, confirmLabel:"Done", onYes:()=>{}}));
+  } else ask({eyebrow:"Report", title:"Copy this", body:"", input:txt, confirmLabel:"Done", onYes:()=>{}});
+}
+
+function copyReport(k){
+  const w = state.weeks[k]; if(!w) return;
+  const done = (w.tasks||[]).filter(t=>t.status==="Completed");
+  const byWs = WS.map(ws=>{
+    const h = (w.tasks||[]).filter(t=>t.workstream===ws.id).reduce((s,t)=>s+(Number(t.actual||t.hours)||0),0);
+    return h ? `  ${ws.name}: ${num(h)}h` : "";
+  }).filter(Boolean).join("\n");
+  const txt = [
+    `Baliston Health — content week ${weekLabel(w.start)}`,
+    `Hours: ${num(actualH(w))} of ${num(w.capacity)} available`,
+    ``,
+    `Hours by workstream:`, byWs, ``,
+    `Completed (${done.length}):`,
+    ...done.map(t=>`  • ${t.name} — ${num(t.actual||t.hours)}h`),
+    ``,
+    `Key progress: ${(w.review||{}).keyProgress||"—"}`
+  ].join("\n");
+  const fallback = () => ask({
+    eyebrow:"Weekly report", title:"Copy this report",
+    body:"Select the text below and copy it.", input:txt,
+    confirmLabel:"Done", cancelLabel:"Close", onYes:()=>{}
+  });
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>toast("Report copied."), fallback);
+  } else { fallback(); }
+}
+
+function exportData(){
+  const blob = new Blob([JSON.stringify(serialise(),null,2)],{type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "data.json";
+  a.click();
+}
+
+function importData(){
+  const inp = document.getElementById("importFile");
+  if(!inp) return;
+  inp.value = "";
+  inp.onchange = () => {
+    const f = inp.files && inp.files[0];
+    if(!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let p;
+      try{ p = JSON.parse(r.result); }
+      catch(err){ toast("That file isn't a valid planner backup."); return; }
+      if(!p || !p.weeks){ toast("That file isn't a planner backup — no weeks found in it."); return; }
+      ask({
+        eyebrow:"Import", title:"Replace everything with this backup?",
+        body:"This cannot be undone. Export the current version first if you might need it.",
+        confirmLabel:"Replace everything",
+        onYes:()=>{
+          state = hydrate(p); state.tab = "week";
+          if(!state.weeks[state.currentWeek]) state.currentWeek = weekKeys().slice(-1)[0];
+          save(); render(); toast("Backup imported.");
+        }
+      });
+    };
+    r.readAsText(f);
+  };
+  inp.click();
+}
+
+function editPriorities(){
+  const w = week();
+  const cur = (w.priorities||[]).join("\n");
+  ask({
+    eyebrow:"This week", title:"Priorities",
+    body:"One per line. The first five are kept.",
+    input:cur, confirmLabel:"Save priorities",
+    onYes:(v)=>{
+      w.priorities = String(v||"").split("\n").map(x=>x.trim()).filter(Boolean).slice(0,5);
+      save(); render();
+    }
+  });
+}
+
+/* ============================================================
+   Render + events
+   ============================================================ */
+function renderTabs(){
+  document.getElementById("tabs").innerHTML = TABS.map(t=>{
+    const c = tabCount(t.k);
+    return `<button class="tab" role="tab" aria-selected="${state.tab===t.k}" data-act="go" data-tab="${t.k}">${t.n}${c!==""?`<span class="cnt num">${c}</span>`:""}</button>`;
+  }).join("");
+
+  const keys = weekKeys().reverse();
+  const now = mondayOf(new Date());
+  document.getElementById("weekPick").innerHTML = keys.map(k=>{
+    const diff = Math.round((parse(k) - parse(now)) / 604800000);
+    const rel = diff===0 ? " · this week" : diff===-1 ? " · last week"
+              : diff===1 ? " · next week" : diff<0 ? " · "+(-diff)+" weeks ago" : " · in "+diff+" weeks";
+    return `<option value="${k}"${k===state.currentWeek?" selected":""}>${weekLabel(k)}${rel}</option>`;
+  }).join("");
+}
+
+function renderMain(){
+  const v = document.getElementById("view");
+  const y = window.scrollY;
+  v.innerHTML =
+    state.tab==="dash" ? viewDash() :
+    state.tab==="week" ? viewWeek() :
+    state.tab==="kpis" ? viewKpis() :
+    state.tab==="pipeline" ? viewPipeline() :
+    state.tab==="funnel" ? viewFunnel() :
+    state.tab==="library" ? viewLibrary() :
+    state.tab==="ideas" ? viewIdeas() :
+    state.tab==="kols" ? viewKols() :
+    state.tab==="scripts" ? viewScripts() : viewReview();
+  window.scrollTo(0,y);
+  renderTabs();
+}
+function render(){ renderMain(); renderDrawer(); }
+
+/* ---- clicks ---- */
+document.addEventListener("click", e=>{
+  const el = e.target.closest("[data-act]");
+  if(!el) return;
+  const a = el.dataset.act;
+  const id = el.dataset.id;
+  switch(a){
+    case "go": state.tab = el.dataset.tab; save(); render(); break;
+    case "newTask": newTask(el.dataset.day); break;
+    case "newContent": newContent(el.dataset.stage); break;
+    case "newKpi": newKpi(); break;
+    case "loadKpis": loadKpis(); break;
+    case "loadWeekPlan": loadWeekPlan(); break;
+    case "openKpi": openDrawer("kpi", id); break;
+    case "cycleKpi": {
+      const k = state.kpis.find(x=>x.id===id);
+      if(k){ cycleKres(k); save(); renderMain(); }
+      break;
+    }
+    case "kpiMenu": kpiMenu(); break;
+    case "copyKpiReport": copyKpiReport(); break;
+    case "gotoWeek": { setCurrentWeek(el.dataset.w); render(); break; }
+    case "deleteKpi": {
+      const k = state.kpis.find(x=>x.id===id);
+      if(!k) break;
+      ask({eyebrow:"Remove", title:"Remove \u201c"+k.name+"\u201d?",
+        body:"It comes off this week's KPI list. Other weeks are unaffected.",
+        confirmLabel:"Remove", onYes:()=>{
+          const i = state.kpis.findIndex(x=>x.id===id);
+          if(i>-1) state.kpis.splice(i,1);
+          save(); render(); toast("Removed.");
+        }});
+      break;
+    }
+    case "newIdea": newIdea(); break;
+    case "newLib": newLib(); break;
+    case "openLib": openDrawer("library", id); break;
+    case "libFilter": { libFilter = el.dataset.t; renderMain(); break; }
+    case "newFunnel": newFunnel(el.dataset.stage); break;
+    case "newKol": newKol(); break;
+    case "loadKolList": loadKolList(); break;
+    case "newScript": newScript(); break;
+    case "openTask": openDrawer("task",id); break;
+    case "openContent": openDrawer("content",id); break;
+    case "openIdea": openDrawer("idea",id); break;
+    case "openFunnel": openDrawer("funnel",id); break;
+    case "openKol": openDrawer("kol",id); break;
+    case "openScript": openDrawer("script",id); break;
+    case "closeDrawer": closeDrawer(); break;
+    case "closeModal": closeModal(); break;
+    case "confirmModal": confirmModal(); break;
+    case "cancelModal": cancelModal(); break;
+    case "deleteItem": {
+      if(!drawer) break;
+      const d = {type:drawer.type, id:drawer.id};
+      ask({
+        eyebrow:"Delete", title:"Delete this permanently?",
+        body:"It won't be recoverable.", confirmLabel:"Delete",
+        onYes:()=>{
+          const col = (d.type==="library") ? state.library
+            : (d.type==="kpi") ? state.kpis
+            : (d.type==="task") ? state.tasks
+            : d.type==="content" ? state.pipeline
+            : d.type==="idea" ? state.ideas
+            : d.type==="funnel" ? state.funnel
+            : d.type==="kol" ? state.kols : state.scripts;
+          const ix = col.findIndex(x=>x.id===d.id);
+          if(ix>-1) col.splice(ix,1);
+          closeDrawer(); save(); render(); toast("Deleted.");
+        }
+      });
+      break;
+    }
+    case "ideaToWeek": ideaToWeek(id); break;
+    case "ideaToPipe": ideaToPipe(id); break;
+    case "archive": archiveWeek(); break;
+    case "newWeek": newWeek(); break;
+    case "stepWeek": stepWeek(Number(el.dataset.d)); break;
+    case "editPriorities": editPriorities(); break;
+    case "exportData": exportData(); break;
+    case "importData": importData(); break;
+    case "pullRepo": pullRepo(); break;
+    case "saveCfg": {
+      const u = document.getElementById("cfgUrl").value.trim();
+      const k = document.getElementById("cfgKey").value.trim();
+      if(!u || !k){ toast("Both the project URL and the key are needed."); break; }
+      if(/service_role|sb_secret/.test(k)){ toast("That's the secret key — use the publishable one."); break; }
+      setCfg(u,k); netError=""; boot(); break;
+    }
+    case "useLocal": { clearCfg(); MODE="local"; boot(); break; }
+    case "copySql": {
+      const box = document.getElementById("sqlBox");
+      const txt = box ? box.value : setupSql();
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(
+          ()=>toast("SQL copied. Paste it into the Supabase SQL Editor."),
+          ()=>{ box.select(); toast("Press Ctrl+C or Cmd+C to copy."); });
+      } else if(box){ box.select(); toast("Press Ctrl+C or Cmd+C to copy."); }
+      break;
+    }
+    case "recheck": { toast("Checking…"); boot(); break; }
+    case "copyLink": {
+      const l = shareLink();
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(l).then(()=>toast("Link copied — send it to whoever needs access."),
+          ()=>ask({eyebrow:"Share", title:"Copy this link", body:"", input:l, confirmLabel:"Done", onYes:()=>{}}));
+      } else {
+        ask({eyebrow:"Share", title:"Copy this link", body:"", input:l, confirmLabel:"Done", onYes:()=>{}});
+      }
+      break;
+    }
+    case "setName": { askName(); break; }
+    case "account": {
+      ask({
+        eyebrow: MODE==="cloud" ? "Shared planner" : "This browser only",
+        title: MODE==="cloud" ? "Live · public link" : "Not connected",
+        body: MODE==="cloud"
+          ? "Anyone with this web address can open and edit the planner. No sign-in. Copy the link and send it to whoever needs it."
+          : "No database connected, so this planner saves to this browser and nobody else sees it.",
+        confirmLabel: MODE==="cloud" ? "Copy the link" : "Close",
+        cancelLabel: "Close",
+        onYes: ()=>{ if(MODE==="cloud") document.getElementById("copyLinkHidden").click(); }
+      });
+      break;
+    }
+  }
+});
+
+/* ---- inputs outside the drawer ---- */
+document.addEventListener("input", e=>{
+  const el = e.target.closest("[data-act]");
+  if(!el) return;
+  if(el.dataset.act==="setCap"){ week().capacity = Number(el.value)||0; save(); renderMain(); }
+  if(el.dataset.act==="rev"){ week().review[el.dataset.k] = el.value; save(); }
+  if(el.dataset.act==="revprio"){
+    const rv = week().review; rv.nextPriorities = rv.nextPriorities||[];
+    rv.nextPriorities[Number(el.dataset.i)] = el.value; save();
+  }
+});
+
+function setCurrentWeek(k){
+  state.currentWeek = k;
+  try{ localStorage.setItem(WEEK_KEY, k); }catch(e){}
+}
+document.getElementById("weekPick").addEventListener("change", e=>{
+  setCurrentWeek(e.target.value); render();
+});
+
+/* ---- keyboard ---- */
+document.addEventListener("keydown", e=>{
+  if(e.key==="Escape" && modal) { closeModal(); return; }
+  if(e.key==="Escape" && drawer) closeDrawer();
+  if(e.key==="Enter" || e.key===" "){
+    const el = document.activeElement;
+    if(el && el.matches('.task,.kcard,.fitem')){ e.preventDefault(); el.click(); }
+  }
+});
+
+/* ---- drag and drop ---- */
+let dragging = null;
+document.addEventListener("dragstart", e=>{
+  const el = e.target.closest("[data-drag]");
+  if(!el) return;
+  dragging = {type:el.dataset.drag, id:el.dataset.id};
+  e.dataTransfer.effectAllowed = "move";
+  try{ e.dataTransfer.setData("text/plain", el.dataset.id); }catch(_){}
+});
+document.addEventListener("dragover", e=>{
+  const z = e.target.closest("[data-drop]");
+  if(!z || !dragging) return;
+  const ok = (z.dataset.drop==="day" && dragging.type==="task")
+          || (z.dataset.drop==="pipe" && dragging.type==="content")
+          || (z.dataset.drop==="funnel" && dragging.type==="funnel");
+  if(!ok) return;
+  e.preventDefault();
+  document.querySelectorAll(".dragover").forEach(n=>n.classList.remove("dragover"));
+  z.classList.add("dragover");
+});
+document.addEventListener("dragleave", e=>{
+  const z = e.target.closest("[data-drop]");
+  if(z) z.classList.remove("dragover");
+});
+document.addEventListener("drop", e=>{
+  const z = e.target.closest("[data-drop]");
+  document.querySelectorAll(".dragover").forEach(n=>n.classList.remove("dragover"));
+  if(!z || !dragging) return;
+  e.preventDefault();
+  if(z.dataset.drop==="day" && dragging.type==="task"){
+    const t = state.tasks.find(x=>x.id===dragging.id); if(t) t.day = z.dataset.day;
+  }
+  if(z.dataset.drop==="pipe" && dragging.type==="content"){
+    const c = state.pipeline.find(x=>x.id===dragging.id);
+    if(c){ c.stage = z.dataset.stage; if(c.stage==="Published" && !c.publishDate) c.publishDate = TODAY; }
+  }
+  if(z.dataset.drop==="funnel" && dragging.type==="funnel"){
+    const f = state.funnel.find(x=>x.id===dragging.id); if(f) f.stage = z.dataset.stage;
+  }
+  dragging = null; save(); renderMain();
+});
+document.addEventListener("dragend", ()=>{ dragging=null; document.querySelectorAll(".dragover").forEach(n=>n.classList.remove("dragover")); });
+
+boot();
+</script>
+</body>
+</html>
