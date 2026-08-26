@@ -73,6 +73,11 @@ header.top{
 }
 .brand .sub{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
 .topctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.weeknav{display:inline-flex;align-items:center;gap:2px;}
+.navbtn{width:26px;height:28px;border:1px solid var(--line);background:var(--surface);
+  border-radius:var(--r);color:var(--muted);font-size:15px;line-height:1;}
+.navbtn:hover{border-color:var(--ink-2);color:var(--ink);}
+.weeknav select{border-radius:var(--r);}
 .savechip{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);white-space:nowrap;}
 .savechip.on{color:var(--ok);}
 
@@ -344,6 +349,37 @@ textarea.field.sql{font-family:var(--mono);font-size:11px;line-height:1.55;min-h
 .kpibar{display:flex;gap:2px;height:6px;margin-top:16px;}
 .kpibar i{display:block;height:100%;border-radius:1px;transition:background .18s;}
 .kpilist{display:grid;gap:8px;}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;}
+.segbtn{padding:7px 13px;font-size:12.5px;color:var(--muted);background:var(--surface);border-right:1px solid var(--line);}
+.segbtn:last-child{border-right:none;}
+.segbtn:hover{color:var(--ink);}
+.segbtn.on{background:var(--ink);color:#fff;}
+.histwrap table{min-width:640px;}
+.histtable th.thname{text-align:left;font-family:var(--sans);font-size:12.5px;font-weight:500;
+  text-transform:none;letter-spacing:0;color:var(--ink);padding:11px 14px;white-space:normal;
+  min-width:210px;border-bottom:1px solid var(--line-soft);vertical-align:middle;}
+.histtable th.thname .dot{display:inline-block;margin-right:9px;vertical-align:middle;}
+.histtable th.wkcol{text-align:center;padding:11px 12px;min-width:110px;}
+.wkbtn{display:block;width:100%;font-family:var(--sans);font-size:12px;font-weight:600;color:var(--ink);
+  text-transform:none;letter-spacing:-.01em;}
+.wkbtn:hover{color:var(--accent);text-decoration:underline;}
+.wkstat{display:block;font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:3px;letter-spacing:.04em;}
+.histtable th.wkcol.now,.histtable td.cell.now{background:var(--accent-soft);}
+.histtable td.cell{text-align:center;padding:9px 12px;border-bottom:1px solid var(--line-soft);}
+.cellbtn{display:inline-flex;align-items:center;gap:7px;padding:3px 8px;border-radius:2px;}
+.cellbtn:hover{background:var(--line-soft);}
+.cellbtn i{font-style:normal;font-size:12px;}
+.cellbtn .num{font-size:10.5px;color:var(--muted);}
+.cell.none{color:var(--line);}
+.renamed{display:block;font-size:9.5px;color:var(--faint);margin-top:3px;line-height:1.3;}
+.totalrow th,.totalrow td{border-top:1px solid var(--line);border-bottom:none;padding-top:12px;}
+.totalrow strong{font-family:var(--serif);font-size:17px;font-weight:400;}
+.lastweek{margin-bottom:14px;border-left:3px solid var(--line);}
+.lwhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.lwline{font-size:13px;color:var(--ink-2);margin-top:5px;}
+.lwgrid{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;}
+.lwitem{font-size:12px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;}
+.lwitem i{font-style:normal;font-size:11px;}
 .kpi{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ws);
   border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;
   gap:14px;align-items:start;}
@@ -359,6 +395,14 @@ textarea.field.sql{font-family:var(--mono);font-size:11px;line-height:1.55;min-h
 .kpi.r-met .tick{background:#2E6B4F;border-color:#2E6B4F;}
 .kpi.r-partly .tick{background:#A8641B;border-color:#A8641B;}
 .kpi.r-missed .tick{background:#9E3A2C;border-color:#9E3A2C;}
+.kpibuilds{margin:8px 0 0;font-size:12px;line-height:1.5;color:var(--muted);}
+.kpibuilds span{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);margin-right:8px;}
+.prevlink{display:inline-flex;align-items:center;gap:8px;margin-top:9px;padding:6px 10px;
+  background:var(--surface-2);border:1px solid var(--line-soft);border-radius:2px;
+  font-size:11.5px;color:var(--ink-2);text-align:left;line-height:1.4;}
+.prevlink:hover{border-color:var(--ink-2);}
+.prevlink i{font-style:normal;font-size:11px;flex:none;}
 .reslabel{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:9px;
   letter-spacing:.1em;text-transform:uppercase;color:var(--res);}
 .reskey{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;}
@@ -395,6 +439,14 @@ ul.crit.review li:before{background:var(--warn);}
 .guard ul.crit li:before{background:var(--warn);}
 @media (max-width:720px){ .briefgrid{grid-template-columns:1fr;} }
 
+.pagetabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:0;}
+.pagetab{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;font-size:12.5px;
+  color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;}
+.pagetab i{width:7px;height:7px;border-radius:50%;display:block;}
+.pagetab b{font-weight:500;color:var(--faint);font-size:10.5px;}
+.pagetab:hover{color:var(--ink-2);}
+.pagetab.on{color:var(--ink);border-bottom-color:var(--c,var(--accent));}
+.pagetab.on b{color:var(--ink-2);}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
 .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);
   border-radius:14px;padding:5px 12px;font-size:12px;color:var(--ink-2);}
@@ -449,7 +501,12 @@ ul.crit.review li:before{background:var(--warn);}
       </div>
       <div class="topctl">
         <span class="presence" id="presence"></span>
-        <select class="bare" id="weekPick" aria-label="Choose week"></select>
+        <span class="weeknav">
+          <button class="navbtn" data-act="stepWeek" data-d="-1" title="Previous week" aria-label="Previous week">‹</button>
+          <select class="bare" id="weekPick" aria-label="Choose week"></select>
+          <button class="navbtn" data-act="stepWeek" data-d="1" title="Next week" aria-label="Next week">›</button>
+        </span>
+        <button class="btn ghost sm" data-act="newWeek" title="Start the following week">+ Week</button>
         <span class="savechip" id="saveChip">Loading</span>
         <button class="btn ghost sm" data-act="copyLink" title="Copy the share link">Share</button>
         <button class="btn ghost sm" data-act="account" title="Status">•••</button>
@@ -508,28 +565,204 @@ const FKIND = ["Existing","Creating","Idea","Gap"];
 const CAPTION = ["Not started","Drafted","Ready","Approved"];
 const KOL_STATUS = ["Researching","Ready to Contact","Contacted","Responded","Conversation","Collaboration","Not Relevant"];
 const SCRIPT_STATUS = ["Idea","Writing","Review","Approved","Ready to Film","Filmed","Edited","Published"];
-const KPI_TEMPLATE = [
-  {name:"3 Series Posts", ws:"content", hours:4,
-   deliverable:"Create 3 posts — 1 Myth/Fact, 1 Educational, 1 Parameter Explainer — including captions, ready for review."},
-  {name:"Instagram Stories", ws:"stories", hours:1,
-   deliverable:"Create 2–3 Story sets, including at least one interactive Story and one supporting a weekly post."},
-  {name:"Short-form Video Bank", ws:"video", hours:0.75,
-   deliverable:"Develop 3 new face-to-camera concepts, based where possible on questions found through audience and SEO research."},
-  {name:"KOL Research", ws:"kol", hours:1,
-   deliverable:"Find and qualify 5 new KOLs not already in the database."},
-  {name:"KOL Outreach Prep", ws:"kol", hours:0.75,
-   deliverable:"Prepare personalised email and DM copy for the KOLs, for the Marketing Manager to send."},
-  {name:"SEO/AEO/GEO: Question Bank", ws:"seo", hours:1.5,
-   deliverable:"Add 10–15 new practitioner questions, categorised by topic cluster, search intent and audience."},
-  {name:"SEO/AEO/GEO: Content Opportunities", ws:"seo", hours:1,
-   deliverable:"Take the 5 strongest questions found so far and recommend what Baliston should create for each — FAQ, article, social post, video, and so on."},
-  {name:"Community Intelligence", ws:"seo", hours:1,
-   deliverable:"Research 2–3 relevant communities and extract 5 recurring questions, pain points or content insights — not just a list of communities."},
-  {name:"Editorial / Authority Research", ws:"seo", hours:1,
-   deliverable:"Add 5 new high-quality editorial and authority opportunities, and prioritise the strongest found across both weeks."},
-  {name:"Review / Revisions", ws:"buffer", hours:1,
-   deliverable:"Feedback, corrections and small unexpected requests."}
+/* Each week gets its own named set. Weeks keep the set they were given —
+   loading a different set only ever touches the week you are looking at. */
+const KPI_SETS = [
+  {id:"w1", label:"Week 1 — discovery and mapping (14h)", items:[
+    {name:"3 Series Posts", ws:"content", hours:4,
+     deliverable:"Create 3 posts — 1 Myth/Fact, 1 Educational, 1 Parameter Explainer — including captions."},
+    {name:"Meet Our Users", ws:"content", hours:2,
+     deliverable:"Complete 1 Meet Our Users carousel plus caption and prepare it for manager review."},
+    {name:"Instagram Stories", ws:"stories", hours:0.75,
+     deliverable:"Create 2 Story sets supporting the week, including at least one interactive Story."},
+    {name:"Short-form Video Bank", ws:"video", hours:0.75,
+     deliverable:"Develop 3 face-to-camera video concepts with a strong hook and key talking points."},
+    {name:"KOL Research + Outreach", ws:"kol", hours:1.5,
+     deliverable:"Find 3 strong new KOLs not already in the database, and prepare a personalised email and DM for the best 2."},
+    {name:"SEO/AEO Question Research", ws:"seo", hours:1.5,
+     deliverable:"Add 10–15 real practitioner questions to the Question Bank, with source, audience type, topic cluster, and whether Baliston already answers it."},
+    {name:"Community Research", ws:"seo", hours:1,
+     deliverable:"Verify 2–3 priority practitioner communities and qualify 3 strong discussion threads. Do not post yet."},
+    {name:"Editorial / Backlink Research", ws:"seo", hours:1,
+     deliverable:"Research and qualify 5 relevant publications, associations, directories or podcasts. Do not send outreach yet."},
+    {name:"SEO / AEO / GEO Learning", ws:"seo", hours:0.5,
+     deliverable:"Build familiarity with SEO, AEO and GEO, and add concise notes to the working strategy."},
+    {name:"Review / Revisions Buffer", ws:"buffer", hours:1,
+     deliverable:"Reserved time for manager feedback, corrections and small unexpected requests."}
+  ]},
+  {id:"w2", label:"Week 2 — categorise and recommend (13h)", items:[
+    {name:"3 Series Posts", ws:"content", hours:4, prev:"3 Series Posts",
+     builds:"Same cadence as last week. Now draw topics from the Question Bank rather than picking them cold.",
+     deliverable:"Create 3 posts — 1 Myth/Fact, 1 Educational, 1 Parameter Explainer — including captions, ready for review."},
+    {name:"Instagram Stories", ws:"stories", hours:1, prev:"Instagram Stories",
+     builds:"Up from 2 sets to 2–3, and now tied to a weekly post rather than standing alone.",
+     deliverable:"Create 2–3 Story sets, including at least one interactive Story and one supporting a weekly post."},
+    {name:"Short-form Video Bank", ws:"video", hours:0.75, prev:"Short-form Video Bank",
+     builds:"Last week the concepts came from us. This week they come from questions real practitioners asked.",
+     deliverable:"Develop 3 new face-to-camera concepts, based where possible on questions found through audience and SEO research."},
+    {name:"KOL Research", ws:"kol", hours:1, prev:"KOL Research + Outreach",
+     builds:"Research and outreach were one KPI last week. Splitting them raises the target from 3 names to 5.",
+     deliverable:"Find and qualify 5 new KOLs not already in the database."},
+    {name:"KOL Outreach Prep", ws:"kol", hours:0.75, prev:"KOL Research + Outreach",
+     builds:"Now its own KPI, so drafting quality is judged separately from how many names were found.",
+     deliverable:"Prepare personalised email and DM copy for the KOLs, for the Marketing Manager to send."},
+    {name:"SEO/AEO/GEO: Question Bank", ws:"seo", hours:1.5, prev:"SEO/AEO Question Research",
+     builds:"Last week collected questions. This week they get categorised by topic cluster, search intent and audience — which is what makes them usable.",
+     deliverable:"Add 10–15 new practitioner questions, categorised by topic cluster, search intent and audience."},
+    {name:"SEO/AEO/GEO: Content Opportunities", ws:"seo", hours:1, prev:"SEO/AEO Question Research",
+     builds:"New this week, and only possible because the questions exist. Turns research into a decision about what to make.",
+     deliverable:"Take the 5 strongest questions found so far and recommend what Baliston should create for each — FAQ, article, social post, video, and so on."},
+    {name:"Community Intelligence", ws:"seo", hours:1, prev:"Community Research",
+     builds:"Last week identified the communities. This week goes inside them and extracts what people actually ask and how they word it.",
+     deliverable:"Research 2–3 relevant communities and extract 5 recurring questions, pain points or content insights — not just a list of communities."},
+    {name:"Editorial / Authority Research", ws:"seo", hours:1, prev:"Editorial / Backlink Research",
+     builds:"Adds 5 more to last week\u2019s 5, then ranks all ten so outreach can start from the strongest.",
+     deliverable:"Add 5 new high-quality editorial and authority opportunities, and prioritise the strongest found across both weeks."},
+    {name:"Review / Revisions", ws:"buffer", hours:1, prev:"Review / Revisions Buffer",
+     builds:"Unchanged — held capacity, not a deliverable.",
+     deliverable:"Feedback, corrections and small unexpected requests."}
+  ]},
+  {id:"w3", label:"Holiday buffer build (13.5h)",
+   note:"Everything you need while the Marketing Manager is away gets made and approved this week.",
+   criteria:[
+     "6 posts with captions completed and approved before Friday.",
+     "4 Story sets finished and handed over as files, not briefs.",
+     "A posting pack the Marketing Manager can follow without asking a question.",
+     "8–10 new questions added and categorised.",
+     "3 strongest questions turned into content recommendations.",
+     "3 recurring insights pulled from communities already identified."
+   ],
+   guardrails:[
+     "Approval is the deadline, not production. The pack lands Thursday so Friday is for fixes.",
+     "Research is deliberately reduced this week. Don't backfill it at the cost of the posts.",
+     "Nothing scheduled or published — the Marketing Manager posts from the pack."
+   ],
+   review:["All 6 posts and captions","The 4 Story sets","The posting pack, before Thursday close"],
+   items:[
+    {name:"6 Posts for the holiday", ws:"content", hours:7, prev:"3 Series Posts",
+     builds:"Two weeks of the series produced in one, so the cadence holds while nobody is here to approve.",
+     deliverable:"6 posts with captions ready for review by Thursday — 2 Myth/Fact, 2 Educational, 2 Parameter Explainer."},
+    {name:"4 Story sets", ws:"stories", hours:1.5, prev:"Instagram Stories",
+     builds:"Made as finished files rather than briefs, because nobody will be here to build them.",
+     deliverable:"4 Story sets ready to post — at least one interactive, at least two supporting a scheduled post."},
+    {name:"Posting pack", ws:"content", hours:0.75,
+     builds:"New. What makes the other work usable by someone else.",
+     deliverable:"One document: what posts on which day, final caption text, hashtags, links, and the Story files."},
+    {name:"SEO/AEO/GEO: Question Bank", ws:"seo", hours:1.25, prev:"SEO/AEO Question Research",
+     builds:"Reduced from 10–15 to 8–10 this week. The thread continues rather than pausing.",
+     deliverable:"8–10 new questions, categorised by topic cluster, search intent and audience."},
+    {name:"SEO/AEO/GEO: Content Opportunities", ws:"seo", hours:0.75, prev:"SEO/AEO Question Research",
+     builds:"Reduced from 5 to 3 while the posts take priority.",
+     deliverable:"The 3 strongest questions turned into content recommendations."},
+    {name:"Community Intelligence", ws:"seo", hours:0.75, prev:"Community Research",
+     builds:"Reduced to 3 insights, using communities already identified rather than finding new ones.",
+     deliverable:"3 recurring questions or pain points from communities already on the list."},
+    {name:"Review, revisions and sign-off", ws:"buffer", hours:1.5, prev:"Review / Revisions Buffer",
+     builds:"Increased from 1h. Everything must clear review before Friday, so revisions cannot slip.",
+     deliverable:"Feedback, corrections and final approval of the whole holiday pack."}
+  ]},
+
+  {id:"w4", label:"Away week 1 — research and prepare (13h)",
+   note:"Work that needs no approval, because there is nobody to approve it.",
+   criteria:[
+     "10–15 new questions added and categorised.",
+     "5 recurring insights extracted from 2–3 communities.",
+     "5 new editorial opportunities qualified.",
+     "5 new KOLs qualified, with outreach copy drafted and queued.",
+     "3 video concepts drawn from Question Bank entries.",
+     "2 posts drafted for the week of 14 September."
+   ],
+   guardrails:[
+     "Nothing is sent, posted or published this week. Outreach is drafted and queued.",
+     "Flag comments and DMs that need a human answer — don't answer on Baliston's behalf.",
+     "Anything needing a decision goes in the handover, not into a holding pattern."
+   ],
+   review:["Nothing this week — queue it all for the return"],
+   items:[
+    {name:"SEO/AEO/GEO: Question Bank", ws:"seo", hours:1.5, prev:"SEO/AEO/GEO: Question Bank",
+     builds:"Back to full pace now the posts are done.",
+     deliverable:"10–15 new questions, categorised by topic cluster, search intent and audience."},
+    {name:"Community Intelligence", ws:"seo", hours:1.5, prev:"Community Intelligence",
+     builds:"Back to 5 insights, across 2–3 communities. Still nothing posted.",
+     deliverable:"5 recurring questions, pain points or content insights from 2–3 communities."},
+    {name:"Editorial / Authority Research", ws:"seo", hours:1.5, prev:"Editorial / Backlink Research",
+     builds:"Resumes after a week out. Adds to the opportunities found in August.",
+     deliverable:"5 new high-quality editorial and authority opportunities qualified. No outreach sent."},
+    {name:"KOL Research", ws:"kol", hours:1.5, prev:"KOL Research + Outreach",
+     builds:"Resumes after a week out, now split from outreach so volume and quality are judged apart.",
+     deliverable:"Find and qualify 5 new KOLs not already in the database."},
+    {name:"KOL Outreach Prep", ws:"kol", hours:1, prev:"KOL Research + Outreach",
+     builds:"Drafted and queued rather than sent, ready for the Marketing Manager's return.",
+     deliverable:"Personalised email and DM copy for the strongest KOLs, queued for approval."},
+    {name:"SEO/AEO/GEO: Content Opportunities", ws:"seo", hours:1, prev:"SEO/AEO/GEO: Content Opportunities",
+     builds:"Back to 5 recommendations.",
+     deliverable:"The 5 strongest questions turned into content recommendations."},
+    {name:"Short-form Video Bank", ws:"video", hours:1, prev:"Short-form Video Bank",
+     builds:"Resumes, now sourced from Question Bank entries rather than invented.",
+     deliverable:"3 face-to-camera concepts with hook and talking points, drawn from real questions."},
+    {name:"Draft posts for w/c 14 September", ws:"content", hours:2, prev:"6 Posts for the holiday",
+     builds:"So the first week back isn't a standing start.",
+     deliverable:"2 posts drafted with captions, ready for review on the Marketing Manager's return."},
+    {name:"Engagement monitoring", ws:"stories", hours:0.75,
+     builds:"New, and only needed because the account is running unattended.",
+     deliverable:"Watch comments and DMs on the scheduled posts. Flag anything needing a human answer."},
+    {name:"SEO / AEO / GEO Learning", ws:"seo", hours:0.75, prev:"SEO / AEO / GEO Learning",
+     builds:"Resumes after a week out.",
+     deliverable:"Notes into the working strategy — search intent, answer-ready content, topic clusters."},
+    {name:"Review / Revisions", ws:"buffer", hours:0.5, prev:"Review, revisions and sign-off",
+     builds:"Reduced — there is nobody here to review.",
+     deliverable:"Small corrections and unexpected requests."}
+  ]},
+
+  {id:"w5", label:"Away week 2 — turn research into decisions (13h)",
+   note:"Research becomes things waiting on the Marketing Manager's desk, ready to act on.",
+   criteria:[
+     "3 posts drafted for the return week.",
+     "Every editorial opportunity ranked, with outreach drafted for the top 3.",
+     "5 more KOLs with outreach queued.",
+     "A four-week content calendar proposal built from the Question Bank.",
+     "A community participation plan ready for approval.",
+     "A one-page handover of what happened and what needs a decision."
+   ],
+   guardrails:[
+     "Still nothing sent or posted. Everything is a recommendation to approve.",
+     "The calendar proposal is a plan to react to, not a list of ideas.",
+     "The handover is one page. If it needs more, something should have been flagged sooner."
+   ],
+   review:["The content calendar proposal","Editorial outreach drafts","The community participation plan","The 3 return-week posts"],
+   items:[
+    {name:"3 posts for the return week", ws:"content", hours:4, prev:"Draft posts for w/c 14 September",
+     builds:"Completes the return week's content so the first week back is review, not production.",
+     deliverable:"3 posts drafted with captions, ready for review the week the Marketing Manager is back."},
+    {name:"Editorial prioritisation", ws:"seo", hours:1.5, prev:"Editorial / Authority Research",
+     builds:"Three weeks of qualifying finally becomes a ranked list and a first approach.",
+     deliverable:"Rank every editorial opportunity found across all weeks, and draft outreach for the top 3."},
+    {name:"KOL Research + Outreach Prep", ws:"kol", hours:1.5, prev:"KOL Research",
+     builds:"Recombined into one KPI now the volume target is steady.",
+     deliverable:"5 more KOLs qualified, with outreach copy queued for approval."},
+    {name:"Content calendar proposal", ws:"seo", hours:1.5, prev:"SEO/AEO/GEO: Content Opportunities",
+     builds:"Individual recommendations become a sequenced four-week plan.",
+     deliverable:"A four-week content calendar built from the Question Bank, mapped to funnel stage."},
+    {name:"SEO/AEO/GEO: Question Bank", ws:"seo", hours:1.25, prev:"SEO/AEO/GEO: Question Bank",
+     builds:"Steady weekly addition — the bank compounds.",
+     deliverable:"10 more questions, categorised."},
+    {name:"Community participation plan", ws:"seo", hours:1, prev:"Community Intelligence",
+     builds:"Three weeks of listening becomes a recommendation on where to actually contribute.",
+     deliverable:"Where and how Baliston could genuinely add value, for approval. Still nothing posted."},
+    {name:"Short-form Video Bank", ws:"video", hours:0.75, prev:"Short-form Video Bank",
+     builds:"Steady weekly addition.",
+     deliverable:"3 more face-to-camera concepts."},
+    {name:"Engagement monitoring", ws:"stories", hours:0.75, prev:"Engagement monitoring",
+     builds:"Unchanged from last week.",
+     deliverable:"Watch comments and DMs. Flag anything needing a human answer."},
+    {name:"Return handover", ws:"buffer", hours:0.75, prev:"Review / Revisions",
+     builds:"Replaces the review buffer — the output of two unsupervised weeks.",
+     deliverable:"One page: what happened, what is waiting for a decision, what was blocked."}
+  ]},
 ];
+const CURRENT_SET = "w3";
+const kpiSet = id => KPI_SETS.find(x=>x.id===id) || KPI_SETS[KPI_SETS.length-1];
+const KPI_TEMPLATE = kpiSet(CURRENT_SET).items;
 
 const SUCCESS_CRITERIA = [
   "3 series posts completed with captions and ready for review.",
@@ -557,7 +790,33 @@ const REVIEW_POINTS = [
   "Any proposed community participation, before posting"
 ];
 
-const WEEK_PLAN = [
+const WEEK_PLAN_W1 = [
+  {day:"mon", ws:"content", name:"Meet Our Users carousel — Marie: slides + caption", hours:2, priority:"High", due:1,
+   format:"Carousel", platform:"Instagram", notes:"Ready for manager review, not published."},
+  {day:"mon", ws:"content", name:"Series post 1 — Myth/Fact, incl. caption", hours:1.5, priority:"High", due:2,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"content", name:"Series post 2 — Educational, incl. caption", hours:1.25, priority:"High", due:3,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"seo", name:"SEO/AEO question research — 10–15 practitioner questions", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Website", notes:"Source, audience type, topic cluster, and whether we already answer it."},
+  {day:"wed", ws:"content", name:"Series post 3 — Parameter Explainer, incl. caption", hours:1.25, priority:"High", due:4,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"wed", ws:"seo", name:"Community research — verify 2–3 communities, qualify 3 threads", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Do not post."},
+  {day:"wed", ws:"stories", name:"Instagram Stories — 2 sets, one interactive", hours:0.75, priority:"Medium", due:4,
+   format:"Story", platform:"Instagram", notes:""},
+  {day:"thu", ws:"kol", name:"KOL research + outreach copy for the best 2", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"Outreach copy goes to Emma to send."},
+  {day:"thu", ws:"seo", name:"Editorial / backlink research — qualify 5 opportunities", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"No outreach this week."},
+  {day:"thu", ws:"video", name:"Short-form video bank — 3 face-to-camera concepts", hours:0.75, priority:"Medium", due:4,
+   format:"Reel / Short Video", platform:"Instagram", notes:""},
+  {day:"fri", ws:"seo", name:"SEO / AEO / GEO learning — notes into the working strategy", hours:0.5, priority:"Low", due:4,
+   format:"Other", platform:"Other", notes:""},
+  {day:"fri", ws:"buffer", name:"Review and revisions buffer", hours:1, priority:"Medium", due:null,
+   format:"Other", platform:"Other", notes:""}
+];
+const WEEK_PLAN_W2 = [
   {day:"mon", ws:"content", name:"Series post 1 — Myth/Fact, incl. caption", hours:1.5, priority:"High", due:2,
    format:"Static Post", platform:"Instagram", notes:"Ready for review, not published. Useful rather than promotional."},
   {day:"mon", ws:"seo", name:"Question Bank — add 10–15 new practitioner questions", hours:1.5, priority:"High", due:4,
@@ -583,8 +842,81 @@ const WEEK_PLAN = [
   {day:"fri", ws:"buffer", name:"Review and revisions", hours:1, priority:"Medium", due:null,
    format:"Other", platform:"Other", notes:"Held for feedback, corrections and small unexpected requests."}
 ];
-function makeWeekPlan(weekStart){
-  return WEEK_PLAN.map(t=>({
+const WEEK_PLAN_W3 = [
+  {day:"mon", ws:"content", name:"Holiday posts 1–2 — Myth/Fact + Educational, incl. captions", hours:2.5, priority:"High", due:3,
+   format:"Static Post", platform:"Instagram", notes:"For the fortnight away. Ready for review by Thursday, not published."},
+  {day:"mon", ws:"seo", name:"Question Bank — 8–10 new questions, categorised", hours:1.25, priority:"Medium", due:4,
+   format:"Other", platform:"Website", notes:"Reduced this week. Topic cluster, search intent and audience on each."},
+  {day:"tue", ws:"content", name:"Holiday posts 3–4 — Parameter Explainer + Myth/Fact, incl. captions", hours:2.5, priority:"High", due:3,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"seo", name:"Community intelligence — 3 recurring insights", hours:0.75, priority:"Low", due:4,
+   format:"Other", platform:"Other", notes:"Use communities already on the list. Don't go looking for new ones this week."},
+  {day:"wed", ws:"content", name:"Holiday posts 5–6 — Educational + Parameter Explainer, incl. captions", hours:2, priority:"High", due:3,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"wed", ws:"stories", name:"4 Story sets — finished files, ready to post", hours:1.5, priority:"High", due:3,
+   format:"Story", platform:"Instagram", notes:"At least one interactive, at least two supporting a scheduled post. Export the files — not briefs."},
+  {day:"thu", ws:"content", name:"Posting pack — schedule, captions, links, Story files", hours:0.75, priority:"High", due:3,
+   format:"PDF / Document", platform:"Other", notes:"Emma must be able to post from this without asking a question."},
+  {day:"thu", ws:"seo", name:"Content opportunities — 3 strongest questions", hours:0.75, priority:"Low", due:4,
+   format:"Other", platform:"Other", notes:"Reduced from 5 this week."},
+  {day:"thu", ws:"buffer", name:"Hand the full pack to Emma for review", hours:0.5, priority:"High", due:3,
+   format:"Other", platform:"Other", notes:"Thursday, so Friday is for fixes rather than first drafts."},
+  {day:"fri", ws:"buffer", name:"Revisions and final sign-off", hours:1, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"Everything approved before the end of Friday. This is the hard deadline."}
+];
+
+const WEEK_PLAN_W4 = [
+  {day:"mon", ws:"seo", name:"Question Bank — 10–15 new questions, categorised", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Website", notes:"Back to full pace."},
+  {day:"mon", ws:"kol", name:"KOL research — 5 new names", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"Check the KOL tab first — 35 are already in there."},
+  {day:"tue", ws:"seo", name:"Community intelligence — 5 recurring insights", hours:1.5, priority:"High", due:4,
+   format:"Other", platform:"Other", notes:"2–3 communities. Nothing posted."},
+  {day:"tue", ws:"seo", name:"Content opportunities — 5 recommendations", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:""},
+  {day:"wed", ws:"seo", name:"Editorial / authority research — 5 new opportunities", hours:1.5, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Qualify only. Nothing sent."},
+  {day:"wed", ws:"content", name:"Draft 2 posts for w/c 14 September", hours:2, priority:"Medium", due:4,
+   format:"Static Post", platform:"Instagram", notes:"For review when Emma is back. Don't schedule."},
+  {day:"thu", ws:"kol", name:"KOL outreach prep — draft and queue the copy", hours:1, priority:"Medium", due:4,
+   format:"Email", platform:"Email", notes:"Queued for Emma's return. Do not send."},
+  {day:"thu", ws:"video", name:"Short-form video bank — 3 concepts from the Question Bank", hours:1, priority:"Medium", due:4,
+   format:"Reel / Short Video", platform:"Instagram", notes:"Build them from real questions."},
+  {day:"thu", ws:"stories", name:"Engagement monitoring — comments and DMs", hours:0.75, priority:"High", due:4,
+   format:"Other", platform:"Instagram", notes:"Flag anything needing a human answer. Don't answer for Baliston."},
+  {day:"fri", ws:"seo", name:"SEO / AEO / GEO learning — notes into the strategy", hours:0.75, priority:"Low", due:4,
+   format:"Other", platform:"Other", notes:""},
+  {day:"fri", ws:"buffer", name:"Small corrections and unexpected requests", hours:0.5, priority:"Low", due:null,
+   format:"Other", platform:"Other", notes:"Reduced — nobody here to review."}
+];
+
+const WEEK_PLAN_W5 = [
+  {day:"mon", ws:"content", name:"Return-week posts 1–2, incl. captions", hours:2.5, priority:"High", due:4,
+   format:"Static Post", platform:"Instagram", notes:"For review the week Emma is back."},
+  {day:"mon", ws:"stories", name:"Engagement monitoring — comments and DMs", hours:0.75, priority:"High", due:4,
+   format:"Other", platform:"Instagram", notes:"Flag anything needing a human answer."},
+  {day:"tue", ws:"content", name:"Return-week post 3, incl. caption", hours:1.5, priority:"High", due:4,
+   format:"Static Post", platform:"Instagram", notes:""},
+  {day:"tue", ws:"seo", name:"Question Bank — 10 more questions, categorised", hours:1.25, priority:"Medium", due:4,
+   format:"Other", platform:"Website", notes:""},
+  {day:"wed", ws:"seo", name:"Editorial prioritisation + outreach drafts for the top 3", hours:1.5, priority:"High", due:4,
+   format:"Email", platform:"Email", notes:"Rank everything found across all weeks. Drafts only — Emma approves and sends."},
+  {day:"wed", ws:"seo", name:"Content calendar proposal — four weeks from the Question Bank", hours:1.5, priority:"High", due:4,
+   format:"PDF / Document", platform:"Other", notes:"Sequenced and mapped to funnel stage. A plan to react to, not a list."},
+  {day:"thu", ws:"kol", name:"KOL research + outreach prep — 5 more", hours:1.5, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Queued for approval."},
+  {day:"thu", ws:"seo", name:"Community participation plan — for approval", hours:1, priority:"Medium", due:4,
+   format:"Other", platform:"Other", notes:"Where and how we could genuinely contribute. Still nothing posted."},
+  {day:"fri", ws:"video", name:"Short-form video bank — 3 more concepts", hours:0.75, priority:"Low", due:4,
+   format:"Reel / Short Video", platform:"Instagram", notes:""},
+  {day:"fri", ws:"buffer", name:"Return handover — one page", hours:0.75, priority:"High", due:4,
+   format:"PDF / Document", platform:"Other", notes:"What happened, what needs a decision, what was blocked."}
+];
+
+const WEEK_PLANS = {w1:WEEK_PLAN_W1, w2:WEEK_PLAN_W2, w3:WEEK_PLAN_W3, w4:WEEK_PLAN_W4, w5:WEEK_PLAN_W5};
+const WEEK_PLAN = WEEK_PLAN_W3;
+function makeWeekPlan(weekStart, setId){
+  return (WEEK_PLANS[setId||CURRENT_SET]||WEEK_PLAN_W2).map(t=>({
     id:uid(), weekId:weekStart, day:t.day, workstream:t.ws, name:t.name,
     hours:t.hours, actual:0, status:"Not Started", priority:t.priority,
     due: t.due==null ? "" : addDays(weekStart, t.due),
@@ -609,17 +941,28 @@ function cycleKres(k){
   setKres(k, order[(order.indexOf(kres(k))+1) % order.length]);
 }
 
-function makeKpis(weekId){
-  return KPI_TEMPLATE.map(k=>({id:uid(), weekId, name:k.name, deliverable:k.deliverable,
-    hours:k.hours, workstream:k.ws, result:"", done:false, notes:""}));
+function makeKpis(weekId, setId){
+  return kpiSet(setId||CURRENT_SET).items.map(k=>({id:uid(), weekId, name:k.name,
+    deliverable:k.deliverable, hours:k.hours, workstream:k.ws, setId:setId||CURRENT_SET,
+    prev:k.prev||"", builds:k.builds||"", result:"", done:false, notes:""}));
 }
 
 const LIB_TYPES = [
-  {k:"community",  n:"Community",       c:"#6B3F8C", hint:"Reddit, Facebook, LinkedIn or forum groups worth listening to"},
-  {k:"question",   n:"Question",        c:"#1F5E63", hint:"Real practitioner or patient questions for the Question Bank"},
-  {k:"opportunity",n:"Content idea",    c:"#A2682F", hint:"A question turned into something we should make"},
-  {k:"editorial",  n:"Editorial",       c:"#55693C", hint:"Publications, associations, directories and podcasts"},
-  {k:"resource",   n:"Resource",        c:"#3F566B", hint:"Learning links, tools, competitor examples, anything useful"}
+  {k:"question",   n:"Question Bank", c:"#1F5E63", view:"table",
+   blurb:"Real questions practitioners and patients ask, categorised so they can be turned into content. This is the foundation everything else in SEO and AEO sits on.",
+   add:"Add a question"},
+  {k:"opportunity",n:"Content Plan",  c:"#A2682F", view:"cards",
+   blurb:"Questions turned into decisions — what Baliston should actually make, and in what format.",
+   add:"Add a content idea"},
+  {k:"community",  n:"Communities",   c:"#6B3F8C", view:"cards",
+   blurb:"Reddit, Facebook, LinkedIn and forum groups worth listening to. Record the participation rules and what people genuinely ask — never a place to drop links.",
+   add:"Add a community"},
+  {k:"editorial",  n:"Editorial",     c:"#55693C", view:"table",
+   blurb:"Publications, associations, directories and podcasts that could legitimately mention or link to Baliston Health.",
+   add:"Add an opportunity"},
+  {k:"resource",   n:"SEO Resources", c:"#3F566B", view:"cards",
+   blurb:"Learning links, tools, competitor examples and anything else worth keeping.",
+   add:"Add a resource"}
 ];
 const libType = k => LIB_TYPES.find(t=>t.k===k) || LIB_TYPES[4];
 const PLATFORMS_COMM = ["Reddit","Facebook group","LinkedIn group","Forum","Discord / Slack","YouTube","Other"];
@@ -720,8 +1063,12 @@ function seedLibrary(){
 }
 
 function seed(){
-  const thisMon = mondayOf(new Date(Date.UTC(2026,7,17)));
+  /* Dates come from today, so the planner is never seeded into the past. */
+  const thisMon = mondayOf(new Date());
   const prevMon = addDays(thisMon,-7);
+  const prev2Mon = addDays(thisMon,-14);
+  const next1Mon = addDays(thisMon,7);
+  const next2Mon = addDays(thisMon,14);
 
   const T = (day,workstream,name,hours,status,priority,dueOffset,format,platform,owner,recurrence,notes,actual)=>({
     id:uid(), day, workstream, name, hours, actual:actual??0, status, priority,
@@ -730,20 +1077,28 @@ function seed(){
     recurrence:recurrence||"One-off", link:"", notes:notes||""
   });
 
-  const tasks = makeWeekPlan(thisMon);
+  const tasks = makeWeekPlan(thisMon, "w3");
+  const next1Tasks = makeWeekPlan(next1Mon, "w4");
+  const next2Tasks = makeWeekPlan(next2Mon, "w5");
 
-  const prevTasks = [
-    T("mon","content","Meet Our Users carousel — Thomas",2,"Completed","High",null,"Carousel","Instagram","Narindra","Recurring","",2),
-    T("mon","stories","Instagram Stories — 3 sets",1.5,"Completed","Medium",null,"Story","Instagram","Narindra","Recurring","",1.5),
-    T("tue","content","Educational post — pronation explained",1.5,"Completed","High",null,"Static Post","Instagram","Narindra","Recurring","",2),
-    T("tue","funnel","Set up the funnel mapping sheet and stage definitions",2,"Completed","High",null,"Other","Other","Narindra","One-off","",2),
-    T("wed","video","Script — why we measure gait, not steps",1.5,"Completed","Medium",null,"Reel / Short Video","Instagram","Narindra","Recurring","",1.5),
-    T("wed","content","Captions for the week",1,"Completed","Medium",null,"Other","Instagram","Narindra","Recurring","",1),
-    T("thu","kol","First 8 KOL candidates — running creators",2,"Completed","High",null,"Other","Other","Narindra","Recurring","",2.5),
-    T("thu","design","Event graphic — practitioner day banner",1.5,"Completed","Medium",null,"PDF / Document","Other","Narindra","One-off","",1.5),
-    T("fri","content","Article draft — why we measure gait, not steps",2,"Completed","High",null,"Article","Website","Narindra","One-off","",2)
+  const prevTasks = makeWeekPlan(prevMon, "w1").map(t=>({
+    ...t, status:"Completed", actual:t.hours, due:""
+  }));
+
+  const E = (day,ws,name,hours,actual)=>({id:uid(), weekId:prev2Mon, day, workstream:ws, name,
+    hours, actual, status:"Completed", priority:"Medium", due:"", format:"Other",
+    platform:"Instagram", owner:"Narindra", recurrence:"One-off", link:"", notes:""});
+  const prev2Tasks = [
+    E("mon","content","Meet Our Users carousel — Thomas",2,2),
+    E("mon","stories","Instagram Stories — 3 sets",1.5,1.5),
+    E("tue","content","Educational post — pronation explained",1.5,2),
+    E("tue","funnel","Set up the funnel mapping sheet and stage definitions",2,2),
+    E("wed","video","Script — why we measure gait, not steps",1.5,1.5),
+    E("wed","content","Captions for the week",1,1),
+    E("thu","kol","First 8 KOL candidates — running creators",2,2.5),
+    E("thu","design","Event graphic — practitioner day banner",1.5,1.5),
+    E("fri","content","Article draft — why we measure gait, not steps",2,2)
   ];
-  prevTasks.forEach(t=>{ t.due=""; });
 
   const C = (title,pillar,funnel,format,platform,stage,deadline,pub,cta,caption,notes)=>({
     id:uid(), title, pillar, funnel, format, platform, owner:"Narindra",
@@ -811,19 +1166,42 @@ function seed(){
       "Save this and check your own pair tonight","Idea","No","No")
   ];
 
+  /* KPIs began with the week-1 brief, so the earliest week has tasks but no KPI set.
+     Each week keeps the set it was actually given. */
+  const lastResults = ["met","met","met","met","partly","met","met","partly","met","met"];
+  const kpis = makeKpis(thisMon, "w3")
+    .concat(makeKpis(next1Mon, "w4"))
+    .concat(makeKpis(next2Mon, "w5"))
+    .concat(makeKpis(prevMon, "w1").map((k,i)=>({...k,
+      result:lastResults[i]||"met", done:(lastResults[i]||"met")==="met"})));
+
   const weeks = {};
+  weeks[prev2Mon] = {
+    start:prev2Mon, capacity:15, archived:true, tasks:prev2Tasks,
+    priorities:["Publish the gait article","Set up the funnel project","First KOL batch"],
+    review:{ keyProgress:"Funnel project properly started and stage definitions agreed. First 8 KOLs in the tracker with full details.", nextPriorities:[] }
+  };
   weeks[prevMon] = {
     start:prevMon, capacity:15, archived:true, tasks:prevTasks,
-    priorities:["Publish the gait article","Set up the funnel project","First KOL batch"],
-    review:{ keyProgress:"Funnel project properly started — stage definitions agreed. First 8 KOLs in the tracker with full details.", outstandingNote:"", nextPriorities:["Ship Meet Our Users — Marie","Map the Awareness stage","10 more KOLs"] }
+    priorities:["Ship the Meet Our Users carousel","Question Bank started","First community and editorial research"],
+    review:{ keyProgress:"Question Bank opened with the first practitioner questions. Communities and editorial targets identified, nothing posted or sent as agreed.", nextPriorities:["Categorise the questions","Turn the best 5 into content recommendations","5 new KOLs"] }
   };
   weeks[thisMon] = {
     start:thisMon, capacity:15, archived:false, tasks,
-    priorities:["Ship the Meet Our Users carousel by Wednesday","Awareness stage mapped, with gaps listed","10 KOLs researched and in the tracker","3 scripts ready to film"],
-    review:{ keyProgress:"", outstandingNote:"", nextPriorities:["","",""] }
+    priorities:["6 holiday posts approved before Friday","4 Story sets finished as files","Posting pack handed over Thursday","Research reduced, not abandoned"],
+    review:{ keyProgress:"", nextPriorities:["","",""] }
+  };
+  weeks[next1Mon] = {
+    start:next1Mon, capacity:15, archived:false, tasks:next1Tasks,
+    priorities:["Question Bank and communities back to full pace","5 new KOLs with outreach queued","Editorial research resumes","2 posts drafted for the return week"],
+    review:{ keyProgress:"", nextPriorities:["","",""] }
+  };
+  weeks[next2Mon] = {
+    start:next2Mon, capacity:15, archived:false, tasks:next2Tasks,
+    priorities:["Return-week posts drafted","Editorial ranked with outreach drafted","Four-week content calendar proposed","Handover written"],
+    review:{ keyProgress:"", nextPriorities:["","",""] }
   };
 
-  const kpis = makeKpis(thisMon).concat(makeKpis(prevMon).map(k=>({...k, done:true})));
   const library = seedLibrary();
   return { version:1, currentWeek:thisMon, weeks, kpis, library, pipeline, funnel, ideas, kols, scripts, tab:"week" };
 }
@@ -1068,8 +1446,10 @@ async function loadCloud(){
   const keys = Object.keys(state.weeks).sort();
   let want = null;
   try{ want = localStorage.getItem(WEEK_KEY); }catch(e){}
+  const todayMon = mondayOf(new Date());
   state.currentWeek = (want && state.weeks[want]) ? want
-    : (keys.filter(k=>!state.weeks[k].archived)[0] || keys[keys.length-1]);
+    : state.weeks[todayMon] ? todayMon
+    : (keys.filter(k=>!state.weeks[k].archived).slice(-1)[0] || keys[keys.length-1]);
   return true;
 }
 
@@ -1386,7 +1766,7 @@ const TABS = [
   {k:"kpis",     n:"KPIs"},
   {k:"pipeline", n:"Pipeline"},
   {k:"funnel",   n:"Funnel"},
-  {k:"library",  n:"Library"},
+  {k:"library",  n:"Research"},
   {k:"ideas",    n:"Idea bank"},
   {k:"kols",     n:"KOLs"},
   {k:"scripts",  n:"Scripts"},
@@ -1418,15 +1798,18 @@ function viewDash(){
   const done = t.filter(x=>x.status==="Completed").length;
   const wip  = t.filter(x=>["In Progress","Waiting / Review","Changes Needed"].includes(x.status)).length;
 
+  const kpiHrs = (id)=>(w.kpis||[]).filter(k=>k.workstream===id).reduce((a,k)=>a+(Number(k.hours)||0),0);
+  const anyKpis = (w.kpis||[]).length>0;
   const wsRows = WS.map(ws=>{
     const h = t.filter(x=>x.workstream===ws.id).reduce((s,x)=>s+(Number(x.hours)||0),0);
-    const max = Math.max(ws.target, h, 1);
+    const target = anyKpis ? kpiHrs(ws.id) : ws.target;
+    const max = Math.max(target, h, 1);
     return `<div class="wsrow">
       <div>
         <div class="wsname"><i class="dot" style="background:${ws.c}"></i>${esc(ws.name)}</div>
-        <div class="wstrack"><div class="wsfill" style="width:${(h/max)*100}%;background:${ws.c}"></div><i class="wstarget" style="left:${(ws.target/max)*100}%"></i></div>
+        <div class="wstrack"><div class="wsfill" style="width:${(h/max)*100}%;background:${ws.c}"></div><i class="wstarget" style="left:${(target/max)*100}%"></i></div>
       </div>
-      <div class="wsnums"><b>${num(h)}</b> / ${num(ws.target)}h</div>
+      <div class="wsnums"><b>${num(h)}</b> / ${num(target)}h</div>
     </div>`;
   }).join("");
 
@@ -1470,7 +1853,7 @@ function viewDash(){
         <div class="stat"><div class="v num">${done}</div><div class="l">Tasks completed</div></div>
         <div class="stat"><div class="v num">${wip}</div><div class="l">Tasks in progress</div></div>
       </div>
-      <div style="margin-top:26px"><span class="eyebrow">Hours by workstream · marker shows the target</span></div>
+      <div style="margin-top:26px"><span class="eyebrow">Hours by workstream · marker shows this week\u2019s KPI target</span></div>
       <div class="wsbar" style="margin-top:14px">${wsRows}</div>
     </div>
 
@@ -1550,6 +1933,7 @@ function viewWeek(){
     <div class="rowbar" style="margin:0">
       <button class="btn" data-act="loadWeekPlan">Load this week's plan</button>
       <button class="btn" data-act="newTask" data-day="mon">Add task</button>
+      <button class="btn" data-act="newWeek">Start next week</button>
       <button class="btn" data-act="go" data-tab="review">Weekly review →</button>
     </div>
   </div>
@@ -1565,6 +1949,38 @@ function viewWeek(){
 }
 
 /* ---------- KPIs ---------- */
+/* Follows each KPI back through prev links to whichever KPI it originally grew
+   from, so the same thread of work can be read across every week it ran. */
+/* Which named set a week is running, taken from its own KPIs. */
+function setOfWeek(w){
+  const k = (w.kpis||[])[0];
+  return (k && k.setId) ? kpiSet(k.setId) : kpiSet(CURRENT_SET);
+}
+
+function kpiThreads(){
+  const keys = weekKeys();
+  const rootOf = new Map();
+  keys.forEach((wk,i)=>{
+    state.kpis.filter(k=>k.weekId===wk).forEach(k=>{
+      let root = k.name;
+      if(k.prev && i>0){
+        for(let j=i-1;j>=0;j--){
+          const p = state.kpis.find(x=>x.weekId===keys[j] && x.name===k.prev);
+          if(p){ root = rootOf.get(p.id) || p.name; break; }
+        }
+      }
+      rootOf.set(k.id, root);
+    });
+  });
+  const threads = new Map();
+  keys.forEach(wk=>state.kpis.filter(k=>k.weekId===wk).forEach(k=>{
+    const r = rootOf.get(k.id) || k.name;
+    if(!threads.has(r)) threads.set(r, {name:r, ws:k.workstream, byWeek:{}});
+    threads.get(r).byWeek[wk] = k;
+  }));
+  return {keys:keys.filter(wk=>state.kpis.some(k=>k.weekId===wk)), threads:[...threads.values()]};
+}
+
 function kpiStats(w){
   const ks = w.kpis||[];
   const total = ks.reduce((a,k)=>a+(Number(k.hours)||0),0);
@@ -1578,6 +1994,62 @@ function kpiStats(w){
           met:met.length, partly:partly.length, missed:missed.length, judged};
 }
 
+let kpiView = "week";
+
+function viewKpiHistory(){
+  const {keys, threads} = kpiThreads();
+  if(!keys.length) return `<div class="card empty">No KPIs have been set on any week yet.</div>`;
+
+  const cols = keys.map(wk=>{
+    const st = kpiStats(state.weeks[wk]);
+    return `<th class="wkcol ${wk===state.currentWeek?"now":""}">
+      <button data-act="gotoWeek" data-w="${wk}" class="wkbtn">${weekLabel(wk).replace(/ \d{4}$/,"")}</button>
+      <span class="wkstat">${st.met}/${st.ks.length} met</span>
+      <span class="wkstat">${num(st.doneH)} of ${num(st.total)}h</span>
+    </th>`;
+  }).join("");
+
+  const rows = threads.map(t=>{
+    const ws = wsOf(t.ws);
+    return `<tr>
+      <th class="thname"><i class="dot" style="background:${ws.c}"></i>${esc(t.name)}</th>
+      ${keys.map(wk=>{
+        const k = t.byWeek[wk];
+        if(!k) return `<td class="cell none">—</td>`;
+        const r = kresInfo(k);
+        return `<td class="cell ${kres(k)||"pending"} ${wk===state.currentWeek?"now":""}">
+          <button class="cellbtn" data-act="gotoWeek" data-w="${wk}" title="${esc(k.name)} — ${esc(r.label)}${k.builds?"\n"+esc(k.builds):""}">
+            <i style="color:${r.c==="var(--line)"?"var(--faint)":r.c}">${r.mark||"○"}</i>
+            <span class="num">${num(k.hours)}h</span>
+          </button>
+          ${k.name!==t.name?`<span class="renamed">${esc(k.name)}</span>`:""}
+        </td>`;
+      }).join("")}
+    </tr>`;
+  }).join("");
+
+  const totals = keys.map(wk=>{
+    const st = kpiStats(state.weeks[wk]);
+    const pct = st.total ? Math.round((st.doneH/st.total)*100) : 0;
+    return `<td class="cell total ${wk===state.currentWeek?"now":""}"><strong class="num">${pct}%</strong></td>`;
+  }).join("");
+
+  return `
+  <div class="tablewrap histwrap">
+    <table class="histtable">
+      <thead><tr><th class="thname">KPI thread</th>${cols}</tr></thead>
+      <tbody>${rows}
+        <tr class="totalrow"><th class="thname">Delivered</th>${totals}</tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="hint" style="margin-top:14px;max-width:80ch">
+    Each row follows one thread of work across the weeks it ran, even where the KPI was renamed or
+    split — the small grey text shows what it was called that week. Click any cell to open that week.
+    Nothing here can be changed from this view; results are edited on the week itself.
+  </p>`;
+}
+
 function viewKpis(){
   const w = week();
   const st = kpiStats(w);
@@ -1585,15 +2057,40 @@ function viewKpis(){
   const pct = total ? Math.round((doneH/total)*100) : 0;
   const prev = weekKeys().filter(k=>k < w.start).slice(-1)[0];
 
+  if(kpiView==="history"){
+    return `
+    <div class="viewhead">
+      <div>
+        <span class="eyebrow">Every week on record</span>
+        <h2>KPI history</h2>
+        <p>How each thread of work has run week to week, and what was actually delivered.</p>
+      </div>
+      <div class="rowbar" style="margin:0">
+        <div class="seg"><button class="segbtn" data-act="kpiView" data-v="week">This week</button><button class="segbtn on" data-act="kpiView" data-v="history">History</button></div>
+        <button class="btn ghost" data-act="copyKpiReport">Copy for reporting</button>
+      </div>
+    </div>
+    ${viewKpiHistory()}`;
+  }
+
+  const isPast = w.archived || w.start < mondayOf(new Date());
+  const prevKpis = prev ? state.kpis.filter(x=>x.weekId===prev) : [];
   const rows = ks.map(k=>{
     const ws = wsOf(k.workstream);
     const r = kresInfo(k);
+    const from = k.prev ? prevKpis.find(x=>x.name===k.prev) : null;
+    const fr = from ? kresInfo(from) : null;
     return `<article class="kpi r-${kres(k)||"none"}" style="--ws:${ws.c};--res:${r.c}">
       <button class="tick" data-act="cycleKpi" data-id="${k.id}"
         title="${esc(r.label)} — click to change" aria-label="${esc(k.name)}: ${esc(r.label)}">${r.mark}</button>
       <div class="kpimain">
         <div class="kpiname" data-act="openKpi" data-id="${k.id}">${esc(k.name)}</div>
         <p class="kpidel">${esc(k.deliverable)}</p>
+        ${k.builds?`<p class="kpibuilds"><span>Builds on</span>${esc(k.builds)}</p>`:""}
+        ${from?`<button class="prevlink" data-act="gotoWeek" data-w="${prev}" title="Open last week">
+          <i style="color:${fr.c==="var(--line)"?"var(--faint)":fr.c}">${fr.mark||"○"}</i>
+          Last week — ${esc(from.name)}: ${esc(fr.label.toLowerCase())}${from.notes?` · ${esc(from.notes.slice(0,80))}`:""}
+        </button>`:""}
         ${k.notes?`<p class="kpinote">${esc(k.notes)}</p>`:""}
         ${kres(k)?`<span class="reslabel">${esc(r.label)}</span>`:""}
       </div>
@@ -1608,13 +2105,17 @@ function viewKpis(){
   return `
   <div class="viewhead">
     <div>
-      <span class="eyebrow">Week of ${weekLabel(w.start)}</span>
-      <h2>KPIs this week</h2>
-      <p>Click the box to mark a KPI met, partly met or missed. Click the name to edit its wording, hours or target.</p>
+      <span class="eyebrow">Week of ${weekLabel(w.start)}${w.archived?" · closed":""}</span>
+      <h2>KPIs ${isPast?"that week":"this week"}</h2>
+      <p>${isPast
+        ? "A past week, kept exactly as it was recorded. You can correct a result if it was logged wrongly — nothing else is affected."
+        : "Click the box to mark a KPI met, partly met or missed. Click the name to edit its wording, hours or target."}</p>
     </div>
     <div class="rowbar" style="margin:0">
+      <div class="seg"><button class="segbtn on" data-act="kpiView" data-v="week">This week</button><button class="segbtn" data-act="kpiView" data-v="history">History</button></div>
       <button class="btn" data-act="newKpi">Add a KPI</button>
       <button class="btn" data-act="kpiMenu">Change this week's set</button>
+      <button class="btn ghost" data-act="copyKpiReport">Copy for reporting</button>
     </div>
   </div>
 
@@ -1646,29 +2147,51 @@ function viewKpis(){
     }).join("")}</div>
   </div>
 
+  ${prev ? (()=>{ const pw = state.weeks[prev]; const ps = kpiStats(pw);
+      if(!ps.ks.length) return "";
+      return `<div class="card pad lastweek">
+        <div class="lwhead">
+          <div>
+            <span class="eyebrow">Last week · ${weekLabel(prev)}</span>
+            <div class="lwline">
+              <strong>${ps.met} of ${ps.ks.length} met</strong>
+              ${ps.partly?`· ${ps.partly} partly`:""}${ps.missed?` · ${ps.missed} missed`:""}
+              · ${num(ps.doneH)} of ${num(ps.total)} committed hours delivered
+            </div>
+          </div>
+          <button class="btn sm" data-act="gotoWeek" data-w="${prev}">Open last week</button>
+        </div>
+        <div class="kpibar" style="margin-top:12px">${ps.ks.map(k=>{const r=kres(k);
+          return `<i style="flex:${Number(k.hours)||1};background:${r==="met"?wsOf(k.workstream).c:r==="partly"?"#E4C79E":r==="missed"?"#E8CFCB":"var(--line-soft)"}" title="${esc(k.name)}"></i>`;}).join("")}</div>
+        <div class="lwgrid">${ps.ks.map(k=>{const r=kresInfo(k);
+          return `<span class="lwitem"><i style="color:${r.c==="var(--line)"?"var(--faint)":r.c}">${r.mark||"○"}</i>${esc(k.name)}</span>`;}).join("")}</div>
+        ${ps.missed||ps.partly ? `<p class="hint" style="margin-top:12px">Anything short here is worth checking against this week's list before you commit the hours.</p>` : ""}
+      </div>`;
+    })() : ""}
+
   ${ks.length ? `<div class="kpilist">${rows}</div>`
-              : `<div class="card empty">No KPIs set for this week yet. Use <strong>Change this week's set</strong> to load the standard ten${prev?" or copy last week's":""}.</div>`}
+              : `<div class="card empty">No KPIs set for this week yet. Use <strong>Change this week's set</strong> to load one${prev?", or copy last week's":""}.</div>`}
 
   <div class="briefgrid">
     <div class="card pad">
       <span class="eyebrow">Success criteria for the week</span>
-      <ul class="crit">${SUCCESS_CRITERIA.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+      <ul class="crit">${(setOfWeek(w).criteria||SUCCESS_CRITERIA).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
     </div>
     <div class="card pad">
       <span class="eyebrow">Send to Emma for review</span>
-      <ul class="crit review">${REVIEW_POINTS.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+      <ul class="crit review">${(setOfWeek(w).review||REVIEW_POINTS).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
       <p class="hint" style="margin-top:12px">Set the task to <strong>Waiting / Review</strong> rather than messaging — it appears on the dashboard.</p>
     </div>
     <div class="card pad guard">
       <span class="eyebrow">Guardrails this week</span>
-      <ul class="crit">${GUARDRAILS.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
+      <ul class="crit">${(setOfWeek(w).guardrails||GUARDRAILS).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>
     </div>
   </div>
 
-  <p class="hint" style="margin-top:16px;max-width:80ch">
-    Planning principle: 13 hours are assigned to defined deliverables, leaving 2 hours of genuine capacity
-    within the 15-hour week. This week moves from finding things to judging them — categorising questions,
-    extracting insight, and recommending what to make.
+  ${setOfWeek(w).note?`<p class="hint" style="margin-top:16px;max-width:80ch"><strong>${esc(setOfWeek(w).label)}.</strong> ${esc(setOfWeek(w).note)}</p>`:""}
+  <p class="hint" style="margin-top:10px;max-width:80ch">
+    Planning principle: hours are assigned to defined deliverables, leaving real capacity
+    inside the 15-hour week for feedback, revisions and anything unexpected.
   </p>`;
 }
 
@@ -1779,69 +2302,101 @@ function viewIdeas(){
 }
 
 /* ---------- Library ---------- */
-let libFilter = "all";
+let libFilter = "question";
 
 function viewLibrary(){
   const all = state.library||[];
-  const items = libFilter==="all" ? all : all.filter(x=>x.type===libFilter);
   const count = k => all.filter(x=>x.type===k).length;
-
-  const chips = [`<button class="chip ${libFilter==="all"?"on":""}" data-act="libFilter" data-t="all">Everything <b class="num">${all.length}</b></button>`]
-    .concat(LIB_TYPES.map(t=>`<button class="chip ${libFilter===t.k?"on":""}" data-act="libFilter" data-t="${t.k}" style="--c:${t.c}">
-      <i style="background:${t.c}"></i>${esc(t.n)} <b class="num">${count(t.k)}</b></button>`)).join("");
-
-  const bits = (it)=>{
-    const t = it.type, out = [];
-    if(t==="community"){ if(it.platform) out.push(it.platform); if(it.audience) out.push(it.audience); }
-    if(t==="question"){ if(it.cluster) out.push(it.cluster); if(it.intent) out.push(it.intent);
-      if(it.covered) out.push("On site: "+it.covered); if(it.format) out.push("→ "+it.format); }
-    if(t==="opportunity"){ if(it.format) out.push(it.format); if(it.cluster) out.push(it.cluster); }
-    if(t==="editorial"){ if(it.audience) out.push(it.audience);
-      if(it.contributed && it.contributed!=="Unknown") out.push("Contributed: "+it.contributed); }
-    if(t==="resource" && it.audience) out.push(it.audience);
-    return out;
-  };
-
-  const cards = items.map(it=>{
-    const t = libType(it.type);
-    const body = it.insight || it.angle || it.rules || it.notes || "";
-    return `<article class="libcard" style="--c:${t.c}">
-      <div class="libhead">
-        <span class="libtype">${esc(t.n)}</span>
-        <span class="pill plain">${esc(it.status||"New")}</span>
-        <span class="prio ${it.priority}" style="margin-left:auto">${esc(it.priority||"")}</span>
-      </div>
-      <div class="libtitle" data-act="openLib" data-id="${it.id}">${esc(it.title||"Untitled")}</div>
-      ${bits(it).length?`<div class="libbits">${bits(it).map(b=>`<span>${esc(b)}</span>`).join("")}</div>`:""}
-      ${body?`<p class="libbody">${esc(body)}</p>`:""}
-      <div class="libfoot">
-        ${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer" class="liblink">Open link ↗</a>`:`<span class="hint">No link yet</span>`}
-        <button class="btn ghost sm" data-act="openLib" data-id="${it.id}">Edit</button>
-      </div>
-    </article>`;
-  }).join("");
-
   const t = libFilter==="all" ? null : libType(libFilter);
+  const items = t ? all.filter(x=>x.type===t.k) : all;
+
+  const nav = [`<button class="pagetab ${libFilter==="all"?"on":""}" data-act="libFilter" data-t="all">
+      Everything <b class="num">${all.length}</b></button>`]
+    .concat(LIB_TYPES.map(x=>`<button class="pagetab ${libFilter===x.k?"on":""}" data-act="libFilter" data-t="${x.k}" style="--c:${x.c}">
+      <i style="background:${x.c}"></i>${esc(x.n)} <b class="num">${count(x.k)}</b></button>`)).join("");
+
+  let body;
+  if(!items.length){
+    body = `<div class="card empty">Nothing here yet. ${t?esc(t.add):"Add the first entry"} to get started.</div>`;
+  } else if(t && t.k==="question"){
+    body = `<div class="tablewrap"><table>
+      <thead><tr><th>Question</th><th>Topic cluster</th><th>Intent</th><th>Audience</th><th>On our site</th><th>Make</th><th>Priority</th></tr></thead>
+      <tbody>${items.map(it=>`<tr data-act="openLib" data-id="${it.id}">
+        <td style="max-width:380px"><strong>${esc(it.title||"Untitled")}</strong>
+          ${it.insight?`<span class="sub">from ${esc(it.insight)}</span>`:""}</td>
+        <td>${esc(it.cluster||"—")}</td>
+        <td>${esc(it.intent||"—")}</td>
+        <td>${esc(it.audience||"—")}</td>
+        <td>${it.covered?`<span class="pill plain">${esc(it.covered)}</span>`:"—"}</td>
+        <td>${esc(it.format||"—")}</td>
+        <td><span class="prio ${it.priority}">${esc(it.priority||"")}</span></td>
+      </tr>`).join("")}</tbody></table></div>`;
+  } else if(t && t.k==="editorial"){
+    body = `<div class="tablewrap"><table>
+      <thead><tr><th>Publication or organisation</th><th>Their audience</th><th>Angle</th><th>Contributed</th><th>Contact route</th><th>Priority</th><th>Status</th></tr></thead>
+      <tbody>${items.map(it=>`<tr data-act="openLib" data-id="${it.id}">
+        <td><strong>${esc(it.title||"Untitled")}</strong>
+          ${it.url?`<span class="sub">${esc(it.url.replace(/^https?:\/\//,"").slice(0,44))}</span>`:""}</td>
+        <td>${esc(it.audience||"—")}</td>
+        <td style="max-width:300px">${esc(it.angle||"—")}</td>
+        <td>${esc(it.contributed||"Unknown")}</td>
+        <td>${esc(it.route||"—")}</td>
+        <td><span class="prio ${it.priority}">${esc(it.priority||"")}</span></td>
+        <td><span class="pill plain">${esc(it.status||"New")}</span></td>
+      </tr>`).join("")}</tbody></table></div>`;
+  } else {
+    const bits = (it)=>{
+      const o = [];
+      if(it.type==="community"){ if(it.platform) o.push(it.platform); if(it.audience) o.push(it.audience); }
+      if(it.type==="opportunity"){ if(it.format) o.push(it.format); if(it.cluster) o.push(it.cluster); }
+      if(it.type==="question"){ if(it.cluster) o.push(it.cluster); if(it.intent) o.push(it.intent); }
+      if(it.type==="editorial" && it.audience) o.push(it.audience);
+      if(it.type==="resource" && it.audience) o.push(it.audience);
+      return o;
+    };
+    body = `<div class="libgrid">${items.map(it=>{
+      const ty = libType(it.type);
+      const text = it.insight || it.angle || it.rules || it.notes || "";
+      return `<article class="libcard" style="--c:${ty.c}">
+        <div class="libhead">
+          <span class="libtype">${esc(ty.n)}</span>
+          <span class="pill plain">${esc(it.status||"New")}</span>
+          <span class="prio ${it.priority}" style="margin-left:auto">${esc(it.priority||"")}</span>
+        </div>
+        <div class="libtitle" data-act="openLib" data-id="${it.id}">${esc(it.title||"Untitled")}</div>
+        ${bits(it).length?`<div class="libbits">${bits(it).map(b=>`<span>${esc(b)}</span>`).join("")}</div>`:""}
+        ${text?`<p class="libbody">${esc(text)}</p>`:""}
+        ${it.type==="community" && it.rules && it.insight?`<p class="libbody" style="color:var(--warn)"><strong>Rules:</strong> ${esc(it.rules)}</p>`:""}
+        <div class="libfoot">
+          ${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer" class="liblink">Open link ↗</a>`:`<span class="hint">No link yet</span>`}
+          <button class="btn ghost sm" data-act="openLib" data-id="${it.id}">Edit</button>
+        </div>
+      </article>`;
+    }).join("")}</div>`;
+  }
+
+  const linked = items.filter(x=>x.url).length;
 
   return `
   <div class="viewhead">
     <div>
-      <span class="eyebrow">${all.length} saved</span>
-      <h2>Library</h2>
-      <p>Everything found while researching, in one place — communities, real questions, content ideas, editorial targets and useful links. ${t?esc(t.hint)+"." : "Filter by type, or add anything that doesn't fit elsewhere."}</p>
+      <span class="eyebrow">Research</span>
+      <h2>${t?esc(t.n):"Everything"}</h2>
+      <p>${t?esc(t.blurb):"Everything found while researching — questions, content decisions, communities, editorial targets and useful links, in one place."}</p>
     </div>
     <div class="rowbar" style="margin:0">
-      <button class="btn primary" data-act="newLib">Add to the Library</button>
+      <button class="btn primary" data-act="newLib">${t?esc(t.add):"Add an entry"}</button>
     </div>
   </div>
 
-  <div class="chips">${chips}</div>
+  <nav class="pagetabs">${nav}</nav>
 
-  ${items.length ? `<div class="libgrid">${cards}</div>`
-    : `<div class="card empty">Nothing here yet. Add the first ${t?esc(t.n.toLowerCase()):"entry"}.</div>`}`;
+  ${items.length?`<p class="hint" style="margin:-4px 0 14px">${items.length} saved${linked?` · ${linked} with a link`:""}</p>`:""}
+
+  ${body}`;
 }
 
-/* ---------- KOLs ---------- */
+/* ---------- KOLs ---------- *//* ---------- KOLs ---------- */
 function kolColor(s){
   return ({"Researching":"#9AA3A7","Ready to Contact":"#A8641B","Contacted":"#2E6F9E",
     "Responded":"#2E6F9E","Conversation":"#2E6F9E","Collaboration":"#2E6B4F","Not Relevant":"#C9CFD1"})[s] || "#9AA3A7";
@@ -1939,7 +2494,8 @@ function viewReview(){
       <h2>Weekly review</h2>
       <p>Close the week, then archive it. Unfinished tasks move forward and recurring work starts fresh.</p>
     </div>
-    ${w.archived?`<span class="flag good">Archived</span>`:`<button class="btn primary" data-act="archive">Archive week and start the next one</button>`}
+    ${w.archived?`<span class="flag good">Archived</span>`:`<button class="btn" data-act="archive">Mark this week closed</button>
+      <button class="btn primary" data-act="newWeek">Start next week</button>`}
   </div>
 
   <div class="rev">
@@ -2081,6 +2637,7 @@ function renderModal(){
       <div class="modal" role="dialog" aria-modal="true" aria-label="${esc(m.title)}">
         <div class="mhead"><span class="eyebrow">${esc(m.eyebrow||"Confirm")}</span><h3>${esc(m.title)}</h3></div>
         <div class="mbody">${esc(m.body||"")}</div>
+        ${m.choices ? `<div style="padding:12px 22px 0"><select class="field" id="modalChoice">${m.choices.map(c=>`<option value="${esc(c.v)}">${esc(c.n)}</option>`).join("")}</select></div>` : ""}
         ${m.input!==undefined ? `<div style="padding:12px 22px 0"><textarea class="field" id="modalInput" style="min-height:120px">${esc(m.input)}</textarea></div>` : ""}
         <div class="mfoot">
           <button class="btn" data-act="${m.onNo?"cancelModal":"closeModal"}">${esc(m.cancelLabel||"Cancel")}</button>
@@ -2088,7 +2645,7 @@ function renderModal(){
         </div>
       </div>
     </div>`;
-  const f = host.querySelector("#modalInput") || host.querySelector('[data-act="confirmModal"]');
+  const f = host.querySelector("#modalInput") || host.querySelector("#modalChoice") || host.querySelector('[data-act="confirmModal"]');
   if(f) f.focus();
 }
 
@@ -2104,7 +2661,8 @@ function confirmModal(){
   if(!modal) return;
   const fn = modal.onYes;
   const inp = document.getElementById("modalInput");
-  const val = inp ? inp.value : undefined;
+  const sel = document.getElementById("modalChoice");
+  const val = inp ? inp.value : (sel ? sel.value : undefined);
   modal = null; renderModal();
   if(fn) fn(val);
 }
@@ -2172,6 +2730,8 @@ const SCHEMA = {
   kpi: {title:"KPI", fields:[
     {k:"name",l:"KPI",t:"text",wide:1},
     {k:"deliverable",l:"Deliverable — what done actually looks like",t:"textarea",wide:1},
+    {k:"builds",l:"How this builds on last week",t:"textarea",wide:1},
+    {k:"prev",l:"Continues which KPI from last week",t:"text",wide:1},
     {k:"hours",l:"Time target (hours)",t:"number"},
     {k:"workstream",l:"Workstream",t:"select",o:WS.map(w=>w.id),labels:WS.map(w=>w.name)},
     {k:"result",l:"Result",t:"select",o:KRESULTS.map(r=>r.k),labels:KRESULTS.map(r=>r.label)},
@@ -2336,16 +2896,19 @@ function kpiMenu(){
   const w = week();
   const prev = weekKeys().filter(k=>k < w.start).slice(-1)[0];
   const n = (w.kpis||[]).length;
+  const choices = KPI_SETS.map(x=>({v:x.id, n:x.label}));
+  if(prev && state.kpis.some(k=>k.weekId===prev)) choices.unshift({v:"__last", n:"Copy last week's set, results cleared"});
   ask({
-    eyebrow:"This week's KPI set",
-    title:"Change the KPIs for "+weekLabel(w.start),
-    body:"You have "+n+" KPI"+(n===1?"":"s")+" set for this week."
-      + (prev ? "\n\nCopy last week's set to carry the same targets forward with the results cleared, or load the standard ten from the weekly brief." : "\n\nLoad the standard ten from the weekly brief to start.")
-      + "\n\nEither way, nothing else in the planner is affected — KPIs belong to this week only.",
-    confirmLabel: prev ? "Copy last week's set" : "Load the standard ten",
-    cancelLabel: "Load the standard ten",
-    onYes: ()=> prev ? copyLastKpis(prev) : loadKpis(),
-    onNo:  ()=> loadKpis()
+    eyebrow:"KPI set for this week only",
+    title:"Set the KPIs for "+weekLabel(w.start),
+    body:(n ? "This replaces the "+n+" KPI"+(n===1?"":"s")+" currently on this week. "
+            : "This week has no KPIs yet. ")
+      + "Only "+weekLabel(w.start)+" is affected — every other week keeps its own set and its own results, so your record of what was done stays intact.",
+    choices, confirmLabel:"Set them",
+    onYes:(v)=>{
+      if(v==="__last") copyLastKpis(prev);
+      else loadKpis(v);
+    }
   });
 }
 
@@ -2363,19 +2926,12 @@ function copyLastKpis(prevKey){
     confirmLabel:"Copy them over", onYes:go});
 }
 
-function loadKpis(){
-  const existing = (week().kpis||[]);
-  const go = ()=>{
-    existing.forEach(k=>{ const i = state.kpis.findIndex(x=>x.id===k.id); if(i>-1) state.kpis.splice(i,1); });
-    makeKpis(state.currentWeek).forEach(k=>state.kpis.push(k));
-    save(); render(); toast("This week's KPI set loaded.");
-  };
-  if(!existing.length){ go(); return; }
-  ask({
-    eyebrow:"KPIs", title:"Replace this week's KPIs?",
-    body:"The "+existing.length+" currently here will be removed and the standard set from the brief loaded in their place, unticked.",
-    confirmLabel:"Replace them", onYes:go
-  });
+function loadKpis(setId){
+  const wk = state.currentWeek;
+  (week().kpis||[]).forEach(k=>{ const i = state.kpis.findIndex(x=>x.id===k.id); if(i>-1) state.kpis.splice(i,1); });
+  makeKpis(wk, setId).forEach(k=>state.kpis.push(k));
+  save(); render();
+  toast(kpiSet(setId).label.split(" — ")[0]+" set loaded for "+weekLabel(wk)+".");
 }
 
 function loadWeekPlan(){
@@ -2388,7 +2944,7 @@ function loadWeekPlan(){
   if(!existing.length){ go(false); return; }
   ask({
     eyebrow:"Weekly plan", title:"Load the plan from the brief?",
-    body:"This adds the 12 tasks from the weekly brief, totalling 14 hours. You have "+existing.length+" tasks in this week already — replace them, or keep both?",
+    body:"This adds this week\u2019s tasks from the brief. You have "+existing.length+" already in "+weekLabel(week().start)+" — replace them, or keep both? Other weeks are never touched.",
     confirmLabel:"Replace what's here", cancelLabel:"Keep both",
     onYes:()=>go(true), onNo:()=>go(false)
   });
@@ -2460,42 +3016,95 @@ function ideaToPipe(id){
   state.tab="pipeline"; save(); render(); openDrawer("content",c.id);
 }
 
+function stepWeek(dir){
+  const keys = weekKeys();
+  const i = keys.indexOf(state.currentWeek);
+  const j = i + dir;
+  if(j < 0){ toast("That's the earliest week on record."); return; }
+  if(j >= keys.length){
+    if(dir>0) newWeek();
+    return;
+  }
+  setCurrentWeek(keys[j]); render();
+}
+
+/* Creates the following week alongside the current one. Nothing is archived,
+   nothing is deleted, and the week you were on keeps every task, KPI and result. */
+function newWeek(){
+  const w = week();
+  const nextStart = addDays(w.start, 7);
+  if(state.weeks[nextStart]){ setCurrentWeek(nextStart); render(); toast("Already there."); return; }
+
+  const openTasks = (w.tasks||[]).filter(t=>t.status!=="Completed").length;
+  const recurring = (w.tasks||[]).filter(t=>t.status==="Completed" && t.recurrence==="Recurring").length;
+  const hasKpis = (w.kpis||[]).length;
+
+  ask({
+    eyebrow:"New week",
+    title:"Start the week of "+weekLabel(nextStart)+"?",
+    body:"Nothing is removed from "+weekLabel(w.start)+" — it stays exactly as it is, and you can come back to it any time."
+      + (openTasks||recurring||hasKpis ? "\n\nCarried into the new week:" : "\n\nThe new week starts empty.")
+      + (openTasks ? "\n  • "+openTasks+" unfinished task"+(openTasks===1?"":"s") : "")
+      + (recurring ? "\n  • "+recurring+" recurring task"+(recurring===1?"":"s")+", reset to Not Started" : "")
+      + (hasKpis ? "\n  • the same "+hasKpis+" KPIs, with results cleared" : ""),
+    confirmLabel:"Start the new week",
+    onYes:()=>{
+      const nextPr = ((w.review||{}).nextPriorities||[]).filter(Boolean);
+      state.weeks[nextStart] = hydrateWeek({
+        id:nextStart, start:nextStart, capacity:w.capacity, archived:false,
+        priorities: nextPr, review:{keyProgress:"", nextPriorities:["","",""]}
+      });
+      (w.tasks||[]).forEach(t=>{
+        if(t.status!=="Completed") state.tasks.push({...t, id:uid(), actual:0, weekId:nextStart});
+        else if(t.recurrence==="Recurring") state.tasks.push({...t, id:uid(), actual:0, status:"Not Started", due:"", weekId:nextStart});
+      });
+      (w.kpis||[]).forEach(k=>state.kpis.push({...k, id:uid(), weekId:nextStart,
+        prev:k.name, builds:"Continues from "+weekLabel(w.start)+".",
+        result:"", done:false, notes:""}));
+      setCurrentWeek(nextStart);
+      state.tab = "week";
+      save(); render();
+      toast("Week of "+weekLabel(nextStart)+" created. "+weekLabel(w.start)+" is untouched.");
+    }
+  });
+}
+
 function archiveWeek(){
   const w = week();
   ask({
     eyebrow:"Close the week",
-    title:"Archive "+weekLabel(w.start)+"?",
-    body:"Unfinished tasks move to the new week. Recurring tasks start again at Not Started. The archived week stays readable in the Archive.",
-    confirmLabel:"Archive and start the next week",
-    onYes:()=>doArchive(w)
+    title:"Mark "+weekLabel(w.start)+" as closed?",
+    body:"It stays fully readable in the Archive and in the week picker — closing only marks it done so it is clear which week is live. Nothing is deleted.\n\nUse \u201c+ Week\u201d to start the next one.",
+    confirmLabel:"Mark it closed",
+    onYes:()=>{
+      w.archived = true;
+      const next = addDays(w.start,7);
+      save(); render();
+      toast(state.weeks[next] ? "Closed. The next week is ready." : "Closed. Use + Week to start the next one.");
+    }
   });
 }
 
-function doArchive(w){
-  w.archived = true;
-  const nextStart = addDays(w.start,7);
-  const carried = [];
-  (w.tasks||[]).forEach(t=>{
-    if(t.status!=="Completed"){
-      carried.push({...t, id:uid(), actual:0, weekId:nextStart});
-    } else if(t.recurrence==="Recurring"){
-      carried.push({...t, id:uid(), actual:0, status:"Not Started", due:"", weekId:nextStart});
-    }
-  });
-  carried.forEach(t=>state.tasks.push(t));
-  const priorKpis = (w.kpis||[]);
-  const freshKpis = (priorKpis.length ? priorKpis.map(k=>({...k, id:uid(), weekId:nextStart, result:"", done:false, notes:""}))
-                                      : makeKpis(nextStart));
-  freshKpis.forEach(k=>state.kpis.push(k));
-  const nextPr = ((w.review||{}).nextPriorities||[]).filter(Boolean);
-  state.weeks[nextStart] = hydrateWeek({
-    id:nextStart, start:nextStart, capacity:w.capacity, archived:false,
-    priorities: nextPr.length?nextPr:[],
-    review:{keyProgress:"",nextPriorities:["","",""]}
-  });
-  setCurrentWeek(nextStart);
-  state.tab = "week";
-  save(); render();
+function copyKpiReport(){
+  const w = week();
+  const prev = weekKeys().filter(k=>k < w.start).slice(-1)[0];
+  const block = (wk)=>{
+    const ww = state.weeks[wk]; if(!ww) return "";
+    const st = kpiStats(ww);
+    if(!st.ks.length) return "";
+    const mark = k => ({met:"[x] MET", partly:"[~] PARTLY", missed:"[ ] MISSED"})[kres(k)] || "[ ] not judged";
+    return ["Week of "+weekLabel(wk),
+      st.met+" of "+st.ks.length+" met · "+num(st.doneH)+" of "+num(st.total)+" committed hours delivered",
+      ...st.ks.map(k=>"  "+mark(k)+" — "+k.name+" ("+num(k.hours)+"h)"),
+      ((ww.review||{}).keyProgress ? "\nKey progress: "+ww.review.keyProgress : "")
+    ].join("\n");
+  };
+  const txt = ["BALISTON HEALTH — CONTENT CREATOR KPIs", "",
+    prev?"LAST WEEK\n"+block(prev)+"\n":"", "THIS WEEK\n"+block(w.start)].join("\n");
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>toast("Both weeks copied — paste it into your update."),
+      ()=>ask({eyebrow:"Report", title:"Copy this", body:"", input:txt, confirmLabel:"Done", onYes:()=>{}}));
+  } else ask({eyebrow:"Report", title:"Copy this", body:"", input:txt, confirmLabel:"Done", onYes:()=>{}});
 }
 
 function copyReport(k){
@@ -2586,9 +3195,13 @@ function renderTabs(){
   }).join("");
 
   const keys = weekKeys().reverse();
-  document.getElementById("weekPick").innerHTML = keys.map(k=>
-    `<option value="${k}"${k===state.currentWeek?" selected":""}>${weekLabel(k)}${state.weeks[k].archived?" · archived":""}</option>`
-  ).join("");
+  const now = mondayOf(new Date());
+  document.getElementById("weekPick").innerHTML = keys.map(k=>{
+    const diff = Math.round((parse(k) - parse(now)) / 604800000);
+    const rel = diff===0 ? " · this week" : diff===-1 ? " · last week"
+              : diff===1 ? " · next week" : diff<0 ? " · "+(-diff)+" weeks ago" : " · in "+diff+" weeks";
+    return `<option value="${k}"${k===state.currentWeek?" selected":""}>${weekLabel(k)}${rel}</option>`;
+  }).join("");
 }
 
 function renderMain(){
@@ -2629,6 +3242,9 @@ document.addEventListener("click", e=>{
       break;
     }
     case "kpiMenu": kpiMenu(); break;
+    case "kpiView": { kpiView = el.dataset.v; renderMain(); break; }
+    case "copyKpiReport": copyKpiReport(); break;
+    case "gotoWeek": { setCurrentWeek(el.dataset.w); render(); break; }
     case "deleteKpi": {
       const k = state.kpis.find(x=>x.id===id);
       if(!k) break;
@@ -2683,6 +3299,8 @@ document.addEventListener("click", e=>{
     case "ideaToWeek": ideaToWeek(id); break;
     case "ideaToPipe": ideaToPipe(id); break;
     case "archive": archiveWeek(); break;
+    case "newWeek": newWeek(); break;
+    case "stepWeek": stepWeek(Number(el.dataset.d)); break;
     case "editPriorities": editPriorities(); break;
     case "exportData": exportData(); break;
     case "importData": importData(); break;
